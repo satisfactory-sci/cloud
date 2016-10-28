@@ -2,13 +2,16 @@
   "name": "cloud",
   "version": "1.0.0",
   "description": "The cloud powering our tech demo",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start":"node server.js"
+    "start":"node index.js"
   },
   "author": "Laged",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+	"engines": {
+    "node": "6.6.0"
+	}
 }
