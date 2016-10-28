@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tinderablejs demo</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<script src="tinderable.js"></script>
+	<link href="tinderable.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+	<h6 id="action-indicator">Swipe to see what happens</h6>
+	<div id="tinderable-front"></div>
+
+	<script type="text/javascript">
+	var actionIndicator = document.getElementById("action-indicator");
+	var tinderableFront = document.getElementById("tinderable-front");
+	var tinderableData = [
+		{
+			img: "img1.jpg",
+			title: "Koiranpentu",
+			description: "Koiranpennut ovat söpöjä"
+		},
+		{
+			img: "img2.jpg",
+			title: "Norsu!!",
+			description: "Norsut eivät käytä kortsuja"
+		},
+		{
+			img: "img3.jpg",
+			title: "Sauronin tulinen vagina",
+			description: "Tarvitseeko tämä vielä selityksenkin"
+		},
+
+	];
+
+	var tinderable = new Tinderable(tinderableFront);
+
+	tinderable.onLike(function(dataItem) {
+		actionIndicator.innerHTML = "Liked!";
+		actionIndicator.style.color = "green";
+	});
+	tinderable.onSuperlike(function(dataItem) {
+		actionIndicator.innerHTML = "Superliked!";
+		actionIndicator.style.color = "blue";
+	});
+	tinderable.onDislike(function(dataItem) {
+		actionIndicator.innerHTML = "Disliked!";
+		actionIndicator.style.color = "red";
+	});
+	tinderable.onStackEmpty(function(dataItem) {
+		actionIndicator.innerHTML = "Stack empty!";
+		actionIndicator.style.color = "black";
+	});
+
+	tinderable.setData(tinderableData);
+	tinderable.start();
+
+	</script>
+</body>
+</html>

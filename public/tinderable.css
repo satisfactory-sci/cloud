@@ -1,0 +1,9 @@
+#tinderable-front {
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+}
+
+#action-indicator {
+    text-align: center;
+}
