@@ -78,7 +78,7 @@
 	//Button presses
 	document.getElementById('dislike').addEventListener('click', function(event) {
 		if (stackHasItems)
-			tinderable.triggerLike();
+			tinderable.triggerDislike();
 	});
 	document.getElementById('superlike').addEventListener('click', function(event) {
 		if (stackHasItems)
@@ -86,7 +86,7 @@
 	});
 	document.getElementById('like').addEventListener('click', function(event) {
 		if (stackHasItems)
-			tinderable.triggerDislike();
+			tinderable.triggerLike();
 	});
 
 	//Swipe gestures
