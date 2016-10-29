@@ -7,3 +7,12 @@
 #action-indicator {
     text-align: center;
 }
+
+#actions {
+	width: 100%;
+	border: 1px solid red;
+}
+
+button {
+	width: 100%;
+}

@@ -1,21 +1,47 @@
 const express = require('express');
-const port = 5000;
 const app = express();
-
-const WebSocket = require('ws');
-const WebSocketServer = WebSocket.Server;
-const wss = new WebSocketServer({server:app});
-
-wss.on('connection', (ws) => {
-	ws.on('message', (data, flags) => {
-		console.log(data);
-		ws.send('Server got: ' + data);
-	});
-})
+const http = require('http');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const port = 5000;
+const debugServer = false;
+const debugClient = true;
 
 app.use(express.static('public'));
 
+function handleEvent(client, newEvent, data) {
+	if (debugClient)
+		client.emit('debug', 'server got ' + newEvent);
+	if (debugServer)
+		console.log(newEvent + ' | ', data);
+}
+
+io.on('connection', (client) => {
+	client.on('connect', (data) => {
+		handleEvent(client, 'connect', data);
+	});
+
+	client.on('like', (data) => {
+		handleEvent(client, 'like', data)
+	});
+
+	client.on('superlike', (data) => {
+		handleEvent(client, 'superlike', data)
+	});
+
+	client.on('dislike', (data) => {
+		handleEvent(client, 'dislike', data)
+	});
+
+	client.on('empty', (data) => {
+		handleEvent(client, 'empty', data);
+	});
+});
+
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
-})
-.listen(port, () => console.log('Running on ' + port));
+});
+
+server.listen(port, () => console.log('Running on ' + port));
+
+module.exports = {app: app, server:server};
