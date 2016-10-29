@@ -15,8 +15,7 @@ wss.on('connection', (ws) => {
 
 app.use(express.static('public'));
 
-app
-.get('/', (req, res) => {
+app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 })
-.listen(process.env.PORT | 3000, () => console.log('Running on ' + port));
+.listen(port, () => console.log('Running on ' + port));
