@@ -1,30 +1,36 @@
 //Setting thins up
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
+const bodyParser = require('body-parser');
 const http = require('http');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const xml2js = require('xml2js').parseString;
 const port = 5000;
 const debugServer = false;
-const debugClient = false;
+const debugClient = true;
 const dbs = require('./src/databases.js');
 //App definitions
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 
-
 //Fetch items for client
 function fetchClientItems() {
-	if (debugServer) console.log('fetched items: ', dbs.dummyDataClient);
-	return dbs.dummyDataClient;
+	const items = dbs.getMovies();
+	if (debugServer) console.log('fetched items: ', items);
+	return items;
 }
 
 //Client requesting new items
 function sendItems(client) {
 	if (debugClient) client.emit('debug', 'Server sending items');
-	client.emit('newItems', fetchClientItems());
-	if (debugClient) client.emit('debug', 'Server sent items');
+	dbs.getMovies( (err, items) => {
+		if (items) {
+			if (debugClient) client.emit('debug', items);
+			client.emit('newItems', items);
+			if (debugClient) client.emit('debug', 'Server sent items');
+		}
+	});
 }
 
 //Handle proper requests
@@ -76,20 +82,35 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 });
 
-//Reset databases with delete
+//Reset databases with delete TODO REFACTOR/REMOVE
 app.delete('/:dbPassword', (req, res) => {
 	if (debugServer) console.log('Requesting clientDB deletion: ' + req.params.dbPassword);
 	if (req.params.dbPassword === process.env.DBPASSWORD) {
 		dbs.resetDB('clientDB');
 		res.status(200).json({message: "database reset", targetDB: 'clientDB'});
+	} else {
+		res.status(403).json({message: "wrong PW"});
 	}
 })
 
 app.delete('/dashboard/:dbPassword', (req, res) => {
 	if (debugServer) console.log('Requesting dashboardDB deletion: ' + req.params.dbPassword);
-	if (req.params.dbPassword == process.env.DBPASSWORD) {
+	if (req.params.dbPassword === process.env.DBPASSWORD) {
 		dbs.resetDB('dashboardDB');
 		res.status(200).json({message: "database reset", targetDB: 'dashboardDB'});
+	} else {
+		res.status(403).json({message: "wrong PW"});
+	}
+})
+
+//Update movie DB with PUT
+app.put('/:dbPassword', (req, res) => {
+	if (debugServer) console.log('Requesting movieDB updating: ' + req.params.dbPassword);
+	if (req.params.dbPassword === process.env.DBPASSWORD) {
+		dbs.updateMovies();
+		res.status(200).json({message: "database updated", targetDB: 'movieDB'});
+	} else {
+		res.status(403).json({message: "wrong PW"});
 	}
 })
 
