@@ -31,24 +31,6 @@
 
 	var actionIndicator = document.getElementById("action-indicator");
 	var tinderableFront = document.getElementById("tinderable-front");
-	var tinderableData = [
-		{
-			img: "img1.jpg",
-			title: "Koiranpentu",
-			description: "Koiranpennut ovat söpöjä"
-		},
-		{
-			img: "img2.jpg",
-			title: "Norsu!!",
-			description: "Norsut eivät käytä kortsuja"
-		},
-		{
-			img: "img3.jpg",
-			title: "Sauronin tulinen vagina",
-			description: "Tarvitseeko tämä vielä selityksenkin"
-		},
-
-	];
 
 	var tinderable = new Tinderable(tinderableFront);
 	var stackHasItems = true;
@@ -104,9 +86,14 @@
 		emptyAction(dataItem);
 	});
 
-	tinderable.setData(tinderableData);
-	tinderable.start();
+	//Start tinderable after new items arrive from the server
+	socket.on('newItems', function(data) {
+		tinderable.setData(data);
+		tinderable.start();
+	});
 
+	//Request new items
+	socket.emit('requestItems');
 	</script>
 </body>
 </html>

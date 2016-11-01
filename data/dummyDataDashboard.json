@@ -1,0 +1,17 @@
+[
+	{
+		"title":"Doctor Strange", "img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", "description": "Oispa API", "votes": {"dislikes": 2, "likes": 4, "superlikes": 2}
+	},
+	{
+		"title":"Doctor Weird", "img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", "description": "Oispa API", "votes": {"dislikes": 1, "likes": 6, "superlikes": 1}
+	},
+	{
+		"title":"Doctor Not Strange oh god no", "img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", "description": "Oispa API", "votes": {"dislikes": 2, "likes": 3, "superlikes": 0}
+	},
+	{
+		"title":"Doctor Not Weird", "img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", "description": "Oispa API", "votes": {"dislikes": 5, "likes": 1, "superlikes": 1}
+	},
+	{
+		"title":"Haa haa", "img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", "description": "Oispa API", "votes": {"dislikes": 5, "likes": 1, "superlikes": 1}
+	}
+]
