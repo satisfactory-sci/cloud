@@ -7,19 +7,17 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const port = 5000;
 const debugServer = false;
-const debugClient = true;
+const debugClient = false;
+const dbs = require('./src/databases.js');
 //App definitions
 app.use(express.static('public'));
-app.use(bodyParser);
+app.use(bodyParser.urlencoded({ extended: true}));
 
-//Load data, use dummy data for now
-const dummyDataClient = require('./data/dummyDataClient.json');
-const dummyDataServer = require('./data/dummyDataDashboard.json');
 
 //Fetch items for client
 function fetchClientItems() {
-	if (debugServer) console.log("fetched items: ", dummyDataClient);
-	return dummyDataClient;
+	if (debugServer) console.log('fetched items: ', dbs.dummyDataClient);
+	return dbs.dummyDataClient;
 }
 
 //Client requesting new items
@@ -36,12 +34,12 @@ function handleEvent(client, newEvent, data) {
 	if (debugServer) console.log(newEvent + ' | ', data);
 	//Handle different requests
 	switch (newEvent) {
-		case "requestItems":
-			if (debugServer) console.log("requestItems => sendItems()");
+		case 'requestItems':
+			if (debugServer) console.log('requestItems => sendItems()');
 			sendItems(client);
 			break;
 		default:
-			if (debugServer) console.log("Unrecognized request");
+			if (debugServer) console.log('Unrecognized request');
 		break;
 	}
 }
@@ -78,6 +76,28 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 });
 
+//Reset databases with delete
+app.delete('/:dbPassword', (req, res) => {
+	if (debugServer) console.log('Requesting clientDB deletion: ' + req.params.dbPassword);
+	if (req.params.dbPassword === process.env.DBPASSWORD) {
+		dbs.resetDB('clientDB');
+		res.status(200).json({message: "database reset", targetDB: 'clientDB'});
+	}
+})
+
+app.delete('/dashboard/:dbPassword', (req, res) => {
+	if (debugServer) console.log('Requesting dashboardDB deletion: ' + req.params.dbPassword);
+	if (req.params.dbPassword == process.env.DBPASSWORD) {
+		dbs.resetDB('dashboardDB');
+		res.status(200).json({message: "database reset", targetDB: 'dashboardDB'});
+	}
+})
+
 //Start server
 server.listen(port, () => console.log('Running on ' + port));
 module.exports = {app: app, server:server};
+
+//Debug item count
+if (debugServer) {
+	dbs.debugDBs();
+}
