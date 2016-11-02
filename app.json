@@ -3,7 +3,7 @@
   "description": "Satisfactory",
   "scripts": {
     "dokku": {
-      "predeploy": "cd public/Dashboard/ && gulp --production && cd ../..",
+      "predeploy": "cd public/Dashboard/ && npm install && gulp --production && cd ../..",
     }
   }
 }
