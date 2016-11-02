@@ -1,20 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LikeChart from "./Components/LikeChart";
-//Mock data
-const data = [
-    {title:"Doctor Strange", img:"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", votes: {dislikes: 2, likes: 4, superlikes: 2}},
-    {title:"Doctor Weird", img:"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", votes: {dislikes: 1, likes: 6, superlikes: 1}},
-    {title:"Doctor Not Strange oh god no", img:"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", votes: {dislikes: 2, likes: 3, superlikes: 0}},
-    {title:"Doctor Not Weird", img:"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", votes: {dislikes: 5, likes: 1, superlikes: 1}},
-    {title:"Haa haa", img:"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", votes: {dislikes: 5, likes: 1, superlikes: 1}}
-  ]
-
-
-//used to "emulate" network
-function downloadState() {
-  return data
-}
+import 'babel/polyfill'
 
 class App extends React.Component {
   constructor() {
@@ -26,12 +13,36 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let state = downloadState();
-    this.setState({items: state});
+    let socket = io();
+    socket.on('newItems', (data) => {
+      this.setState({items: data})
+    })
+    /*
+    socket.on('dislike', (data) => {
+      _updateState(data, 0)
+    })
+    socket.on('like',(data) => {
+      _updateState(data, 1)
+    })
+    socket.on('superlike', (data) => {
+      _updateState(data, 2)
+    })*/
+    socket.emit('requestDashboardItems')
   }
 
-  _updateState(data) {
-    this.setState({items: data});
+  _updateState(data, type) {
+    let state = this.state.items
+    let i = state.findIndex((obj) => {
+      obj.id = data.id
+    })
+    if(type == 0){
+      state[i].votes.dislikes += 1
+    }else if(type == 1){
+      state[i].votes.like += 1
+    }else{
+      state[i].votes.superlike += 1
+    }
+    this.setState({items: state})
   }
 
   onClick() {
