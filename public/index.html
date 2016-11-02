@@ -73,13 +73,13 @@
 
 	//Swipe gestures
 	tinderable.onLike(function(dataItem) {
-		likeAction(dataItem);
+		likeAction(dataItem.movieID);
 	});
 	tinderable.onSuperlike(function(dataItem) {
-		superlikeAction(dataItem);
+		superlikeAction(dataItem.movieID);
 	});
 	tinderable.onDislike(function(dataItem) {
-		dislikeAction(dataItem);
+		dislikeAction(dataItem.movieID);
 	});
 
 	tinderable.onStackEmpty(function(dataItem) {

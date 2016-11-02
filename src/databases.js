@@ -114,7 +114,7 @@ module.exports = {
 				break;
 		}
 	},
-	updateMovies() {
+	loadMovies() {
 		xmlToJson(apiURL, (err, data) => {
 			if (err) {
 				console.log(err);
@@ -126,8 +126,47 @@ module.exports = {
 	getMovies(callback) {
 		movieDB.find({}, (err, docs) => {
 			if (err) callback(err, null);
-			if (debugDB) docs.forEach( movie => console.log(movie.title));
+			//if (debugDB) docs.forEach( movie => console.log(movie.title));
 			callback(null, docs);
 		});
+	},
+	voteMovie(action, id, callback) {
+		switch (action) {
+			case 'like':
+				movieDB.find({movieID: id}, (err, doc) => {
+					if (err) callback(err, null);
+					const likes = doc[0].likes;
+					movieDB.update({movieID: id}, { $set: { likes: likes + 1}}, (err, doc) => {
+						if (err) callback(err, null);
+						if (debugDB) console.log("Likes: ", doc);
+						callback(null, doc);
+					});
+				});
+				break;
+			case 'superlike':
+				movieDB.find({movieID: id}, (err, doc) => {
+					if (err) callback(err, null);
+					const superlikes = doc[0].superlikes;
+					movieDB.update({movieID: id}, { $set: { superlikes: superlikes + 1}}, (err, doc) => {
+						if (err) callback(err, null);
+						callback(null, doc);
+					});
+				});
+				break;
+			case 'dislike':
+				movieDB.find({movieID: id}, (err, doc) => {
+					if (err) callback(err, null);
+					const dislikes = doc[0].dislikes;
+					if (debugDB) console.log (id + " with dislikes: " + dislikes);
+					movieDB.update({movieID: id}, { $set: { dislikes: dislikes + 1}}, (err, doc) => {
+						if (err) callback(err, null);
+						if (debugDB) console.log("Disliked: ", doc);
+						callback(null, doc);
+					});
+			 });
+			 break;
+			default:
+				callback('Invalid action', null);
+		}
 	}
 };

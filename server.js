@@ -33,6 +33,13 @@ function sendItems(client) {
 	});
 }
 
+function updateAction(action, id) {
+	dbs.voteMovie( action, id, (err, count) => {
+		if (err) console.log(err);
+		if (debugServer) console.log(count + " changes for " + id + " (" + action + ")");
+	});
+}
+
 //Handle proper requests
 function handleEvent(client, newEvent, data) {
 	//Debug data
@@ -43,6 +50,15 @@ function handleEvent(client, newEvent, data) {
 		case 'requestItems':
 			if (debugServer) console.log('requestItems => sendItems()');
 			sendItems(client);
+			break;
+		case 'like':
+			updateAction('like', data);
+			break;
+		case 'dislike':
+			updateAction('dislike', data);
+			break;
+		case 'superlike':
+			updateAction('superlike', data);
 			break;
 		default:
 			if (debugServer) console.log('Unrecognized request');
@@ -107,7 +123,7 @@ app.delete('/dashboard/:dbPassword', (req, res) => {
 app.put('/:dbPassword', (req, res) => {
 	if (debugServer) console.log('Requesting movieDB updating: ' + req.params.dbPassword);
 	if (req.params.dbPassword === process.env.DBPASSWORD) {
-		dbs.updateMovies();
+		dbs.loadMovies();
 		res.status(200).json({message: "database updated", targetDB: 'movieDB'});
 	} else {
 		res.status(403).json({message: "wrong PW"});
