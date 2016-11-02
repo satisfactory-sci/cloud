@@ -18,6 +18,9 @@ function Tinderable(tinderableFront) {
     this.titleArea = null;
     this.descriptionArea = null;
 
+    this._stackPosition = null;
+    this._swipelisteners = null
+
     this.setData = function(data) {
         this.data = this.data.concat(data);
     }
@@ -75,10 +78,12 @@ function Tinderable(tinderableFront) {
 
     this.triggerCancel = function() {
         if (this.lastAction != null && this.cancelListener != null && this.stack.length > 0) {
+            removeSwipeListeners(this);
             this.stack.unshift(this.lastAction.stackItem);
             this.stackData.unshift(this.lastAction.dataItem);
-            this.stackArea.insertBefore(this.lastAction.stackItem, this.stackArea.firstChild);
+            this.stackArea.insertBefore(this.lastAction.stackItem, this.stackArea.firstChild);            
             setStackTop(this);
+            returnStackTop(this);
             this.cancelListener(this.lastAction.action, this.lastAction.dataItem);
             this.lastAction = null;
         }
@@ -92,6 +97,7 @@ function Tinderable(tinderableFront) {
         self.stackArea = document.createElement("div");
         self.titleArea = document.createElement("h4");
         self.descriptionArea = document.createElement("p");
+        self._stackPosition = self.tinderableFront.getBoundingClientRect();
 
         for (var i = 0; i < self.data.length; i++) {
             var stackItem = dataItem2stackItem(self, self.data[i]);
@@ -110,14 +116,13 @@ function Tinderable(tinderableFront) {
     }
 
     var dataItem2stackItem = function(self, dataItem) {
-        var stackPosition = self.tinderableFront.getBoundingClientRect();
 
         var stackItem = document.createElement("div");
         stackItem.style.display = "inline-block";
         stackItem.style.backgroundColor = "rgba(255, 255, 255, 1)";
         stackItem.style.position = "absolute";
-        stackItem.style.left = stackPosition.left + 'px';
-        stackItem.style.top = stackPosition.top + 'px';
+        stackItem.style.left = self._stackPosition.left + 'px';
+        stackItem.style.top = self._stackPosition.top + 'px';
         stackItem.style.width = self.tinderableFront.clientWidth + 'px';
         stackItem.style.height = self.tinderableFront.clientWidth + 'px';
         stackItem.style.overflow = "hidden";
@@ -128,23 +133,45 @@ function Tinderable(tinderableFront) {
     }
 
     var setStackTop = function(self) {
-        self.stack[0].style.zIndex = 100;
-        if (self.stack.length > 1) {
-            self.stack[1].style.zIndex = 50;
+        //Set the ordering of the stack items to html
+        for (var i = 0; i < self.stack.length; i++) {
+            self.stack[i].style.zIndex = 100-i;
         }
 
+        addSwipeListeners(self);        
+
+        //Show the title and description of the top stack item
+        self.titleArea.innerHTML = self.stackData[0].title;
+        self.descriptionArea.innerHTML = self.stackData[0].description;
+    }
+
+    // Add touch event listeners to the top item of the stack and store them so they can be removed later
+    var addSwipeListeners = function(self) {
         var touchStart = stackTopTouchStart(self);
         var touchEnd = stackTopTouchEnd(self);
         var touchMove = stackTopTouchMove(self);
-
         self.stack[0].addEventListener('touchstart', touchStart, false);
         self.stack[0].addEventListener('touchend', touchEnd, false);
         self.stack[0].addEventListener('touchmove', touchMove, false);
-        self.titleArea.innerHTML = self.stackData[0].title;
-        self.descriptionArea.innerHTML = self.stackData[0].description;
+        self._swipelisteners = {
+            'touchstart': touchStart,
+            'touchend': touchEnd,
+            'touchmove': touchMove,
+        };
 
     }
 
+    //Remove touch event listeners from the top item of the stack
+    var removeSwipeListeners = function(self) {
+        try {
+            self.stack[0].removeEventListener('touchstart', self._swipelisteners.touchStart);
+            self.stack[0].removeEventListener('touchend', self._swipelisteners.touchEnd);
+            self.stack[0].removeEventListener('touchmove', self._swipelisteners.touchMove);
+        } catch (err) {}
+            
+    }
+
+    //The touch event listeners    
     var stackTopTouchStart = function(self) {
         return function(e) {
             self.stack[0].style.transition = "";
@@ -172,11 +199,7 @@ function Tinderable(tinderableFront) {
             } else if (yChange <= -1*minSwipe) {
                 self.triggerSuperlike();
             } else {
-                var stackPosition = self.tinderableFront.getBoundingClientRect();
-                self.stack[0].style.transition = "left 0.5s, top 0.5s, transform 0.5s";
-                self.stack[0].style.left = stackPosition.left + 'px';
-                self.stack[0].style.top = stackPosition.top + 'px';
-                self.stack[0].style.transform = "";
+                returnStackTop(self);
             }
         };
     }
@@ -186,17 +209,18 @@ function Tinderable(tinderableFront) {
             var touch = e.targetTouches[0];
             var xChange = touch.pageX - self.touchStartPosition.x;
             var yChange = touch.pageY - self.touchStartPosition.y;
-            var stackPosition = self.tinderableFront.getBoundingClientRect();
 
-            self.stack[0].style.left = (stackPosition.left + xChange) + 'px';
-            self.stack[0].style.top = (stackPosition.top + yChange) + 'px';
+            self.stack[0].style.left = (self._stackPosition.left + xChange) + 'px';
+            self.stack[0].style.top = (self._stackPosition.top + yChange) + 'px';
             var rotationDegree = xChange*35/self.tinderableFront.clientWidth;
             self.stack[0].style.transform = "rotate(" + rotationDegree + "deg)";
             e.preventDefault();
         }
     }
 
-    var removeStackTop = function(self) {        
+    //Remove the top item of the stack. Called after like, superlike and dislake
+    var removeStackTop = function(self) {
+        removeSwipeListeners(self);
         self.stackArea.removeChild(self.stack[0]);
         self.lastAction = {
             "stackItem": self.stack.shift(),
@@ -213,5 +237,14 @@ function Tinderable(tinderableFront) {
         }
 
         return self.lastAction.dataItem;
+    }
+
+    //The animation to return the top item of the stack to its initial place after first moving it
+    var returnStackTop = function(self) {
+        self.stack[0].style.transition = "left 0.5s, top 0.5s, transform 0.5s";
+        self.stack[0].style.left = self._stackPosition.left + 'px';
+        self.stack[0].style.top = self._stackPosition.top + 'px';
+        self.stack[0].style.transform = "";
+
     }
 };
