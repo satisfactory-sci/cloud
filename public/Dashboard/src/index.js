@@ -10,7 +10,6 @@ class App extends React.Component {
     this.state = {
       items: []
     }
-    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
@@ -36,7 +35,6 @@ class App extends React.Component {
       return obj.movieID == data.id
     })
     if(i == -1){
-      console.log("Shit")
       return;
     }
     if(type == 0){
@@ -49,19 +47,11 @@ class App extends React.Component {
     this.setState({items: state})
   }
 
-  onClick() {
-    let state = this.state.items;
-    let i =  Math.floor((Math.random() * 10) + 1);
-    state.push({title:"Doctor Weird" + i, img:"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg", votes: {dislikes: 1, likes: 4, superlikes: i}})
-    this.setState({items: state});
-  }
-
   render() {
       let rdata = this.state.items.map((item)  => {return {label: item.title, dislikes:item.dislikes, likes: item.likes, superlikes: item.superlikes}});
       return (
         <div>
           <LikeChart data={rdata} />
-          <button type="button" onClick={this.onClick}>Increase</button>
         </div>
       )
   }

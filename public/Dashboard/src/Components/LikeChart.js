@@ -14,7 +14,9 @@ class LikeChart extends React.Component {
   componentDidMount() {
     //Data
     let size = this.props.data.length
-    const data = this.props.data
+    const data = this.props.data.filter((obj) => {
+      return obj.likes + obj.dislikes + obj.superlikes > 0
+    })
     data.sort(this._sortLikes);
 
     //Graph's dimensions
@@ -85,7 +87,9 @@ class LikeChart extends React.Component {
   //Animation step
   componentDidUpdate() {
     //Data
-      const data = this.props.data
+      const data = this.props.data.filter((obj) => {
+        return obj.likes + obj.dislikes + obj.superlikes > 0
+      })
       data.sort(this._sortLikes);
 
       //Graph's dimensions
