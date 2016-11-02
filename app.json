@@ -1,0 +1,9 @@
+{
+  "name": "Satisfactory",
+  "description": "Satisfactory",
+  "scripts": {
+    "dokku": {
+      "predeploy": "cd public/Dashboard/ && gulp --production && cd ../..",
+    }
+  }
+}
