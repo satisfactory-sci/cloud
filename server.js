@@ -33,8 +33,8 @@ function sendItems(client) {
 	});
 }
 
-function updateAction(action, id) {
-	dbs.voteMovie( action, id, (err, count) => {
+function updateAction(action, data) {
+	dbs.voteMovie( action, data, (err, count) => {
 		if (err) console.log(err);
 		if (debugServer) console.log(count + " changes for " + id + " (" + action + ")");
 	});

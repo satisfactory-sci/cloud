@@ -38,17 +38,17 @@
 	function dislikeAction(dataItem) {
 		actionIndicator.innerHTML = "Disliked!";
 		actionIndicator.style.color = "red";
-		socket.emit("dislike", dataItem);
+		socket.emit("dislike", {id: dataItem.movieID, vote: 1});
 	}
 	function superlikeAction(dataItem) {
 		actionIndicator.innerHTML = "Superliked!";
 		actionIndicator.style.color = "blue";
-		socket.emit("superlike", dataItem);
+		socket.emit("superlike", {id: dataItem.movieID, vote: 1});
 	}
 	function likeAction(dataItem) {
 		actionIndicator.innerHTML = "Liked!";
 		actionIndicator.style.color = "green";
-		socket.emit("like", dataItem);
+		socket.emit("like", {id: dataItem.movieID, vote: 1});
 	}
 	function emptyAction(dataItem) {
 		actionIndicator.innerHTML = "Stack empty!";
@@ -57,7 +57,8 @@
 	}
 	function cancelAction(action, dataItem) {
 		actionIndicator.innerHTML = action + " cancelled!";
-        actionIndicator.style.color = "grey";
+		actionIndicator.style.color = "grey";
+		socket.emit(action, {id: dataItem.movieID, vote: -1});
 	}
 
 	//Button presses
@@ -71,25 +72,25 @@
 		tinderable.triggerLike();
 	});
 	document.getElementById('cancel').addEventListener('click', function(event) {
-        tinderable.triggerCancel();
-    });
+		tinderable.triggerCancel();
+	});
 
 	//Swipe gestures
 	tinderable.onLike(function(dataItem) {
-		likeAction(dataItem.movieID);
+		likeAction(dataItem);
 	});
 	tinderable.onSuperlike(function(dataItem) {
-		superlikeAction(dataItem.movieID);
+		superlikeAction(dataItem);
 	});
 	tinderable.onDislike(function(dataItem) {
-		dislikeAction(dataItem.movieID);
+		dislikeAction(dataItem);
 	});
 	tinderable.onStackEmpty(function(dataItem) {
 		emptyAction(dataItem);
 	});
 	tinderable.onCancelAction(function(action, dataItem) {
-		cancelAction(action, dataItem);        
-    });
+		cancelAction(action, dataItem);
+	});
 
 	//Start tinderable after new items arrive from the server
 	socket.on('newItems', function(data) {

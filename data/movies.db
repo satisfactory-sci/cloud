@@ -1,104 +1,75 @@
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":1,"dislikes":2,"superlikes":1,"_id":"098l3t4sgCS4lsbu"}
-{"movieID":"963111","title":"Julieta","description":"Draama","img":"http://media.finnkino.fi/1012/Event_10948/portrait_medium/Julieta_1080.jpg","likes":2,"dislikes":1,"superlikes":1,"_id":"6qkwz8Tycs0RkhY5"}
-{"movieID":"963132","title":"Sully - Uroteko Hudson-joella","description":"Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10989/portrait_medium/Sully_1080.jpg","likes":1,"dislikes":1,"superlikes":2,"_id":"F4P5MWHGv7npLeLQ"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":1,"dislikes":1,"superlikes":1,"_id":"FJFJJLos6xKnO2Kz"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":1,"dislikes":0,"superlikes":1,"_id":"G51gdAjfpACwpUHO"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"GJ1jZAwZ74ht4Jc2"}
-{"movieID":"963170","title":"Haikarat (2D) (dub)","description":"Komedia, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11185/portrait_medium/Storks_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"NozYHF8g6UbKMebo"}
-{"movieID":"956930","title":"Luokkakokous 2 - Polttarit","description":"Komedia, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11226/portrait_medium/Luokkakokous2_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"TzfYxIKxeqie6exl"}
-{"movieID":"963127","title":"Florence","description":"Komedia, Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10983/portrait_medium/FlorenceFosterJenkins_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"V4ZqCOMa1ShXAx1X"}
-{"movieID":"963117","title":"Tyttö nimeltä Varpu","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10964/portrait_medium/TyttoNimeltaVarpu_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"YHvbEOPxCHGvlIu0"}
-{"movieID":"963168","title":"Pete ja lohikäärme Elliott (2D) (dub)","description":"Seikkailu, Fantasia, Perhe-elokuva","img":"http://media.finnkino.fi/1012/Event_11181/portrait_medium/Petes_Dragon_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"YXj408FjSZPjQKOV"}
-{"movieID":"963193","title":"Samurai Rauni Reposaarelainen","description":"Komedia, Draama, Toiminta, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11213/portrait_medium/SamuraiRauniRepos_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"ZjpxG8ikWvIcYZqn"}
-{"movieID":"963128","title":"Tulen morsian","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10985/portrait_medium/TulenMorsian_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"aBe1g0miHFuhyZb3"}
-{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"ajO23g9TjnSur0JO"}
-{"movieID":"963176","title":"Kuun metsän Kaisa","description":"Dokumentti, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11175/portrait_medium/KuunMetsanKaisa_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"f39NckULeKNFSRY8"}
-{"movieID":"963144","title":"Deepwater Horizon","description":"Draama, Toiminta, Jännitys","img":"http://media.finnkino.fi/1012/Event_11004/portrait_medium/DeepwaterHorizon_1080t.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"fMSaBsdhsZnWpu8K"}
-{"movieID":"963173","title":"Tämän jälkeen","description":"Draama","img":"http://media.finnkino.fi/1012/Event_11190/portrait_medium/L_avenir_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"mDvgBroJRR31sTHq"}
-{"movieID":"963146","title":"Pahan kukat","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11008/portrait_medium/PahanKukat_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"nKWuvvfK8xYWs9Bt"}
-{"movieID":"963130","title":"Bridget Jones's Baby","description":"Komedia, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10986/portrait_medium/BridgetJonessBaby_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"nWG8jY8n5WimBgXz"}
-{"movieID":"963186","title":"Doctor Strange (2D)","description":"Toiminta, Seikkailu, Fantasia, Sci-fi","img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"oU43uAHTlE64Q2Ap"}
-{"movieID":"963134","title":"Love & Friendship","description":"Komedia, Draama, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10996/portrait_medium/LoveFriendship_poster.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"om0XG4bvuRByxbKH"}
-{"movieID":"963153","title":"Sausage Party","description":"Komedia, Seikkailu, Animaatio","img":"http://media.finnkino.fi/1012/Event_11176/portrait_medium/SausageParty_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"tGIkFEsHr9mHDZMU"}
-{"movieID":"963163","title":"Kanelia kainaloon, Tatu ja Patu!","description":"Komedia, Perhe-elokuva, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11179/portrait_medium/KaneliaKainaloonTatuP_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"tbllXRoZxq8hVY9P"}
-{"movieID":"963181","title":"Trolls (2D) (dub)","description":"Komedia, Seikkailu, Musikaali, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11193/portrait_medium/Trolls_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"uFu6DzuN9j3JDyzu"}
-{"movieID":"963149","title":"Poika ja peto (orig)","description":"Toiminta, Seikkailu, Fantasia, Animaatio","img":"http://media.finnkino.fi/1012/Event_11016/portrait_medium/BakemonoNoKo_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"zRF27S2yfxD3xRqF"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":1,"dislikes":3,"superlikes":1,"_id":"098l3t4sgCS4lsbu"}
-{"movieID":"963111","title":"Julieta","description":"Draama","img":"http://media.finnkino.fi/1012/Event_10948/portrait_medium/Julieta_1080.jpg","likes":2,"dislikes":1,"superlikes":2,"_id":"6qkwz8Tycs0RkhY5"}
-{"movieID":"963132","title":"Sully - Uroteko Hudson-joella","description":"Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10989/portrait_medium/Sully_1080.jpg","likes":2,"dislikes":1,"superlikes":2,"_id":"F4P5MWHGv7npLeLQ"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":2,"dislikes":1,"superlikes":1,"_id":"FJFJJLos6xKnO2Kz"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":1,"dislikes":0,"superlikes":2,"_id":"G51gdAjfpACwpUHO"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":1,"superlikes":0,"_id":"GJ1jZAwZ74ht4Jc2"}
-{"movieID":"963170","title":"Haikarat (2D) (dub)","description":"Komedia, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11185/portrait_medium/Storks_1080.jpg","likes":0,"dislikes":0,"superlikes":1,"_id":"NozYHF8g6UbKMebo"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":1,"dislikes":3,"superlikes":2,"_id":"098l3t4sgCS4lsbu"}
-{"movieID":"963111","title":"Julieta","description":"Draama","img":"http://media.finnkino.fi/1012/Event_10948/portrait_medium/Julieta_1080.jpg","likes":2,"dislikes":2,"superlikes":2,"_id":"6qkwz8Tycs0RkhY5"}
-{"$$deleted":true,"_id":"098l3t4sgCS4lsbu"}
-{"$$deleted":true,"_id":"6qkwz8Tycs0RkhY5"}
-{"$$deleted":true,"_id":"F4P5MWHGv7npLeLQ"}
-{"$$deleted":true,"_id":"FJFJJLos6xKnO2Kz"}
-{"$$deleted":true,"_id":"G51gdAjfpACwpUHO"}
-{"$$deleted":true,"_id":"GJ1jZAwZ74ht4Jc2"}
-{"$$deleted":true,"_id":"NozYHF8g6UbKMebo"}
-{"$$deleted":true,"_id":"TzfYxIKxeqie6exl"}
-{"$$deleted":true,"_id":"V4ZqCOMa1ShXAx1X"}
-{"$$deleted":true,"_id":"YHvbEOPxCHGvlIu0"}
-{"$$deleted":true,"_id":"YXj408FjSZPjQKOV"}
-{"$$deleted":true,"_id":"ZjpxG8ikWvIcYZqn"}
-{"$$deleted":true,"_id":"aBe1g0miHFuhyZb3"}
-{"$$deleted":true,"_id":"ajO23g9TjnSur0JO"}
-{"$$deleted":true,"_id":"f39NckULeKNFSRY8"}
-{"$$deleted":true,"_id":"fMSaBsdhsZnWpu8K"}
-{"$$deleted":true,"_id":"mDvgBroJRR31sTHq"}
-{"$$deleted":true,"_id":"nKWuvvfK8xYWs9Bt"}
-{"$$deleted":true,"_id":"nWG8jY8n5WimBgXz"}
-{"$$deleted":true,"_id":"oU43uAHTlE64Q2Ap"}
-{"$$deleted":true,"_id":"om0XG4bvuRByxbKH"}
-{"$$deleted":true,"_id":"tGIkFEsHr9mHDZMU"}
-{"$$deleted":true,"_id":"tbllXRoZxq8hVY9P"}
-{"$$deleted":true,"_id":"uFu6DzuN9j3JDyzu"}
-{"$$deleted":true,"_id":"zRF27S2yfxD3xRqF"}
-{"movieID":"963132","title":"Sully - Uroteko Hudson-joella","description":"Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10989/portrait_medium/Sully_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"DHYhceJrr5eLbZrS"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"6VXPrWi1mlceE5ZM"}
-{"movieID":"963163","title":"Kanelia kainaloon, Tatu ja Patu!","description":"Komedia, Perhe-elokuva, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11179/portrait_medium/KaneliaKainaloonTatuP_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"V5yBaRKGRdV44fZj"}
-{"movieID":"963181","title":"Trolls (2D) (dub)","description":"Komedia, Seikkailu, Musikaali, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11193/portrait_medium/Trolls_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"gwiWrSr1UNexp5xK"}
-{"movieID":"963168","title":"Pete ja lohikäärme Elliott (2D) (dub)","description":"Seikkailu, Fantasia, Perhe-elokuva","img":"http://media.finnkino.fi/1012/Event_11181/portrait_medium/Petes_Dragon_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"YfIJYY9hV6NEhqy4"}
-{"movieID":"963153","title":"Sausage Party","description":"Komedia, Seikkailu, Animaatio","img":"http://media.finnkino.fi/1012/Event_11176/portrait_medium/SausageParty_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"95AVAvSo8YdLQgAJ"}
-{"movieID":"963127","title":"Florence","description":"Komedia, Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10983/portrait_medium/FlorenceFosterJenkins_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"VcitBYdnHcmN8AEt"}
-{"movieID":"963149","title":"Poika ja peto (orig)","description":"Toiminta, Seikkailu, Fantasia, Animaatio","img":"http://media.finnkino.fi/1012/Event_11016/portrait_medium/BakemonoNoKo_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"QKTWRxJPiEVgqccq"}
-{"movieID":"956930","title":"Luokkakokous 2 - Polttarit","description":"Komedia, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11226/portrait_medium/Luokkakokous2_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"rQJzFuCHZbVbDDiL"}
-{"movieID":"963111","title":"Julieta","description":"Draama","img":"http://media.finnkino.fi/1012/Event_10948/portrait_medium/Julieta_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Z4T2Z3ircC2XtaO8"}
-{"movieID":"963117","title":"Tyttö nimeltä Varpu","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10964/portrait_medium/TyttoNimeltaVarpu_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"vF09QoPvyo47SYBD"}
-{"movieID":"963170","title":"Haikarat (2D) (dub)","description":"Komedia, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11185/portrait_medium/Storks_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"xG85MYldyt3EJK7Q"}
-{"movieID":"963128","title":"Tulen morsian","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10985/portrait_medium/TulenMorsian_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"RVRzFeVdmoujybTR"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"2tlzd0duCHDl4zRs"}
-{"movieID":"963134","title":"Love & Friendship","description":"Komedia, Draama, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10996/portrait_medium/LoveFriendship_poster.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Rf1FXnRLJnP3bRru"}
-{"movieID":"963173","title":"Tämän jälkeen","description":"Draama","img":"http://media.finnkino.fi/1012/Event_11190/portrait_medium/L_avenir_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"RphbvlPOVXbkSUq2"}
-{"movieID":"963176","title":"Kuun metsän Kaisa","description":"Dokumentti, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11175/portrait_medium/KuunMetsanKaisa_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"mHC5NRDCIngvQg7E"}
-{"movieID":"963186","title":"Doctor Strange (2D)","description":"Toiminta, Seikkailu, Fantasia, Sci-fi","img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"B8Of9vHt79lvgX9U"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"8bbjC229iZEHkNLF"}
-{"movieID":"963130","title":"Bridget Jones's Baby","description":"Komedia, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10986/portrait_medium/BridgetJonessBaby_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"DYdaCf08djLZZTWc"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"2cPXc3osgczIVzda"}
-{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"48JUxD1b4qX1v2Ha"}
-{"movieID":"963193","title":"Samurai Rauni Reposaarelainen","description":"Komedia, Draama, Toiminta, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11213/portrait_medium/SamuraiRauniRepos_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"FkWj4vhKUCYl64kK"}
-{"movieID":"963144","title":"Deepwater Horizon","description":"Draama, Toiminta, Jännitys","img":"http://media.finnkino.fi/1012/Event_11004/portrait_medium/DeepwaterHorizon_1080t.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"AK9bHJEz6LYrxMd5"}
-{"movieID":"963146","title":"Pahan kukat","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11008/portrait_medium/PahanKukat_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"VpthuKMEVevYEb0s"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":1,"superlikes":0,"_id":"2cPXc3osgczIVzda"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":0,"dislikes":1,"superlikes":0,"_id":"2tlzd0duCHDl4zRs"}
-{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":0,"dislikes":1,"superlikes":0,"_id":"48JUxD1b4qX1v2Ha"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":0,"dislikes":1,"superlikes":0,"_id":"6VXPrWi1mlceE5ZM"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":0,"dislikes":1,"superlikes":0,"_id":"8bbjC229iZEHkNLF"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":1,"superlikes":1,"_id":"2cPXc3osgczIVzda"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":0,"dislikes":1,"superlikes":1,"_id":"2tlzd0duCHDl4zRs"}
-{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":0,"dislikes":1,"superlikes":1,"_id":"48JUxD1b4qX1v2Ha"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":0,"dislikes":1,"superlikes":1,"_id":"6VXPrWi1mlceE5ZM"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":0,"dislikes":1,"superlikes":1,"_id":"8bbjC229iZEHkNLF"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":1,"dislikes":1,"superlikes":1,"_id":"2cPXc3osgczIVzda"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":1,"dislikes":1,"superlikes":1,"_id":"2tlzd0duCHDl4zRs"}
-{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":1,"dislikes":1,"superlikes":1,"_id":"48JUxD1b4qX1v2Ha"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":1,"dislikes":1,"superlikes":1,"_id":"6VXPrWi1mlceE5ZM"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":1,"dislikes":1,"superlikes":1,"_id":"8bbjC229iZEHkNLF"}
-{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":1,"dislikes":1,"superlikes":2,"_id":"2cPXc3osgczIVzda"}
-{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":1,"dislikes":1,"superlikes":2,"_id":"2tlzd0duCHDl4zRs"}
-{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":1,"dislikes":1,"superlikes":2,"_id":"48JUxD1b4qX1v2Ha"}
-{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":1,"dislikes":1,"superlikes":2,"_id":"6VXPrWi1mlceE5ZM"}
-{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":1,"dislikes":1,"superlikes":2,"_id":"8bbjC229iZEHkNLF"}
+{"movieID":"963149","title":"Poika ja peto (orig)","description":"Toiminta, Seikkailu, Fantasia, Animaatio","img":"http://media.finnkino.fi/1012/Event_11016/portrait_medium/BakemonoNoKo_1080.jpg","likes":0,"dislikes":2,"superlikes":0,"_id":"11HFuM0wKx6XVXYp"}
+{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":0,"dislikes":0,"superlikes":2,"_id":"1iw5ZIuv4e3sgV92"}
+{"movieID":"963111","title":"Julieta","description":"Draama","img":"http://media.finnkino.fi/1012/Event_10948/portrait_medium/Julieta_1080.jpg","likes":1,"dislikes":0,"superlikes":0,"_id":"24pmVg81O6tsVLPZ"}
+{"movieID":"963134","title":"Love & Friendship","description":"Komedia, Draama, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10996/portrait_medium/LoveFriendship_poster.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"4rPab730xXKIRcKj"}
+{"movieID":"963168","title":"Pete ja lohikäärme Elliott (2D) (dub)","description":"Seikkailu, Fantasia, Perhe-elokuva","img":"http://media.finnkino.fi/1012/Event_11181/portrait_medium/Petes_Dragon_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"62jll8SCMLNzhibA"}
+{"movieID":"963117","title":"Tyttö nimeltä Varpu","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10964/portrait_medium/TyttoNimeltaVarpu_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"6Uw84UvbI94ZAan9"}
+{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"E6P5t6j1bAMjNFeC"}
+{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"JWDB6X0FJsb9O1yX"}
+{"movieID":"963181","title":"Trolls (2D) (dub)","description":"Komedia, Seikkailu, Musikaali, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11193/portrait_medium/Trolls_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Mliozyrzi9hgsiAU"}
+{"movieID":"956930","title":"Luokkakokous 2 - Polttarit","description":"Komedia, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11226/portrait_medium/Luokkakokous2_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Ssp4D13c2QN2Nl0y"}
+{"movieID":"963146","title":"Pahan kukat","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11008/portrait_medium/PahanKukat_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"WdEMOmHYjdJXK47S"}
+{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"XDr2Tgv9UOKt3qMS"}
+{"movieID":"963170","title":"Haikarat (2D) (dub)","description":"Komedia, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11185/portrait_medium/Storks_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"XzUwTgQYEz7t9549"}
+{"movieID":"963163","title":"Kanelia kainaloon, Tatu ja Patu!","description":"Komedia, Perhe-elokuva, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11179/portrait_medium/KaneliaKainaloonTatuP_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"YC3myCOrbCN5D9gz"}
+{"movieID":"963186","title":"Doctor Strange (2D)","description":"Toiminta, Seikkailu, Fantasia, Sci-fi","img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"YaAsTxRsAGvQKdkF"}
+{"movieID":"963153","title":"Sausage Party","description":"Komedia, Seikkailu, Animaatio","img":"http://media.finnkino.fi/1012/Event_11176/portrait_medium/SausageParty_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"YbzxZJxMYsXgkvI8"}
+{"movieID":"963176","title":"Kuun metsän Kaisa","description":"Dokumentti, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11175/portrait_medium/KuunMetsanKaisa_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"acfu6fKpddhBXCbC"}
+{"movieID":"963128","title":"Tulen morsian","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10985/portrait_medium/TulenMorsian_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"ao53Sx3OcT1Uwddp"}
+{"movieID":"963144","title":"Deepwater Horizon","description":"Draama, Toiminta, Jännitys","img":"http://media.finnkino.fi/1012/Event_11004/portrait_medium/DeepwaterHorizon_1080t.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"c41Q0hLaE1u1YOEH"}
+{"movieID":"963127","title":"Florence","description":"Komedia, Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10983/portrait_medium/FlorenceFosterJenkins_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"h0sRMA65fgcv1Pbh"}
+{"movieID":"963193","title":"Samurai Rauni Reposaarelainen","description":"Komedia, Draama, Toiminta, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11213/portrait_medium/SamuraiRauniRepos_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"ij8HHxcJC4hCw5Xa"}
+{"movieID":"963130","title":"Bridget Jones's Baby","description":"Komedia, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10986/portrait_medium/BridgetJonessBaby_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"rck1wo1JYsRMRjqD"}
+{"movieID":"963173","title":"Tämän jälkeen","description":"Draama","img":"http://media.finnkino.fi/1012/Event_11190/portrait_medium/L_avenir_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"sJxOG02OCsFRI2RF"}
+{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"tI95JRGcnoRY9FlQ"}
+{"movieID":"963132","title":"Sully - Uroteko Hudson-joella","description":"Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10989/portrait_medium/Sully_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"yKa2vrZaxaP2yWuU"}
+{"$$deleted":true,"_id":"11HFuM0wKx6XVXYp"}
+{"$$deleted":true,"_id":"1iw5ZIuv4e3sgV92"}
+{"$$deleted":true,"_id":"24pmVg81O6tsVLPZ"}
+{"$$deleted":true,"_id":"4rPab730xXKIRcKj"}
+{"$$deleted":true,"_id":"62jll8SCMLNzhibA"}
+{"$$deleted":true,"_id":"6Uw84UvbI94ZAan9"}
+{"$$deleted":true,"_id":"E6P5t6j1bAMjNFeC"}
+{"$$deleted":true,"_id":"JWDB6X0FJsb9O1yX"}
+{"$$deleted":true,"_id":"Mliozyrzi9hgsiAU"}
+{"$$deleted":true,"_id":"Ssp4D13c2QN2Nl0y"}
+{"$$deleted":true,"_id":"WdEMOmHYjdJXK47S"}
+{"$$deleted":true,"_id":"XDr2Tgv9UOKt3qMS"}
+{"$$deleted":true,"_id":"XzUwTgQYEz7t9549"}
+{"$$deleted":true,"_id":"YC3myCOrbCN5D9gz"}
+{"$$deleted":true,"_id":"YaAsTxRsAGvQKdkF"}
+{"$$deleted":true,"_id":"YbzxZJxMYsXgkvI8"}
+{"$$deleted":true,"_id":"acfu6fKpddhBXCbC"}
+{"$$deleted":true,"_id":"ao53Sx3OcT1Uwddp"}
+{"$$deleted":true,"_id":"c41Q0hLaE1u1YOEH"}
+{"$$deleted":true,"_id":"h0sRMA65fgcv1Pbh"}
+{"$$deleted":true,"_id":"ij8HHxcJC4hCw5Xa"}
+{"$$deleted":true,"_id":"rck1wo1JYsRMRjqD"}
+{"$$deleted":true,"_id":"sJxOG02OCsFRI2RF"}
+{"$$deleted":true,"_id":"tI95JRGcnoRY9FlQ"}
+{"$$deleted":true,"_id":"yKa2vrZaxaP2yWuU"}
+{"movieID":"963132","title":"Sully - Uroteko Hudson-joella","description":"Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10989/portrait_medium/Sully_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"szUgRbcUlKhiL0hk"}
+{"movieID":"963112","title":"Hymyilevä mies","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10937/portrait_medium/HymyilevaMies_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"klZ7V9DfrXIdtybL"}
+{"movieID":"963163","title":"Kanelia kainaloon, Tatu ja Patu!","description":"Komedia, Perhe-elokuva, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11179/portrait_medium/KaneliaKainaloonTatuP_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"VHsbISgZAOzOwqQB"}
+{"movieID":"963181","title":"Trolls (2D) (dub)","description":"Komedia, Seikkailu, Musikaali, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11193/portrait_medium/Trolls_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"6hYlRQxbsDF0xrUY"}
+{"movieID":"963168","title":"Pete ja lohikäärme Elliott (2D) (dub)","description":"Seikkailu, Fantasia, Perhe-elokuva","img":"http://media.finnkino.fi/1012/Event_11181/portrait_medium/Petes_Dragon_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"t0szsY7DUMRSmKX5"}
+{"movieID":"963153","title":"Sausage Party","description":"Komedia, Seikkailu, Animaatio","img":"http://media.finnkino.fi/1012/Event_11176/portrait_medium/SausageParty_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Gm8tLv23ypKUNT95"}
+{"movieID":"963127","title":"Florence","description":"Komedia, Draama, Elämäkerta","img":"http://media.finnkino.fi/1012/Event_10983/portrait_medium/FlorenceFosterJenkins_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Z5svZePsZ5w6QCag"}
+{"movieID":"963149","title":"Poika ja peto (orig)","description":"Toiminta, Seikkailu, Fantasia, Animaatio","img":"http://media.finnkino.fi/1012/Event_11016/portrait_medium/BakemonoNoKo_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"LY5ByIjS15CyTSSU"}
+{"movieID":"956930","title":"Luokkakokous 2 - Polttarit","description":"Komedia, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11226/portrait_medium/Luokkakokous2_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"yFVH2Mg5bnhEUojz"}
+{"movieID":"963111","title":"Julieta","description":"Draama","img":"http://media.finnkino.fi/1012/Event_10948/portrait_medium/Julieta_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"LJPSu0i01wwml8T5"}
+{"movieID":"963117","title":"Tyttö nimeltä Varpu","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10964/portrait_medium/TyttoNimeltaVarpu_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"vu8pimse5dZz4RFN"}
+{"movieID":"963170","title":"Haikarat (2D) (dub)","description":"Komedia, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_11185/portrait_medium/Storks_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"CTXV5mvWZuP5BLGB"}
+{"movieID":"963128","title":"Tulen morsian","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_10985/portrait_medium/TulenMorsian_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"AVintBZZ5CwdATNg"}
+{"movieID":"963121","title":"Doria etsimässä (2D) (dub)","description":"Komedia, Seikkailu, Perhe-elokuva, Animaatio","img":"http://media.finnkino.fi/1012/Event_10966/portrait_medium/FindingDory_1080s.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"Af7C1RfPesRcrtkJ"}
+{"movieID":"963134","title":"Love & Friendship","description":"Komedia, Draama, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10996/portrait_medium/LoveFriendship_poster.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"V9dHXeu5EVOUCQmo"}
+{"movieID":"963173","title":"Tämän jälkeen","description":"Draama","img":"http://media.finnkino.fi/1012/Event_11190/portrait_medium/L_avenir_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"W0BON6lOfqIklECT"}
+{"movieID":"963176","title":"Kuun metsän Kaisa","description":"Dokumentti, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11175/portrait_medium/KuunMetsanKaisa_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"TezIQY8aIteyHkxC"}
+{"movieID":"963186","title":"Doctor Strange (2D)","description":"Toiminta, Seikkailu, Fantasia, Sci-fi","img":"http://media.finnkino.fi/1012/Event_11199/portrait_medium/DoctorStrange_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"jxuOIl4ozEc6TWQu"}
+{"movieID":"963140","title":"Nainen junassa","description":"Jännitys","img":"http://media.finnkino.fi/1012/Event_11001/portrait_medium/TheGirlOnTheTrain_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"7Dd3I7w7DLwKA9eT"}
+{"movieID":"963130","title":"Bridget Jones's Baby","description":"Komedia, Romantiikka","img":"http://media.finnkino.fi/1012/Event_10986/portrait_medium/BridgetJonessBaby_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"dsB8yQ3ZjGyPqeXv"}
+{"movieID":"963123","title":"The Lobster","description":"Komedia, Draama, Romantiikka, Sci-fi","img":"http://media.finnkino.fi/1012/Event_10972/portrait_medium/TheLobster_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"DhiCDK8xYL46jblC"}
+{"movieID":"963195","title":"Äpärä","description":"Draama, Jännitys, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11214/portrait_medium/Apara_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"dCLGX1nYF8h3AXnG"}
+{"movieID":"963193","title":"Samurai Rauni Reposaarelainen","description":"Komedia, Draama, Toiminta, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11213/portrait_medium/SamuraiRauniRepos_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"tvlDWdV1bI3O3SGt"}
+{"movieID":"963144","title":"Deepwater Horizon","description":"Draama, Toiminta, Jännitys","img":"http://media.finnkino.fi/1012/Event_11004/portrait_medium/DeepwaterHorizon_1080t.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"EcLSzGcn1vEVln7A"}
+{"movieID":"963146","title":"Pahan kukat","description":"Draama, Kotimainen","img":"http://media.finnkino.fi/1012/Event_11008/portrait_medium/PahanKukat_1080.jpg","likes":0,"dislikes":0,"superlikes":0,"_id":"pgEMOMihuWgkXZ7y"}
