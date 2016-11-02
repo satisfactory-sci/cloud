@@ -10,6 +10,7 @@ const port = 5000;
 const debugServer = true;
 const debugClient = true;
 const dbs = require('./src/databases.js');
+const dashboards = [];
 //App definitions
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
@@ -35,6 +36,7 @@ function sendItems(client) {
 }
 
 function updateAction(action, data) {
+	if (debugServer) console.log("updateAction " + action + " with ", data);
 	dbs.voteMovie( action, data, (err, count) => {
 		if (err) console.log(err);
 		if (debugServer) console.log(count + " changes for " + id + " (" + action + ")");
@@ -78,19 +80,22 @@ io.on('connection', (client) => {
 	});
 	//Client requesting new items
 	client.on('requestItems', (data) => {
-		handleEvent(client, 'requestItems')
+		handleEvent(client, 'requestItems');
 	})
 	//Client liked an item
 	client.on('like', (data) => {
-		handleEvent(client, 'like', data)
+		handleEvent(client, 'like', data);
+		dashboards.forEach( client => emit('like', data));
 	});
 	//Cliend superliked an item
 	client.on('superlike', (data) => {
-		handleEvent(client, 'superlike', data)
+		handleEvent(client, 'superlike', data);
+		dashboards.forEach( client => emit('superlike', data));
 	});
 	//Client disliked an item
 	client.on('dislike', (data) => {
-		handleEvent(client, 'dislike', data)
+		handleEvent(client, 'dislike', data);
+		dashboards.forEach( client => emit('dislike', data));
 	});
 	//Client has an empty list
 	client.on('empty', (data) => {
@@ -99,7 +104,19 @@ io.on('connection', (client) => {
 
 	//Dashboard requesting items
 	client.on('requestDashboardData', (data) => {
+		//Add dashboard to listeners
+		dashboard.push(client);
+		if (debugServer) console.log('dashboards connected: ' + dashboards.length);
 		handleEvent(client, 'requestDashboardData', data);
+	})
+
+	client.on('disconnect', (data) => {
+		//Remove dashboard from listeners
+		const index = dashboards.indexOf(client);
+		if (index > -1) {
+			dashboards.splice(index, 1);
+			if (debugServer) console.log('dashboard removed');
+		}
 	})
 });
 
