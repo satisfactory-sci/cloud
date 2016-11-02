@@ -12,6 +12,7 @@ const debugClient = true;
 const dbs = require('./src/databases.js');
 //App definitions
 app.use(express.static('public'));
+app.use(express.static('public/Dashboard'));
 app.use(bodyParser.urlencoded({ extended: true}));
 
 //Fetch items for client
@@ -96,6 +97,10 @@ io.on('connection', (client) => {
 //Serve HTML when requested
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/dashboard', (req, res) => {
+	res.sendFile(__dirname + '/public/Dashboard/index.html');
 });
 
 //Reset databases with delete TODO REFACTOR/REMOVE
