@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import io from 'socket.io-client';
 import LikeChart from "./Components/LikeChart";
 import 'babel/polyfill'
 
@@ -17,30 +18,34 @@ class App extends React.Component {
     socket.on('newItems', (data) => {
       this.setState({items: data})
     })
-    /*
     socket.on('dislike', (data) => {
-      _updateState(data, 0)
+      this._updateState(data, 0)
     })
     socket.on('like',(data) => {
-      _updateState(data, 1)
+      this._updateState(data, 1)
     })
     socket.on('superlike', (data) => {
-      _updateState(data, 2)
-    })*/
-    socket.emit('requestDashboardItems')
+      this._updateState(data, 2)
+    })
+    socket.emit('requestDashboardData')
   }
 
   _updateState(data, type) {
     let state = this.state.items
+    console.log(data.id)
     let i = state.findIndex((obj) => {
-      obj.id = data.id
+      return obj.id == data.id
     })
+    if(i == -1){
+      console.log("Shit")
+      return;
+    }
     if(type == 0){
-      state[i].votes.dislikes += 1
+      state[i].dislikes += data.vote
     }else if(type == 1){
-      state[i].votes.like += 1
+      state[i].like += data.vote
     }else{
-      state[i].votes.superlike += 1
+      state[i].superlike += data.vote
     }
     this.setState({items: state})
   }
@@ -53,7 +58,7 @@ class App extends React.Component {
   }
 
   render() {
-      let rdata = this.state.items.map((item) => {return {label: item.title, dislikes:item.votes.dislikes, likes: item.votes.likes, superlikes: item.votes.superlikes}});
+      let rdata = this.state.items.map((item)  => {return {label: item.title, dislikes:item.dislikes, likes: item.likes, superlikes: item.superlikes}});
       return <div><LikeChart data={rdata} /><button type="button" onClick={this.onClick}>Increase</button></div>
   }
 }
