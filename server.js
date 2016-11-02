@@ -7,7 +7,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const xml2js = require('xml2js').parseString;
 const port = 5000;
-const debugServer = false;
+const debugServer = true;
 const debugClient = true;
 const dbs = require('./src/databases.js');
 //App definitions
@@ -52,6 +52,10 @@ function handleEvent(client, newEvent, data) {
 			if (debugServer) console.log('requestItems => sendItems()');
 			sendItems(client);
 			break;
+		case 'requestDashboardData':
+			if (debugServer) console.log('requestDashboardData => sendItems()');
+			sendItems(client);
+			break;
 		case 'like':
 			updateAction('like', data);
 			break;
@@ -92,6 +96,11 @@ io.on('connection', (client) => {
 	client.on('empty', (data) => {
 		handleEvent(client, 'empty', data);
 	});
+
+	//Dashboard requesting items
+	client.on('requestDashboardData', (data) => {
+		handleEvent(client, 'requestDashboardData', data);
+	})
 });
 
 //Serve HTML when requested
