@@ -6,11 +6,13 @@ function Tinderable(tinderableFront) {
     this.dislikeListener = null;
     this.superlikeListener = null;
     this.stackEmptyListener = null;
+    this.cancelListener = null;
     this.data = [];
 
     this.stack = [];
     this.stackData = [];
     this.touchStartPosition = null;
+    this.lastAction = null;
 
     this.stackArea = null;
     this.titleArea = null;
@@ -36,6 +38,10 @@ function Tinderable(tinderableFront) {
         this.stackEmptyListener = stackEmptyListener;
     }
 
+    this.onCancelAction = function(cancelListener) {
+        this.cancelListener = cancelListener;
+    }
+
     this.start = function() {
         if (this.data.length > 0) {
             data2Html(this);
@@ -45,22 +51,36 @@ function Tinderable(tinderableFront) {
 
     this.triggerLike = function() {
         var item = removeStackTop(this);
-        if (this.likeListener != null) {
+        this.lastAction.action = "like";
+        if (this.likeListener != null && this.stack.length > 0) {
             this.likeListener(item);
         }
     }
 
     this.triggerSuperlike = function() {
         var item = removeStackTop(this);
-        if (this.superlikeListener != null) {
+        this.lastAction.action = "superlike";
+        if (this.superlikeListener != null && this.stack.length > 0) {
             this.superlikeListener(item);
         }
     }
 
     this.triggerDislike = function() {
         var item = removeStackTop(this);
-        if (this.dislikeListener != null) {
+        this.lastAction.action = "dislike";
+        if (this.dislikeListener != null && this.stack.length > 0) {
             this.dislikeListener(item);
+        }
+    }
+
+    this.triggerCancel = function() {
+        if (this.lastAction != null && this.cancelListener != null && this.stack.length > 0) {
+            this.stack.unshift(this.lastAction.stackItem);
+            this.stackData.unshift(this.lastAction.dataItem);
+            this.stackArea.insertBefore(this.lastAction.stackItem, this.stackArea.firstChild);
+            setStackTop(this);
+            this.cancelListener(this.lastAction.action, this.lastAction.dataItem);
+            this.lastAction = null;
         }
     }
 
@@ -176,10 +196,12 @@ function Tinderable(tinderableFront) {
         }
     }
 
-    var removeStackTop = function(self) {
+    var removeStackTop = function(self) {        
         self.stackArea.removeChild(self.stack[0]);
-        self.stack.shift();
-        var data = self.stackData.shift();
+        self.lastAction = {
+            "stackItem": self.stack.shift(),
+            "dataItem": self.stackData.shift()
+        };
 
         if (self.stack.length > 0) {
             setStackTop(self);
@@ -190,6 +212,6 @@ function Tinderable(tinderableFront) {
             window.setTimeout(self.stackEmptyListener, 0);
         }
 
-        return data;
+        return self.lastAction.dataItem;
     }
 };
