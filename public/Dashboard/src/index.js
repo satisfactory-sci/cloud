@@ -33,8 +33,9 @@ class App extends React.Component {
   _updateState(data, type) {
     let state = this.state.items
     console.log(data.id)
+    console.log(type)
     let i = state.findIndex((obj) => {
-      return obj.id == data.id
+      return obj.movieID == data.id
     })
     if(i == -1){
       console.log("Shit")
@@ -43,9 +44,9 @@ class App extends React.Component {
     if(type == 0){
       state[i].dislikes += data.vote
     }else if(type == 1){
-      state[i].like += data.vote
+      state[i].likes += data.vote
     }else{
-      state[i].superlike += data.vote
+      state[i].superlikes += data.vote
     }
     this.setState({items: state})
   }
