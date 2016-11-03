@@ -69,7 +69,7 @@ class LikeChart extends React.Component {
       .attr("x", margin.left)
       .attr("y", margin.top)
       .style("font-size", "1.7em")
-      .style("font-family", "'Roboto', Times New Roman")
+      .style("font-family", "'Fira Mono', Times New Roman")
       .text("Top 5")
 
     var legend = svg.selectAll(".legend")
@@ -79,11 +79,16 @@ class LikeChart extends React.Component {
       .attr("transform", function(d, i) { return "translate(" + i*Math.sqrt(i)*70 + "," + height + ")"; })
       .style("font", "12px 'Fira Mono'");
 
-    legend.append("rect")
+    let icons = ['\uf165', '\uf164','\uf08a']
+
+    legend.append("text")
       .attr("x", width/2 + 4)
-      .attr("width", 18)
-      .attr("height", 18)
-      .attr("fill", function(d, i) {return colors[i]});
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .attr('font-family', 'FontAwesome')
+      .attr('font-size', '4em' )
+      .style("fill", function(d, i){return colors[i]})
+      .text(function(d, i) { return icons[i] });
 
     legend.append("text")
       .attr("x", width/2)
@@ -160,7 +165,7 @@ class LikeChart extends React.Component {
                   tspan = no.append("tspan")
                     .attr("x", x)
                     .attr("y", y)
-                    .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                    .attr("dy", ++li * lh + dy + "em")
                     .text(word);
               }
           }
