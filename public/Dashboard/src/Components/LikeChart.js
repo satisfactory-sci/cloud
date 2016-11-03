@@ -69,7 +69,7 @@ class LikeChart extends React.Component {
       .attr("x", margin.left)
       .attr("y", margin.top)
       .style("font-size", "1.7em")
-      .style("font-family", "'Roboto', sans-serif")
+      .style("font-family", "'Roboto', Times New Roman")
       .text("Top 5")
 
     var legend = svg.selectAll(".legend")
@@ -77,7 +77,7 @@ class LikeChart extends React.Component {
       .enter().append("g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(" + i*Math.sqrt(i)*70 + "," + height + ")"; })
-      .style("font", "12px 'Roboto'");
+      .style("font", "12px 'Fira Mono'");
 
     legend.append("rect")
       .attr("x", width/2 + 4)
@@ -132,9 +132,46 @@ class LikeChart extends React.Component {
 
       //Insert new entries
       this.insert(svg, data, width, x, y);
+      setTimeout(()=> {
+        svg.selectAll(".tick text")
+          .each(function(d,i) {
+            let no = d3.select(this)
+            let words = d.split(" ").reverse();
+            let word;
+            let line = []
+            let x = no.attr("x")
+            let li = 0
+            let lh = 1.1
+            let y = no.attr("y")
+            let dy = 0
+            let tspan = no
+              .text(null)
+              .append("tspan")
+              .attr("x", x)
+              .attr("y", y)
+              .attr("dy", dy + "em")
+            while (word = words.pop()) {
+              line.push(word);
+              tspan.text(line.join(" "));
+              if (tspan.node().getComputedTextLength() > width*(1/4)) {
+                  line.pop();
+                  tspan.text(line.join(" "));
+                  line = [word];
+                  tspan = no.append("tspan")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                    .text(word);
+              }
+          }
+
+          })
+      }, 400)
+
       //Update old entries
       this.updateGraph(svg, data, width, x, y);
       svg.exit().remove();
+
   }
 
   //Function that draws new data entries to the graph
