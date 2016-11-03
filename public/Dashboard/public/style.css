@@ -14,11 +14,13 @@
   visibility: hidden;
 }
 
-text {
-  font-size: 1.5em;
+.tick text {
+  font-size: 1.8em;
   font-family: Fira Mono, Times New Roman;
   fill: #212121;
 }
+
+
 
 .navbar-brand {
   padding: 0px;

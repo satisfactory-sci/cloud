@@ -76,17 +76,17 @@ class LikeChart extends React.Component {
       .data(["Dislike", "Like", "Megalike"])
       .enter().append("g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(" + i*Math.sqrt(i)*70 + "," + height + ")"; })
-      .style("font", "12px 'Fira Mono'");
+      .attr("transform", function(d, i) { return "translate(" + i*Math.sqrt(i)*100 + "," + height + ")"; })
+      .style("font", "1.3em 'Fira Mono'");
 
     let icons = ['\uf165', '\uf164','\uf08a']
 
     legend.append("text")
-      .attr("x", width/2 + 4)
+      .attr("x", width/2 + 10)
       .attr("y", 9)
       .attr("dy", ".35em")
       .attr('font-family', 'FontAwesome')
-      .attr('font-size', '4em' )
+      .attr('font-size', '1.3em' )
       .style("fill", function(d, i){return colors[i]})
       .text(function(d, i) { return icons[i] });
 
