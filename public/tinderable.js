@@ -2,117 +2,146 @@ function Tinderable(tinderableFront) {
 
     this.tinderableFront = tinderableFront;
 
-    this.likeListener = null;
-    this.dislikeListener = null;
-    this.superlikeListener = null;
-    this.stackEmptyListener = null;
-    this.cancelListener = null;
-    this.data = [];
+    this._likeListener = null;
+    this._dislikeListener = null;
+    this._superlikeListener = null;
+    this._stackEmptyListener = null;
+    this._cancelListener = null;
+    this._data = [];
 
-    this.stack = [];
-    this.stackData = [];
-    this.touchStartPosition = null;
-    this.lastAction = null;
+    this._stack = [];
+    this._stackData = [];
+    this._touchStartPosition = null;
+    this._lastAction = null;
 
-    this.stackArea = null;
-    this.titleArea = null;
-    this.descriptionArea = null;
+    this._stackArea = null;
+    this._buttonsArea = null;
 
     this._stackPosition = null;
-    this._swipelisteners = null
 
     this.setData = function(data) {
-        this.data = this.data.concat(data);
+        this._data = this._data.concat(data);
     }
 
     this.onLike = function(likeListener) {
-        this.likeListener = likeListener;
+        this._likeListener = likeListener;
     }
 
     this.onSuperlike = function(superlikeListener) {
-        this.superlikeListener = superlikeListener;
+        this._superlikeListener = superlikeListener;
     }
 
     this.onDislike = function(dislikeListener) {
-        this.dislikeListener = dislikeListener;
+        this._dislikeListener = dislikeListener;
     }
 
     this.onStackEmpty = function(stackEmptyListener) {
-        this.stackEmptyListener = stackEmptyListener;
+        this._stackEmptyListener = stackEmptyListener;
     }
 
     this.onCancelAction = function(cancelListener) {
-        this.cancelListener = cancelListener;
+        this._cancelListener = cancelListener;
     }
 
     this.start = function() {
-        if (this.data.length > 0) {
+        if (this._data.length > 0) {
             data2Html(this);
             setStackTop(this);
         }
     }
 
     this.triggerLike = function() {
-        var item = removeStackTop(this);
-        this.lastAction.action = "like";
-        if (this.likeListener != null && this.stack.length > 0) {
-            this.likeListener(item);
+        if (this._stack.length > 0) {
+            var item = removeStackTop(this);
+            this._lastAction.action = "like";
+            if (this._likeListener != null) {
+                this._likeListener(item);
+            }
         }
     }
 
     this.triggerSuperlike = function() {
-        var item = removeStackTop(this);
-        this.lastAction.action = "superlike";
-        if (this.superlikeListener != null && this.stack.length > 0) {
-            this.superlikeListener(item);
+        if (this._stack.length > 0) {
+            var item = removeStackTop(this);
+            this._lastAction.action = "superlike";
+            if (this._superlikeListener != null) {
+                this._superlikeListener(item);
+            }
         }
     }
 
     this.triggerDislike = function() {
-        var item = removeStackTop(this);
-        this.lastAction.action = "dislike";
-        if (this.dislikeListener != null && this.stack.length > 0) {
-            this.dislikeListener(item);
+        if (this._stack.length > 0) {
+            var item = removeStackTop(this);
+            this._lastAction.action = "dislike";
+            if (this._dislikeListener != null) {
+                this._dislikeListener(item);
+            }
         }
     }
 
     this.triggerCancel = function() {
-        if (this.lastAction != null && this.cancelListener != null && this.stack.length > 0) {
-            removeSwipeListeners(this);
-            this.stack.unshift(this.lastAction.stackItem);
-            this.stackData.unshift(this.lastAction.dataItem);
-            this.stackArea.insertBefore(this.lastAction.stackItem, this.stackArea.firstChild);            
-            setStackTop(this);
-            returnStackTop(this);
-            this.cancelListener(this.lastAction.action, this.lastAction.dataItem);
-            this.lastAction = null;
+        if (this._lastAction != null) {
+            //Re-render tinderable to make sure there are no previous event listeners left
+            var prevAction = this._lastAction.action;
+            var prevDataItem = this._lastAction.dataItem;
+            var prevData = this._data;
+            this._data = [this._lastAction.dataItem];
+            this.setData(this._stackData);
+            this.setData(prevData);
+            this.destroy();
+            this.start();
+
+            //Disable the cancel button. You can only cancel the last action which was already cancelled
+            this._buttonsArea.firstChild.disabled = true;
+            this._buttonsArea.firstChild.style.color = "lightgrey";
+
+            if (this._cancelListener != null) {
+                this._cancelListener(prevAction, prevDataItem);
+            }            
+            
         }
     }
 
     this.destroy = function() {
         this.tinderableFront.innerHTML = "";
+        this._stack = [];
+        this._stackData = [];
+        this._touchStartPosition = null;
+        this._lastAction = null;
+        this._stackArea = null;
+        this._stackPosition = null;
     }
 
+    //Private functions
+
     var data2Html = function(self) {
-        self.stackArea = document.createElement("div");
-        self.titleArea = document.createElement("h4");
-        self.descriptionArea = document.createElement("p");
         self._stackPosition = self.tinderableFront.getBoundingClientRect();
 
-        for (var i = 0; i < self.data.length; i++) {
-            var stackItem = dataItem2stackItem(self, self.data[i]);
-            self.stack.push(stackItem);
-            self.stackData.push(self.data[i]);
-            self.stackArea.appendChild(stackItem);
+        self._buttonsArea = createButtons(self);
+        self._stackArea = document.createElement("div");
+
+        for (var i = 0; i < self._data.length; i++) {
+            var stackItem = dataItem2stackItem(self, self._data[i]);
+            self._stack.push(stackItem);
+            self._stackData.push(self._data[i]);
+            self._stackArea.appendChild(stackItem);
         }
+        self.tinderableFront.appendChild(self._stackArea);
+        self.tinderableFront.appendChild(self._buttonsArea);
 
-        self.data = [];
-        self.tinderableFront.appendChild(self.stackArea);
-        self.tinderableFront.appendChild(self.titleArea);
-        self.tinderableFront.appendChild(self.descriptionArea);
+        self._data = [];
+        self._stackArea.style.width = self._stackArea.firstChild.clientWidth + 'px';        
 
-        self.stackArea.style.width = self.tinderableFront.clientWidth + 'px';
-        self.stackArea.style.height = self.tinderableFront.clientWidth + 'px';
+        //Find the height of the tallest stack item and set all items to have that height
+        var maxHeight = 0;
+        for (var i = 0; i < self._stack.length; i++) {
+            maxHeight = self._stack[i].clientHeight > maxHeight ? self._stack[i].clientHeight : maxHeight;
+        }
+        for (var i = 0; i < self._stack.length; i++) {
+            self._stack[i].style.height = maxHeight + 'px';
+        }
+        self._stackArea.style.height = maxHeight + 'px';
     }
 
     var dataItem2stackItem = function(self, dataItem) {
@@ -124,59 +153,134 @@ function Tinderable(tinderableFront) {
         stackItem.style.left = self._stackPosition.left + 'px';
         stackItem.style.top = self._stackPosition.top + 'px';
         stackItem.style.width = self.tinderableFront.clientWidth + 'px';
-        stackItem.style.height = self.tinderableFront.clientWidth + 'px';
-        stackItem.style.overflow = "hidden";
-        stackItem.innerHTML = "<img style=\"width:100%\" src='" + dataItem.img + "' />";
+        stackItem.style.border = "1px solid lightgrey";
+        stackItem.style.borderRadius = "10px";
+
+        var imgArea = document.createElement("div");
+        imgArea.style.width = self.tinderableFront.clientWidth + 'px';
+        imgArea.style.height = self.tinderableFront.clientWidth + 'px';
+        imgArea.style.overflow = "hidden";
+        imgArea.style.borderRadius = "10px";
+        imgArea.innerHTML = "<img style=\"width:100%\" src='" + dataItem.img + "' />";
+        stackItem.appendChild(imgArea);
+
+        var titleArea = document.createElement("h3");
+        titleArea.style.marginTop = "5px";
+        titleArea.style.marginBottom = "2px";
+        titleArea.style.marginLeft = "10px";
+        titleArea.innerHTML = dataItem.title;
+        stackItem.appendChild(titleArea);
+
+        var descriptionArea = document.createElement("p");
+        descriptionArea.style.marginTop = "0px";
+        descriptionArea.style.marginBottom = "10px";
+        descriptionArea.style.marginLeft = "10px";
+        descriptionArea.innerHTML = dataItem.description.length > 75 ? dataItem.description.substring(0,75)+"..." : dataItem.description;
+        stackItem.appendChild(descriptionArea);
 
         return stackItem;
 
     }
 
-    var setStackTop = function(self) {
-        //Set the ordering of the stack items to html
-        for (var i = 0; i < self.stack.length; i++) {
-            self.stack[i].style.zIndex = 100-i;
-        }
+    var createButtons = function(self) {
+        var buttonsArea = document.createElement("div");
+        buttonsArea.style.marginTop = "10px";
 
-        addSwipeListeners(self);        
+        var cancelButton = document.createElement("button");
+        cancelButton.style.backgroundColor = "yellow";
+        cancelButton.style.width = "24%";
+        cancelButton.style.marginRight = "1%";
+        cancelButton.style.float = "left";
+        cancelButton.style.borderRadius = "5px";
+        cancelButton.innerHTML = "<h4>Cancel</h4>";
+        cancelButton.addEventListener('click', function (e) { self.triggerCancel() }, false);
+        buttonsArea.appendChild(cancelButton);
 
-        //Show the title and description of the top stack item
-        self.titleArea.innerHTML = self.stackData[0].title;
-        self.descriptionArea.innerHTML = self.stackData[0].description;
+        var dislikeButton = document.createElement("button");
+        dislikeButton.style.backgroundColor = "red";
+        dislikeButton.style.color = "white";
+        dislikeButton.style.width = "24%";
+        dislikeButton.style.marginRight = "1%";
+        dislikeButton.style.float = "left";
+        dislikeButton.style.borderRadius = "5px";
+        dislikeButton.innerHTML = "<h4>Dislike</h4>";
+        dislikeButton.addEventListener('click', function (e) { self.triggerDislike() }, false);
+        buttonsArea.appendChild(dislikeButton);
+
+        var likeButton = document.createElement("button");
+        likeButton.style.backgroundColor = "green";
+        likeButton.style.color = "white";
+        likeButton.style.width = "24%";
+        likeButton.style.marginRight = "1%";
+        likeButton.style.float = "left";
+        likeButton.style.borderRadius = "5px";
+        likeButton.innerHTML = "<h4>Like</h4>";
+        likeButton.addEventListener('click', function (e) { self.triggerLike() }, false);
+        buttonsArea.appendChild(likeButton);
+
+        var superlikeButton = document.createElement("button");
+        superlikeButton.style.backgroundColor = "blue";
+        superlikeButton.style.color = "white";
+        superlikeButton.style.width = "24%";
+        superlikeButton.style.marginRight = "1%";
+        superlikeButton.style.float = "left";
+        superlikeButton.style.borderRadius = "5px";
+        superlikeButton.innerHTML = "<h4>Superlike</h4>";
+        superlikeButton.addEventListener('click', function (e) { self.triggerSuperlike() }, false);
+        buttonsArea.appendChild(superlikeButton);
+
+        //Disable the cancel button.
+        cancelButton.disabled = true;
+        cancelButton.style.color = "lightgrey";
+
+        return buttonsArea;
     }
 
-    // Add touch event listeners to the top item of the stack and store them so they can be removed later
-    var addSwipeListeners = function(self) {
+    var setStackTop = function(self) {
+        //Set the ordering of the stack items to html
+        for (var i = 0; i < self._stack.length; i++) {
+            self._stack[i].style.zIndex = 100-i;
+        }
+
+        //Add touch event listeners
         var touchStart = stackTopTouchStart(self);
         var touchEnd = stackTopTouchEnd(self);
         var touchMove = stackTopTouchMove(self);
-        self.stack[0].addEventListener('touchstart', touchStart, false);
-        self.stack[0].addEventListener('touchend', touchEnd, false);
-        self.stack[0].addEventListener('touchmove', touchMove, false);
-        self._swipelisteners = {
-            'touchstart': touchStart,
-            'touchend': touchEnd,
-            'touchmove': touchMove,
+        self._stack[0].addEventListener('touchstart', touchStart, false);
+        self._stack[0].addEventListener('touchend', touchEnd, false);
+        self._stack[0].addEventListener('touchmove', touchMove, false);
+    }    
+
+    //Remove the top item of the stack. Called after like, superlike and dislake
+    var removeStackTop = function(self) {
+        self._stackArea.removeChild(self._stack[0]);
+        self._stack.shift();
+        self._lastAction = {
+            "dataItem": self._stackData.shift()
         };
 
+        if (self._stack.length > 0) {
+            setStackTop(self);
+        } else if (self._data != null && self._data.length > 0) {
+            self.destroy();
+            self.start();
+        } else if (self._stackEmptyListener != null) {
+            window.setTimeout(self._stackEmptyListener, 0);
+        }
+
+        //Make sure the cancel button is enabled
+        self._buttonsArea.firstChild.disabled = false;
+        self._buttonsArea.firstChild.style.color = "black";
+        return self._lastAction.dataItem;
     }
 
-    //Remove touch event listeners from the top item of the stack
-    var removeSwipeListeners = function(self) {
-        try {
-            self.stack[0].removeEventListener('touchstart', self._swipelisteners.touchStart);
-            self.stack[0].removeEventListener('touchend', self._swipelisteners.touchEnd);
-            self.stack[0].removeEventListener('touchmove', self._swipelisteners.touchMove);
-        } catch (err) {}
-            
-    }
+    //Create the touch event listeners
 
-    //The touch event listeners    
     var stackTopTouchStart = function(self) {
         return function(e) {
-            self.stack[0].style.transition = "";
+            self._stack[0].style.transition = "";
             var touch = e.targetTouches[0];
-            self.touchStartPosition = {
+            self._touchStartPosition = {
                 x: touch.pageX,
                 y: touch.pageY
             };
@@ -188,8 +292,8 @@ function Tinderable(tinderableFront) {
     var stackTopTouchEnd = function(self) {
         return function(e) {
             var touch = e.changedTouches[0];
-            var xChange = touch.pageX - self.touchStartPosition.x;
-            var yChange = touch.pageY - self.touchStartPosition.y;
+            var xChange = touch.pageX - self._touchStartPosition.x;
+            var yChange = touch.pageY - self._touchStartPosition.y;
             var minSwipe = self.tinderableFront.clientWidth/3;
 
             if (xChange >= minSwipe) {
@@ -199,7 +303,10 @@ function Tinderable(tinderableFront) {
             } else if (yChange <= -1*minSwipe) {
                 self.triggerSuperlike();
             } else {
-                returnStackTop(self);
+                self._stack[0].style.transition = "left 0.5s, top 0.5s, transform 0.5s";
+                self._stack[0].style.left = self._stackPosition.left + 'px';
+                self._stack[0].style.top = self._stackPosition.top + 'px';
+                self._stack[0].style.transform = "";
             }
         };
     }
@@ -207,44 +314,14 @@ function Tinderable(tinderableFront) {
     var stackTopTouchMove = function(self) {
         return function(e) {
             var touch = e.targetTouches[0];
-            var xChange = touch.pageX - self.touchStartPosition.x;
-            var yChange = touch.pageY - self.touchStartPosition.y;
+            var xChange = touch.pageX - self._touchStartPosition.x;
+            var yChange = touch.pageY - self._touchStartPosition.y;
 
-            self.stack[0].style.left = (self._stackPosition.left + xChange) + 'px';
-            self.stack[0].style.top = (self._stackPosition.top + yChange) + 'px';
+            self._stack[0].style.left = (self._stackPosition.left + xChange) + 'px';
+            self._stack[0].style.top = (self._stackPosition.top + yChange) + 'px';
             var rotationDegree = xChange*35/self.tinderableFront.clientWidth;
-            self.stack[0].style.transform = "rotate(" + rotationDegree + "deg)";
+            self._stack[0].style.transform = "rotate(" + rotationDegree + "deg)";
             e.preventDefault();
         }
-    }
-
-    //Remove the top item of the stack. Called after like, superlike and dislake
-    var removeStackTop = function(self) {
-        removeSwipeListeners(self);
-        self.stackArea.removeChild(self.stack[0]);
-        self.lastAction = {
-            "stackItem": self.stack.shift(),
-            "dataItem": self.stackData.shift()
-        };
-
-        if (self.stack.length > 0) {
-            setStackTop(self);
-        } else if (self.data != null && self.data.length > 0) {
-            self.destroy();
-            self.start();
-        } else if (self.stackEmptyListener != null) {
-            window.setTimeout(self.stackEmptyListener, 0);
-        }
-
-        return self.lastAction.dataItem;
-    }
-
-    //The animation to return the top item of the stack to its initial place after first moving it
-    var returnStackTop = function(self) {
-        self.stack[0].style.transition = "left 0.5s, top 0.5s, transform 0.5s";
-        self.stack[0].style.left = self._stackPosition.left + 'px';
-        self.stack[0].style.top = self._stackPosition.top + 'px';
-        self.stack[0].style.transform = "";
-
     }
 };
