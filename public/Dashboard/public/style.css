@@ -62,10 +62,15 @@
   box-shadow: 0px 1px 15px -7px rgba(0,0,0,0.75);
 }
 
-.card-title {
+#toast-title {
   margin-top: 0.3em;
+  color:#212121;
+}
+
+#toast-like {
   color: #FB8C00;
 }
+
 
 .toast-container {
   width: 100%;
