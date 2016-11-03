@@ -6,7 +6,9 @@
 
 #action-indicator {
     text-align: center;
-		font-family: 'Fira Mono', 'Times New Roman';
+	font-family: 'Fira Mono', 'Times New Roman';
+    margin-bottom: 5px;
+    margin-top: 15px;
 }
 
 #actions {
