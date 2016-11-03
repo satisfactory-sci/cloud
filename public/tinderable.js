@@ -98,8 +98,8 @@ function Tinderable(tinderableFront) {
 
             if (this._cancelListener != null) {
                 this._cancelListener(prevAction, prevDataItem);
-            }            
-            
+            }
+
         }
     }
 
@@ -131,7 +131,7 @@ function Tinderable(tinderableFront) {
         self.tinderableFront.appendChild(self._buttonsArea);
 
         self._data = [];
-        self._stackArea.style.width = self._stackArea.firstChild.clientWidth + 'px';        
+        self._stackArea.style.width = self._stackArea.firstChild.clientWidth + 'px';
 
         //Find the height of the tallest stack item and set all items to have that height
         var maxHeight = 0;
@@ -168,6 +168,7 @@ function Tinderable(tinderableFront) {
         titleArea.style.marginTop = "5px";
         titleArea.style.marginBottom = "2px";
         titleArea.style.marginLeft = "10px";
+        titleArea.style.fontFamily = 'Fira Mono', 'Times New Roman';
         titleArea.innerHTML = dataItem.title;
         stackItem.appendChild(titleArea);
 
@@ -175,6 +176,7 @@ function Tinderable(tinderableFront) {
         descriptionArea.style.marginTop = "0px";
         descriptionArea.style.marginBottom = "10px";
         descriptionArea.style.marginLeft = "10px";
+        descriptionArea.style.fontFamily = 'Roboto', 'Arial';
         descriptionArea.innerHTML = dataItem.description.length > 75 ? dataItem.description.substring(0,75)+"..." : dataItem.description;
         stackItem.appendChild(descriptionArea);
 
@@ -186,46 +188,52 @@ function Tinderable(tinderableFront) {
         var buttonsArea = document.createElement("div");
         buttonsArea.style.marginTop = "10px";
 
-        var cancelButton = document.createElement("button");
-        cancelButton.style.backgroundColor = "yellow";
+        var cancelButton = document.createElement("button"); //Cancel
+        cancelButton.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        cancelButton.style.borderColor = "rgba(255, 255, 255, 0.5)";
         cancelButton.style.width = "24%";
         cancelButton.style.marginRight = "1%";
         cancelButton.style.float = "left";
         cancelButton.style.borderRadius = "5px";
-        cancelButton.innerHTML = "<h4>Cancel</h4>";
+        cancelButton.style.outline = 0;
+        cancelButton.innerHTML = "<i style='color:#FFEA00' class='fa fa-3x fa-undo aria-hidden='true'></i>";
         cancelButton.addEventListener('click', function (e) { self.triggerCancel() }, false);
         buttonsArea.appendChild(cancelButton);
 
-        var dislikeButton = document.createElement("button");
-        dislikeButton.style.backgroundColor = "red";
+        var dislikeButton = document.createElement("button"); //Dislike
+        dislikeButton.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        dislikeButton.style.borderColor = "rgba(255, 255, 255, 0.5)";
         dislikeButton.style.color = "white";
         dislikeButton.style.width = "24%";
         dislikeButton.style.marginRight = "1%";
         dislikeButton.style.float = "left";
         dislikeButton.style.borderRadius = "5px";
-        dislikeButton.innerHTML = "<h4>Dislike</h4>";
+        dislikeButton.style.outline = 0;
+        dislikeButton.innerHTML = "<i style='color:#D32F2F' class='fa fa-3x fa-thumbs-down aria-hidden='true'></i>";
         dislikeButton.addEventListener('click', function (e) { self.triggerDislike() }, false);
         buttonsArea.appendChild(dislikeButton);
 
-        var likeButton = document.createElement("button");
-        likeButton.style.backgroundColor = "green";
-        likeButton.style.color = "white";
+        var likeButton = document.createElement("button"); //Like
+        likeButton.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        likeButton.style.borderColor = "rgba(255, 255, 255, 0.5)";
         likeButton.style.width = "24%";
         likeButton.style.marginRight = "1%";
         likeButton.style.float = "left";
         likeButton.style.borderRadius = "5px";
-        likeButton.innerHTML = "<h4>Like</h4>";
+        likeButton.style.outline = 0;
+        likeButton.innerHTML = "<i style='color:#388E3C' class='fa fa-3x fa-thumbs-up aria-hidden='true'></i>";
         likeButton.addEventListener('click', function (e) { self.triggerLike() }, false);
         buttonsArea.appendChild(likeButton);
 
-        var superlikeButton = document.createElement("button");
-        superlikeButton.style.backgroundColor = "blue";
-        superlikeButton.style.color = "white";
+        var superlikeButton = document.createElement("button"); //Megalike
+        superlikeButton.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        superlikeButton.style.borderColor = "rgba(255, 255, 255, 0.5)";
         superlikeButton.style.width = "24%";
         superlikeButton.style.marginRight = "1%";
         superlikeButton.style.float = "left";
         superlikeButton.style.borderRadius = "5px";
-        superlikeButton.innerHTML = "<h4>Superlike</h4>";
+        superlikeButton.style.outline = 0;
+        superlikeButton.innerHTML = "<i style='color:#1976D2' class='fa fa-3x fa-heart aria-hidden='true'></i>";
         superlikeButton.addEventListener('click', function (e) { self.triggerSuperlike() }, false);
         buttonsArea.appendChild(superlikeButton);
 
@@ -249,7 +257,7 @@ function Tinderable(tinderableFront) {
         self._stack[0].addEventListener('touchstart', touchStart, false);
         self._stack[0].addEventListener('touchend', touchEnd, false);
         self._stack[0].addEventListener('touchmove', touchMove, false);
-    }    
+    }
 
     //Remove the top item of the stack. Called after like, superlike and dislake
     var removeStackTop = function(self) {
