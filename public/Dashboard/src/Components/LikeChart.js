@@ -102,7 +102,10 @@ class LikeChart extends React.Component {
         return obj.likes + obj.dislikes + obj.superlikes > 0
       })
       data.sort(this._sortLikes);
-      data = data.slice(data.length - 5, data.length);
+      if(data.length > 5){
+        data = data.slice(data.length - 5, data.length);
+      }
+
       //Graph's dimensions
       var margin = {
           top: window.innerHeight*0.07,
@@ -130,7 +133,6 @@ class LikeChart extends React.Component {
       //Insert new entries
       this.insert(svg, data, width, x, y);
       //Update old entries
-      svg.exit().remove();
       this.updateGraph(svg, data, width, x, y);
       svg.exit().remove();
   }
