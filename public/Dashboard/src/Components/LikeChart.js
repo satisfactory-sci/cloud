@@ -38,7 +38,7 @@ class LikeChart extends React.Component {
         .attr("align", "center")
         .append("g")
         //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    var colors = ["#e82600", "#fb8c00", "#f9cc00"]
+    var colors = ["#D32F2F", "#388E3C", "#1976D2"]
     //Scales and axis
     var x = d3.scaleLinear().range([0, width*(3/4)]);
     var y = d3.scaleBand().range([height, 0]);
@@ -73,7 +73,7 @@ class LikeChart extends React.Component {
       .text("Top 5")
 
     var legend = svg.selectAll(".legend")
-      .data(["Dislike", "Like", "SuperLike"])
+      .data(["Dislike", "Like", "Megalike"])
       .enter().append("g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(" + i*Math.sqrt(i)*70 + "," + height + ")"; })
@@ -149,7 +149,7 @@ class LikeChart extends React.Component {
         .attr("y", function(d) { return y(d.label); })
         .attr("width", function(d) { return x(d.dislikes); })
         .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")")
-        .attr("fill", "#e82600")
+        .attr("fill", "#D32F2F")
     //Draw like bar
     svg.selectAll(".bar2")
         .data(data)
@@ -160,7 +160,7 @@ class LikeChart extends React.Component {
         .attr("y", function(d) { return y(d.label); })
         .attr("width", function(d) { return x(d.likes); })
         .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")")
-        .attr("fill", "#fb8c00")
+        .attr("fill", "#388E3C")
     //Draw superlike bar
     svg.selectAll(".bar3")
         .data(data)
@@ -171,7 +171,7 @@ class LikeChart extends React.Component {
         .attr("y", function(d) { return y(d.label); })
         .attr("width", function(d) { return x(d.superlikes); })
         .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")")
-        .attr("fill", "#f9cc00")
+        .attr("fill", "#1976D2 ")
   }
 
   //Updates the graph by animating the transition

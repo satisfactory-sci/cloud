@@ -47,34 +47,35 @@ class App extends React.Component {
       state[i].likes += data.vote
     }else{
       state[i].superlikes += data.vote
-      this.superLike(state[i].title, state[i].img)
+      this.superLike(state[i])
     }
     this.setState({items: state, superlikes: this.state.superlikes})
   }
 
-  onClick() {
-      let toast = document.getElementById("toast")
-      toast.className = "show"
-      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-  }
-
-  superLike(title, img) {
+//Show superlike in the left corner
+  superLike(slike) {
     let old = this.state.superlikes
-    let index = old.length
-    old.push({title:title, img:img, index:index})
-    this.setState({items: this.state.items, superlikes: old})
-    setTimeout(() => {
-      let i = old.findIndex((item) => {
-        return item.index == index
-      })
-      old.splice(i, 1)
+    let i = old.findIndex((item) => {
+      return item.movieID == slike.movieID
+    })
+    if(i < 0){
+      old.push(slike)
       this.setState({items: this.state.items, superlikes: old})
-    }, 1000);
+      setTimeout(() => {
+        let n = this.state.superlikes
+        let i = n.findIndex((item) => {
+          return item.movieID == slike.movieID
+        })
+        n.splice(i, 1)
+        this.setState({items: this.state.items, superlikes: n})
+      }, 900);
+
+    }
   }
 
   render() {
       let rdata = this.state.items.map((item)  => {return {label: item.title, dislikes:item.dislikes, likes: item.likes, superlikes: item.superlikes}});
-      let superlikes = this.state.superlikes.map((like) => {return <SuperLike key={like.index} title={like.title} img={like.img} />})
+      let superlikes = this.state.superlikes.map((like) => {return <SuperLike key={like.movieID} title={like.title} img={like.img} count={like.superlikes} />})
       return (
         <div>
           <div className="toast-container">
