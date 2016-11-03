@@ -88,9 +88,9 @@ class App extends React.Component {
             </ReactCSSTransitionGroup>
           </div>
           <nav className="navbar navbar-light bg-faded" id="navbar">
-            <div className="container-fluid nav-container">
+            <div className="container-fluid">
               <div className="navbar-header">
-                  Satisfactory
+                <a className=""><img src="/Dashboard/public/logo_minified.png" className="d-inline-block align-top" id="logo"></img></a>
               </div>
             </div>
           </nav>

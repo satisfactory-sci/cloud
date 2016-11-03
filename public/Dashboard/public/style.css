@@ -6,6 +6,10 @@
     font-size: 2em;
 }
 
+.tick line {
+  visibility: hidden;
+}
+
 .y.axis .domain {
   visibility: hidden;
 }
@@ -16,31 +20,29 @@ text {
   fill: #212121;
 }
 
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+
+#logo {
+  height: 2.5em;
+}
+
 .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.nav-container {
-  text-align: center;
-  margin:0.1em;
-  border: 1px, 1px, 1px, 1px;
-}
-
 .navbar {
   -webkit-box-shadow: 0px 1px 15px -7px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 1px 15px -7px rgba(0,0,0,0.75);
   box-shadow: 0px 1px 15px -7px rgba(0,0,0,0.75);
-}
-
-.navbar-header {
-  color: #FB8C00;
-  font-size: 1.3em;
-}
-
-.navbar-light .container-fluid .navbar-brand {
-    color: #FB8C00;
 }
 
 #toast {
