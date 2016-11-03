@@ -32,6 +32,7 @@ function xmlToJson(url, callback) {
 }
 
 function parseMovie(movie) {
+	if (movie && movie.ID && movie.Title && movie.Genres && movie.Images) {
 		return {
 			movieID: movie.ID[0],
 			title: movie.Title[0],
@@ -40,6 +41,9 @@ function parseMovie(movie) {
 			likes: 0,
 			dislikes: 0,
 			superlikes: 0,
+		}
+	} else {
+		return null;
 	}
 }
 
@@ -47,7 +51,7 @@ function addMovies(json) {
 	const titlesAdded = [];
 	const movies = json.Schedule.Shows[0].Show.map(parseMovie);
 	movies.forEach( movie => {
-		if (titlesAdded.indexOf(movie.title) === -1) {
+		if (movie && titlesAdded.indexOf(movie.title) === -1) {
 			titlesAdded.push(movie.title);
 			movieDB.insert(movie);
 		}
@@ -135,31 +139,43 @@ module.exports = {
 			case 'like':
 				movieDB.find({movieID: data.id}, (err, doc) => {
 					if (err) callback(err, null);
-					const likes = doc[0].likes;
-					movieDB.update({movieID: data.id}, { $set: { likes: likes + data.vote}}, (err, doc) => {
-						if (err) callback(err, null);
-						callback(null, doc);
-					});
+					if (doc && doc[0]) {
+						const likes = doc[0].likes;
+						movieDB.update({movieID: data.id}, { $set: { likes: likes + data.vote}}, (err, doc) => {
+							if (err) callback(err, null);
+							callback(null, doc);
+						});
+					} else {
+						callback("Invalid data", null);
+					}
 				});
 				break;
 			case 'superlike':
 				movieDB.find({movieID: data.id}, (err, doc) => {
 					if (err) callback(err, null);
-					const superlikes = doc[0].superlikes;
-					movieDB.update({movieID: data.id}, { $set: { superlikes: superlikes + data.vote}}, (err, doc) => {
-						if (err) callback(err, null);
-						callback(null, doc);
-					});
+					if (doc && doc[0]) {
+						const superlikes = doc[0].superlikes;
+						movieDB.update({movieID: data.id}, { $set: { superlikes: superlikes + data.vote}}, (err, doc) => {
+							if (err) callback(err, null);
+							callback(null, doc);
+						});
+					} else {
+						callback("Invalid data", null);
+					}
 				});
 				break;
 			case 'dislike':
 				movieDB.find({movieID: data.id}, (err, doc) => {
 					if (err) callback(err, null);
-					const dislikes = doc[0].dislikes;
-					movieDB.update({movieID: data.id}, { $set: { dislikes: dislikes + data.vote}}, (err, doc) => {
-						if (err) callback(err, null);
-						callback(null, doc);
-					});
+					if (doc && doc[0] && data) {
+						const dislikes = doc[0].dislikes;
+						movieDB.update({movieID: data.id}, { $set: { dislikes: dislikes + data.vote}}, (err, doc) => {
+							if (err) callback(err, null);
+							callback(null, doc);
+						});
+					} else {
+						callback("Invalid data", null);
+					}
 			 });
 			 break;
 			default:
