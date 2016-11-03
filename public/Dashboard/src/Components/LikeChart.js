@@ -79,7 +79,7 @@ class LikeChart extends React.Component {
       .attr("transform", function(d, i) { return "translate(" + i*Math.sqrt(i)*100 + "," + height + ")"; })
       .style("font", "1.3em 'Fira Mono'");
 
-    let icons = ['\uf165', '\uf164','\uf08a']
+    let icons = ['\uf165', '\uf164','\uf004']
 
     legend.append("text")
       .attr("x", width/2 + 10)
