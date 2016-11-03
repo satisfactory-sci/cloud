@@ -14,28 +14,30 @@ class LikeChart extends React.Component {
   componentDidMount() {
     //Data
     let size = this.props.data.length
-    const data = this.props.data.filter((obj) => {
+    let data = this.props.data.filter((obj) => {
       return obj.likes + obj.dislikes + obj.superlikes > 0
     })
     data.sort(this._sortLikes);
+    data = data.slice(data.length - 5, data.length);
 
     //Graph's dimensions
     var margin = {
-        top: 20,
-        right: 20,
-        bottom: 30,
-        left: 40
+      top: window.innerHeight*0.07,
+      right: window.innerWidth*0.07,
+      bottom: window.innerHeight*0.07,
+      left: window.innerWidth*0.07
       };
+    var navbar = document.getElementById("navbar").clientHeight
     var width = window.innerWidth - margin.left - margin.right;
-    var height = window.innerHeight - margin.top - margin.bottom;
+    var height = window.innerHeight - navbar - margin.top - margin.bottom;
 
     //Draw canvas
     var svg = d3.select(".wrapper").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left)
+        .attr("height", height + margin.top)
         .attr("align", "center")
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var colors = ["#e82600", "#fb8c00", "#f9cc00"]
     //Scales and axis
     var x = d3.scaleLinear().range([0, width*(3/4)]);
@@ -50,18 +52,25 @@ class LikeChart extends React.Component {
       .paddingOuter(0.5);
 
     //draw axis
-    svg.append("g")
+  /*  svg.append("g")
         .attr("class", "x axis")
         .call(xAxis)
-        .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")");
+        .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")");*/
     svg.append("g")
         .attr("class", "y axis")
+        .attr("fill", "#212121")
         .call(yAxis)
-        .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")");
-
+        .attr("transform", "translate(" + width*(1/4) + "," + 0 + ")")
     //Insert initial data
     this.insert(svg, data, width, x, y)
     this.setState({svg: svg});
+
+    svg.append("text")
+      .attr("x", margin.left)
+      .attr("y", margin.top)
+      .style("font-size", "1.7em")
+      .style("font-family", "'Roboto', sans-serif")
+      .text("Top 5")
 
     var legend = svg.selectAll(".legend")
       .data(["Dislike", "Like", "SuperLike"])
@@ -81,39 +90,42 @@ class LikeChart extends React.Component {
       .attr("y", 9)
       .attr("dy", ".35em")
       .attr("text-anchor", "end")
+      .attr("fill", "#212121")
       .text(function(d) { return d; });
+
   }
 
   //Animation step
   componentDidUpdate() {
     //Data
-      const data = this.props.data.filter((obj) => {
+      let data = this.props.data.filter((obj) => {
         return obj.likes + obj.dislikes + obj.superlikes > 0
       })
       data.sort(this._sortLikes);
-
+      data = data.slice(data.length - 5, data.length);
       //Graph's dimensions
       var margin = {
-          top: 20,
-          right: 20,
-          bottom: 30,
-          left: 40
+          top: window.innerHeight*0.07,
+          right: window.innerWidth*0.07,
+          bottom: window.innerHeight*0.07,
+          left: window.innerWidth*0.07
         };
       let svg = this.state.svg
+      var navbar = document.getElementById("navbar").clientHeight
       var width = window.innerWidth - margin.left - margin.right;
-      var height = window.innerHeight - margin.top - margin.bottom;
+      var height = window.innerHeight - navbar - margin.top - margin.bottom;
 
       //Scales and axis
       var x = d3.scaleLinear().range([0, width*(3/4)]);
       var y = d3.scaleBand().range([height, 0]);
       x.domain([0, d3.max(data, function(d) { return d.likes + d.dislikes + d.superlikes; })]);
       y.domain(data.map(function(d) { return d.label; })).paddingInner(0.1).paddingOuter(0.5);
-      var xAxis = d3.axisTop(x).ticks(10);
+      //var xAxis = d3.axisTop(x).ticks(10);
       var yAxis = d3.axisLeft(y);
 
       //Update Axis
-      svg.select('.x.axis').transition().duration(300).call(xAxis);
-      svg.select(".y.axis").transition().duration(300).call(yAxis);
+      //svg.select('.x.axis').transition().duration(300).call(xAxis);
+      svg.select(".y.axis").transition().duration(300).call(yAxis)
 
       //Insert new entries
       this.insert(svg, data, width, x, y);
@@ -196,7 +208,7 @@ class LikeChart extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="section">
         <div className="wrapper" style={{textAlign:'center'}}>
         </div>
       </div>
