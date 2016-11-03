@@ -72,13 +72,6 @@ class App extends React.Component {
       let rdata = this.state.items.map((item)  => {return {label: item.title, dislikes:item.dislikes, likes: item.likes, superlikes: item.superlikes}});
       return (
         <div>
-          <nav className="navbar navbar-light bg-faded" id="navbar">
-            <div className="container-fluid nav-container">
-              <div className="navbar-header">
-                  Satisfactory
-              </div>
-            </div>
-          </nav>
           <div className="toast-container">
             <div id="toast">
               <div className="card" id="card">
@@ -87,6 +80,13 @@ class App extends React.Component {
               </div>
             </div>
           </div>
+          <nav className="navbar navbar-light bg-faded" id="navbar">
+            <div className="container-fluid nav-container">
+              <div className="navbar-header">
+                  Satisfactory
+              </div>
+            </div>
+          </nav>
           <LikeChart data={rdata} />
         </div>
       )

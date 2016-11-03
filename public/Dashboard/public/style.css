@@ -95,8 +95,8 @@ text {
   position: fixed;
   z-index: 1;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 button {
