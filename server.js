@@ -138,7 +138,7 @@ app.delete('/:dbPassword', (req, res) => {
   } else {
     res.status(403).json({message: "wrong PW"});
   }
-})
+});
 
 app.delete('/dashboard/:dbPassword', (req, res) => {
   if (debugServer) console.log('Requesting dashboardDB deletion: ' + req.params.dbPassword);
@@ -148,7 +148,7 @@ app.delete('/dashboard/:dbPassword', (req, res) => {
   } else {
     res.status(403).json({message: "wrong PW"});
   }
-})
+});
 
 //Update movie DB with PUT
 app.put('/:dbPassword', (req, res) => {
@@ -159,7 +159,11 @@ app.put('/:dbPassword', (req, res) => {
   } else {
     res.status(403).json({message: "wrong PW"});
   }
-})
+});
+
+app.get('/blog', (req, res) => {
+	res.redirect('http://medium.com/satisfactory');
+});
 
 //Start server
 server.listen(port, () => console.log('Running on ' + port));
