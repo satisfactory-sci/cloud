@@ -120,28 +120,25 @@ function Tinderable(tinderableFront) {
 
         self._buttonsArea = createButtons(self);
         self._stackArea = document.createElement("div");
-
-        for (var i = 0; i < self._data.length; i++) {
-            var stackItem = dataItem2stackItem(self, self._data[i]);
-            self._stack.push(stackItem);
-            self._stackData.push(self._data[i]);
-            self._stackArea.appendChild(stackItem);
-        }
         self.tinderableFront.appendChild(self._stackArea);
         self.tinderableFront.appendChild(self._buttonsArea);
 
-        self._data = [];
-        self._stackArea.style.width = self._stackArea.firstChild.clientWidth + 'px';
+        self._stackArea.style.width = self.tinderableFront.clientWidth + 'px';
+        self._stackArea.style.height = (self.tinderableFront.clientWidth + 90) + 'px';
 
-        //Find the height of the tallest stack item and set all items to have that height
-        var maxHeight = 0;
-        for (var i = 0; i < self._stack.length; i++) {
-            maxHeight = self._stack[i].clientHeight > maxHeight ? self._stack[i].clientHeight : maxHeight;
+        //Add max two data items to the stack
+        for (var i = 0; i < 2 && self._data.length > 0; i++) {
+            var dataItem = self._data.shift();
+            addDataItemToStack(self, dataItem);
         }
-        for (var i = 0; i < self._stack.length; i++) {
-            self._stack[i].style.height = maxHeight + 'px';
-        }
-        self._stackArea.style.height = maxHeight + 'px';
+    }
+
+    var addDataItemToStack = function(self, dataItem) {
+        var stackItem = dataItem2stackItem(self, dataItem);
+        self._stack.push(stackItem);
+        self._stackData.push(dataItem);
+        self._stackArea.appendChild(stackItem);
+
     }
 
     var dataItem2stackItem = function(self, dataItem) {
@@ -150,9 +147,11 @@ function Tinderable(tinderableFront) {
         stackItem.style.display = "inline-block";
         stackItem.style.backgroundColor = "rgba(255, 255, 255, 1)";
         stackItem.style.position = "absolute";
+        stackItem.style.overflow = "hidden";
         stackItem.style.left = self._stackPosition.left + 'px';
         stackItem.style.top = self._stackPosition.top + 'px';
         stackItem.style.width = self.tinderableFront.clientWidth + 'px';
+        stackItem.style.height = (self.tinderableFront.clientWidth + 90) + 'px';
         stackItem.style.border = "1px solid lightgrey";
         stackItem.style.borderRadius = "10px";
 
@@ -160,7 +159,6 @@ function Tinderable(tinderableFront) {
         imgArea.style.width = self.tinderableFront.clientWidth + 'px';
         imgArea.style.height = self.tinderableFront.clientWidth + 'px';
         imgArea.style.overflow = "hidden";
-        imgArea.style.borderRadius = "10px";
         imgArea.innerHTML = "<img style=\"width:100%\" src='" + dataItem.img + "' />";
         stackItem.appendChild(imgArea);
 
@@ -196,7 +194,7 @@ function Tinderable(tinderableFront) {
         cancelButton.style.float = "left";
         cancelButton.style.borderRadius = "5px";
         cancelButton.style.outline = 0;
-        cancelButton.innerHTML = "<i style='color:#FFEA00' class='fa fa-3x fa-undo aria-hidden='true'></i>";
+        cancelButton.innerHTML = "<i class='fa fa-3x fa-undo aria-hidden='true'></i>";
         cancelButton.addEventListener('click', function (e) { self.triggerCancel() }, false);
         buttonsArea.appendChild(cancelButton);
 
@@ -267,18 +265,20 @@ function Tinderable(tinderableFront) {
             "dataItem": self._stackData.shift()
         };
 
+        if (self._stack.length <= 3 && self._data.length > 0) {
+            var dataItem = self._data.shift();
+            addDataItemToStack(self, dataItem);
+        }
+
         if (self._stack.length > 0) {
             setStackTop(self);
-        } else if (self._data != null && self._data.length > 0) {
-            self.destroy();
-            self.start();
-        } else if (self._stackEmptyListener != null) {
+        } else if (self._stack.length == 0 && self._stackEmptyListener != null) {
             window.setTimeout(self._stackEmptyListener, 0);
         }
 
         //Make sure the cancel button is enabled
         self._buttonsArea.firstChild.disabled = false;
-        self._buttonsArea.firstChild.style.color = "black";
+        self._buttonsArea.firstChild.style.color = "#FFEA00";
         return self._lastAction.dataItem;
     }
 

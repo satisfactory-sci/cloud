@@ -14,6 +14,9 @@
 	<h6 id="action-indicator">Swipe to see what happens</h6>
 	<div id="tinderable-front"></div>
 	<script type="text/javascript">
+	String.prototype.capitalizeFirstLetter = function() {
+	    return this.charAt(0).toUpperCase() + this.slice(1);
+	}
 	/* SOCKET IO STUFF*/
 	var socket = io();
 	socket.on('connect', function(data) {
@@ -52,7 +55,7 @@
 		socket.emit("empty", dataItem);
 	}
 	function cancelAction(action, dataItem) {
-		actionIndicator.innerHTML = action + " cancelled!";
+		actionIndicator.innerHTML = action.capitalizeFirstLetter() + " cancelled!";
 		actionIndicator.style.color = "grey";
 		socket.emit(action, {id: dataItem.movieID, vote: -1});
 	}
