@@ -165,6 +165,10 @@ app.get('/blog', (req, res) => {
 	res.redirect('http://medium.com/satisfactory');
 });
 
+app.get('/proto', (req, res) => {
+  res.redirect('http://flinto.com/p/c7b2c2ba');
+});
+
 //Start server
 server.listen(port, () => console.log('Running on ' + port));
 module.exports = {app: app, server:server};
