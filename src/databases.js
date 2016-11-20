@@ -1,3 +1,4 @@
+"use strict";
 //Load data, use dummy data for now
 const dummyDataClient = require('./data/dummyDataClient.json');
 const dummyDataDashboard = require('./data/dummyDataDashboard.json');

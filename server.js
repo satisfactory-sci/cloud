@@ -125,6 +125,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/tinderable', (req, res) => {
+  res.sendFile(__dirname + '/tinderable/index.html');
+});
+
 app.get('/dashboard', (req, res) => {
   res.sendFile(__dirname + '/public/Dashboard/index.html');
 });
