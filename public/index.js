@@ -21548,6 +21548,8 @@
 	            var appStyle = {
 	                width: '100%',
 	                maxWidth: '800px',
+	                position: 'relative',
+	                overflow: 'hidden',
 	                margin: 'auto',
 	                display: 'inline-block'
 	            };
