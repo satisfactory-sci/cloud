@@ -8,11 +8,16 @@ class DetailsView extends React.Component {
         super(props);
 
         this.joinEvent = this.joinEvent.bind(this);
+        this.unJoinEvent = this.unJoinEvent.bind(this);
         this.addComment = this.addComment.bind(this);
     };
 
     joinEvent(e) {
         this.props.dataHandler.joinEvent(this.props.data.id);
+    }
+
+    unJoinEvent(e) {
+        this.props.dataHandler.unJoinEvent(this.props.data.id);
     }
 
     addComment(e) {
@@ -26,6 +31,8 @@ class DetailsView extends React.Component {
         if (!this.props.visible) {
             return (<div></div>);
         }
+
+        var isJoined = this.props.dataHandler.isJoined(this.props.data.id);
 
         var headerStyle = {
             width: '100%',
@@ -50,17 +57,40 @@ class DetailsView extends React.Component {
             borderBottom: '1px solid lightgrey',
             fontSize: '1.1em'
         }
+        var joinEventBtnStyle = {
+            float: 'right', 
+            color: 'green',
+            display: isJoined ? 'none' : ''
+        }
+        var unjoinEventBtnStyle = {
+            float: 'right', 
+            color: 'red',
+            display: isJoined ? '' : 'none'
+        }
+        var joinedIndicatorStyle = {
+            color: 'green',
+            display: isJoined ? '' : 'none',
+            border: '4px solid green',
+            position: 'absolute',
+            top: 70,
+            right: 20,
+            padding: 7,
+            transform: 'rotate(20deg)'
+
+        }
 
         return (
             <div>
                 <div style={headerStyle}>
                     <h1 style={{margin: 10}}>
-                        <i onClick={this.props.onCancelClicked} style={{float: 'left', color: 'red'}} className="fa fa-times" aria-hidden="true"></i>
+                        <i onClick={this.props.onCancelClicked} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
                         Join
-                        <i onClick={this.joinEvent} style={{float: 'right', color: 'green'}} className="fa fa-check" aria-hidden="true"></i>
+                        <i onClick={this.joinEvent} style={joinEventBtnStyle} className="fa fa-check" aria-hidden="true"></i>
+                        <i onClick={this.unJoinEvent} style={unjoinEventBtnStyle} className="fa fa-times" aria-hidden="true"></i>
                     </h1>
                 </div>
                 <div style={{height: '60px'}}></div>
+                <h2 style={joinedIndicatorStyle}>JOINED</h2>
                 <img style={{width: '100%'}} src={this.props.data.img} />
                 <div style={textContainerStyle}>
                     <div style={{borderBottom: '1px solid lightgrey'}}>
