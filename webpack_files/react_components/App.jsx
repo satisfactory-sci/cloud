@@ -53,7 +53,6 @@ class App extends React.Component {
 
         var appStyle = {
             width: '100%',
-            maxWidth: '800px',
             position: 'relative',
             overflow: 'hidden',
             margin: 'auto',

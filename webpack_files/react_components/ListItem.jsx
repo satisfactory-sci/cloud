@@ -64,16 +64,17 @@ class ListItem extends React.Component {
             height: '125px',
         }
         var textContainerStyle = {
-            float: 'left',
             fontSize: '1.1em',
-            marginLeft: '10px'
+            marginLeft: '10px',
         }
         var itemHeaderStyle = {
             marginTop: '5px',
             marginBottom: '5px',
         }
         var imgContainerStyle = {
-            float: 'right',
+            position: 'absolute',
+            right: 0,
+            top: 0
         }
         var imgStyle = {
             width: '125px',
