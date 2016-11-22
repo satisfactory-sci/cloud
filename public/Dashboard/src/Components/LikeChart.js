@@ -43,7 +43,7 @@ class LikeChart extends React.Component {
     var x = d3.scaleLinear().range([0, width*(3/4)]);
     var y = d3.scaleBand().range([height, 0]);
     var xAxis = d3.axisTop(x).ticks(10);
-    var yAxis = d3.axisLeft(y);
+    var yAxis = d3.axisLeft(y)
 
     //Define domains
     x.domain([0, d3.max(data, function(d) { return d.likes + d.dislikes + d.superlikes; })]);
@@ -110,6 +110,23 @@ class LikeChart extends React.Component {
       if(data.length > 5){
         data = data.slice(data.length - 5, data.length);
       }
+      data = data.map((obj) => {
+        if(obj.label.length > 20){
+          let t = obj.label.split(" ")
+          let nt = t[0]
+          let i = 1
+          while(true){
+            let tmp = nt + " " + t[i]
+            if(tmp.length > 20){
+              break;
+            }
+            nt = tmp
+            i += 1
+          }
+          obj.label = nt
+        }
+        return obj
+      })
 
       //Graph's dimensions
       var margin = {
@@ -134,45 +151,40 @@ class LikeChart extends React.Component {
       //Update Axis
       //svg.select('.x.axis').transition().duration(300).call(xAxis);
       svg.select(".y.axis").transition().duration(300).call(yAxis)
-
+      /*svg.selectAll(".tick text")
+        .each(function(d,i) {
+          let no = d3.select(this)
+          let words = d.split(" ").reverse();
+          let word;
+          let line = []
+          let x = no.attr("x")
+          let li = 0
+          let lh = 1.1
+          let y = no.attr("y")
+          let dy = 0
+          let tspan = no
+            .text(null)
+            .append("tspan")
+            .attr("x", x)
+            .attr("y", y)
+            .attr("dy", dy + "em")
+          while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width*(1/4)) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = no.append("tspan")
+                  .attr("x", x)
+                  .attr("y", y)
+                  .attr("dy", ++li * lh + dy + "em")
+                  .text(word);
+            }
+        }
+        })*/
       //Insert new entries
       this.insert(svg, data, width, x, y);
-      setTimeout(()=> {
-        svg.selectAll(".tick text")
-          .each(function(d,i) {
-            let no = d3.select(this)
-            let words = d.split(" ").reverse();
-            let word;
-            let line = []
-            let x = no.attr("x")
-            let li = 0
-            let lh = 1.1
-            let y = no.attr("y")
-            let dy = 0
-            let tspan = no
-              .text(null)
-              .append("tspan")
-              .attr("x", x)
-              .attr("y", y)
-              .attr("dy", dy + "em")
-            while (word = words.pop()) {
-              line.push(word);
-              tspan.text(line.join(" "));
-              if (tspan.node().getComputedTextLength() > width*(1/4)) {
-                  line.pop();
-                  tspan.text(line.join(" "));
-                  line = [word];
-                  tspan = no.append("tspan")
-                    .attr("x", x)
-                    .attr("y", y)
-                    .attr("dy", ++li * lh + dy + "em")
-                    .text(word);
-              }
-          }
-
-          })
-      }, 400)
-
       //Update old entries
       this.updateGraph(svg, data, width, x, y);
       svg.exit().remove();

@@ -1,90 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>satisFactory demo</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-	<script src="https://use.fontawesome.com/155b75c4ed.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Fira+Mono|Roboto" rel="stylesheet">
-	<script src="tinderable.js"></script>
-	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-	<link href="tinderable.css" rel="stylesheet" type="text/css">
-
-</head>
-<body>
-	<h6 id="action-indicator">Swipe to see what happens</h6>
-	<div id="tinderable-front"></div>
-	<script type="text/javascript">
-	String.prototype.capitalizeFirstLetter = function() {
-	    return this.charAt(0).toUpperCase() + this.slice(1);
-	}
-	/* SOCKET IO STUFF*/
-	var socket = io();
-	socket.on('connect', function(data) {
-		console.log('Connected to websocket');
-	});
-
-	socket.on('debug', function(data) {
-		console.log(data);
-	});
-
-	console.log('Socket init done');
-
-	var actionIndicator = document.getElementById("action-indicator");
-	var tinderableFront = document.getElementById("tinderable-front");
-
-	var tinderable = new Tinderable(tinderableFront);
-	//Action handlers
-	function dislikeAction(dataItem) {
-		actionIndicator.innerHTML = "Disliked!";
-		actionIndicator.style.color = "red";
-		socket.emit("dislike", {id: dataItem.movieID, vote: 1});
-	}
-	function superlikeAction(dataItem) {
-		actionIndicator.innerHTML = "Superliked!";
-		actionIndicator.style.color = "blue";
-		socket.emit("superlike", {id: dataItem.movieID, vote: 1});
-	}
-	function likeAction(dataItem) {
-		actionIndicator.innerHTML = "Liked!";
-		actionIndicator.style.color = "green";
-		socket.emit("like", {id: dataItem.movieID, vote: 1});
-	}
-	function emptyAction(dataItem) {
-		actionIndicator.innerHTML = "Stack empty!";
-		actionIndicator.style.color = "black";
-		socket.emit("empty", dataItem);
-	}
-	function cancelAction(action, dataItem) {
-		actionIndicator.innerHTML = action.capitalizeFirstLetter() + " cancelled!";
-		actionIndicator.style.color = "grey";
-		socket.emit(action, {id: dataItem.movieID, vote: -1});
-	}
-
-	//Swipe gestures
-	tinderable.onLike(function(dataItem) {
-		likeAction(dataItem);
-	});
-	tinderable.onSuperlike(function(dataItem) {
-		superlikeAction(dataItem);
-	});
-	tinderable.onDislike(function(dataItem) {
-		dislikeAction(dataItem);
-	});
-	tinderable.onStackEmpty(function(dataItem) {
-		emptyAction(dataItem);
-	});
-	tinderable.onCancelAction(function(action, dataItem) {
-		cancelAction(action, dataItem);
-	});
-
-	//Start tinderable after new items arrive from the server
-	socket.on('newItems', function(data) {
-		tinderable.setData(data);
-		tinderable.start();
-	});
-
-	//Request new items
-	socket.emit('requestItems');
-	</script>
-</body>
+<html lang = "en">
+   <head>
+      <meta charset = "UTF-8">
+      <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+      <script src="https://use.fontawesome.com/338ec6d5ea.js"></script>
+      <title>Äfterwörk demo</title>
+   </head>
+   <body style="margin:0">
+      <div id="app" style="font-family:'Arial';"></div>
+      <script src="index.js"></script>
+   </body>
 </html>
