@@ -39,11 +39,25 @@ module.exports = {
         this.dataContainerReactComponent.forceUpdate();
     },
 
+    isJoined(id) {
+        return this.userInfo.joinedEvents.indexOf(id) >= 0;
+    },
+
     joinEvent(id) {
-        if (this.userInfo.joinedEvents.indexOf(id) < 0) {
+        if (!this.isJoined(id)) {
             var item = this.listData.find((entry) => { return entry.id == id});
             item.joined += 1;
             this.userInfo.joinedEvents.push(id);
+            this.dataContainerReactComponent.forceUpdate();
+        }
+    },
+
+    unJoinEvent(id) {
+        if (this.isJoined(id)) {
+            var item = this.listData.find((entry) => { return entry.id == id});
+            item.joined -= 1;
+            var index = this.userInfo.joinedEvents.indexOf(id);
+            this.userInfo.joinedEvents.splice(index, 1);
             this.dataContainerReactComponent.forceUpdate();
         }
     },
