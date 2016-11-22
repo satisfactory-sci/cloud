@@ -21547,7 +21547,6 @@
 
 	            var appStyle = {
 	                width: '100%',
-	                maxWidth: '800px',
 	                position: 'relative',
 	                overflow: 'hidden',
 	                margin: 'auto',
@@ -21707,11 +21706,13 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.swipeContainer = _reactDom2.default.findDOMNode(this.refs.swipecontainer);
+	            this.swipeBG = _reactDom2.default.findDOMNode(this.refs.swipebackground);
 	        }
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate(prevProps, prevState) {
 	            this.swipeContainer = _reactDom2.default.findDOMNode(this.refs.swipecontainer);
+	            this.swipeBG = _reactDom2.default.findDOMNode(this.refs.swipebackground);
 	        }
 	    }, {
 	        key: 'swipeContainerTouchStart',
@@ -21727,6 +21728,13 @@
 	            var minSwipe = this.swipeContainer.clientWidth * 0.2;
 	            if (xChange >= minSwipe || xChange <= -1 * minSwipe) {
 	                this.swipeContainer.style.left = xChange + 'px';
+	                if (xChange > 0) {
+	                    var p = parseInt(255 - xChange / this.swipeContainer.clientWidth * 255);
+	                    this.swipeBG.style.backgroundColor = 'rgb(' + p + ',255,' + p + ')';
+	                } else {
+	                    var p = parseInt(255 - -xChange / this.swipeContainer.clientWidth * 255);
+	                    this.swipeBG.style.backgroundColor = 'rgb(255,' + p + ',' + p + ')';
+	                }
 	            }
 	        }
 	    }, {
@@ -21742,6 +21750,8 @@
 	                this.props.dataHandler.registerDislike(this.props.data.id);
 	            }
 	            this.swipeContainer.style.left = "";
+	            this.swipeBG.style.background = '';
+	            this.swipeBG.style.opacity = 1;
 	        }
 	    }, {
 	        key: 'chooseItem',
@@ -21760,10 +21770,11 @@
 	            var swipeContainerStyle = {
 	                position: 'absolute',
 	                width: '100%',
-	                height: '125px'
+	                height: '125px',
+	                opacity: '1',
+	                backgroundColor: 'white'
 	            };
 	            var textContainerStyle = {
-	                float: 'left',
 	                fontSize: '1.1em',
 	                marginLeft: '10px'
 	            };
@@ -21772,7 +21783,9 @@
 	                marginBottom: '5px'
 	            };
 	            var imgContainerStyle = {
-	                float: 'right'
+	                position: 'absolute',
+	                right: 0,
+	                top: 0
 	            };
 	            var imgStyle = {
 	                width: '125px',
@@ -21783,7 +21796,7 @@
 	            };
 	            return _react2.default.createElement(
 	                'div',
-	                { onClick: this.chooseItem, style: itemStyle },
+	                { onClick: this.chooseItem, style: itemStyle, ref: 'swipebackground' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { ref: 'swipecontainer', style: swipeContainerStyle, onTouchStart: this.swipeContainerTouchStart, onTouchMove: this.swipeContainerTouchMove, onTouchEnd: this.swipeContainerTouchEnd },
@@ -21795,12 +21808,10 @@
 	                            { style: itemHeaderStyle },
 	                            this.props.data.title
 	                        ),
-	                        _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
-	                        ' ',
+	                        _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true', style: { width: '18px' } }),
 	                        this.props.data.location,
 	                        _react2.default.createElement('br', null),
-	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' }),
-	                        ' ',
+	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true', style: { width: '18px' } }),
 	                        this.props.data.startTime,
 	                        ' - ',
 	                        this.props.data.endTime,
@@ -21808,8 +21819,7 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            { style: fullnessStyle },
-	                            _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }),
-	                            ' ',
+	                            _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true', style: { width: '18px' } }),
 	                            this.props.data.joined,
 	                            '/',
 	                            this.props.data.maxPeople
@@ -21871,6 +21881,7 @@
 	        var _this = _possibleConstructorReturn(this, (DetailsView.__proto__ || Object.getPrototypeOf(DetailsView)).call(this, props));
 
 	        _this.joinEvent = _this.joinEvent.bind(_this);
+	        _this.unJoinEvent = _this.unJoinEvent.bind(_this);
 	        _this.addComment = _this.addComment.bind(_this);
 	        return _this;
 	    }
@@ -21881,10 +21892,16 @@
 	            this.props.dataHandler.joinEvent(this.props.data.id);
 	        }
 	    }, {
+	        key: 'unJoinEvent',
+	        value: function unJoinEvent(e) {
+	            this.props.dataHandler.unJoinEvent(this.props.data.id);
+	        }
+	    }, {
 	        key: 'addComment',
 	        value: function addComment(e) {
 	            var commentText = _reactDom2.default.findDOMNode(this.refs.newComment).value;
 	            this.props.dataHandler.addComment(this.props.data.id, commentText);
+	            this.refs.newComment.value = "";
 	        }
 	    }, {
 	        key: 'render',
@@ -21893,6 +21910,8 @@
 	            if (!this.props.visible) {
 	                return _react2.default.createElement('div', null);
 	            }
+
+	            var isJoined = this.props.dataHandler.isJoined(this.props.data.id);
 
 	            var headerStyle = {
 	                width: '100%',
@@ -21913,9 +21932,29 @@
 	                color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : this.props.data.joined >= this.props.data.maxPeople / 2 ? 'orange' : 'green'
 	            };
 	            var textContainerStyle = {
-	                marginLeft: 10,
 	                borderBottom: '1px solid lightgrey',
 	                fontSize: '1.1em'
+	            };
+	            var joinEventBtnStyle = {
+	                float: 'right',
+	                color: 'green',
+	                display: isJoined ? 'none' : ''
+	            };
+	            var unjoinEventBtnStyle = {
+	                float: 'right',
+	                color: 'red',
+	                display: isJoined ? '' : 'none'
+	            };
+	            var joinedIndicatorStyle = {
+	                color: 'green',
+	                display: isJoined ? '' : 'none',
+	                border: '4px solid green',
+	                position: 'absolute',
+	                top: 70,
+	                right: 20,
+	                padding: 7,
+	                transform: 'rotate(20deg)'
+
 	            };
 
 	            return _react2.default.createElement(
@@ -21927,19 +21966,25 @@
 	                    _react2.default.createElement(
 	                        'h1',
 	                        { style: { margin: 10 } },
-	                        _react2.default.createElement('i', { onClick: this.props.onCancelClicked, style: { float: 'left', color: 'red' }, className: 'fa fa-times', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { onClick: this.props.onCancelClicked, style: { float: 'left', color: 'orange' }, className: 'fa fa-arrow-left', 'aria-hidden': 'true' }),
 	                        'Join',
-	                        _react2.default.createElement('i', { onClick: this.joinEvent, style: { float: 'right', color: 'green' }, className: 'fa fa-check', 'aria-hidden': 'true' })
+	                        _react2.default.createElement('i', { onClick: this.joinEvent, style: joinEventBtnStyle, className: 'fa fa-check', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { onClick: this.unJoinEvent, style: unjoinEventBtnStyle, className: 'fa fa-times', 'aria-hidden': 'true' })
 	                    )
 	                ),
 	                _react2.default.createElement('div', { style: { height: '60px' } }),
+	                _react2.default.createElement(
+	                    'h2',
+	                    { style: joinedIndicatorStyle },
+	                    'JOINED'
+	                ),
 	                _react2.default.createElement('img', { style: { width: '100%' }, src: this.props.data.img }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { style: textContainerStyle },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { borderBottom: '1px solid lightgrey' } },
+	                        { style: { borderBottom: '1px solid lightgrey', paddingLeft: 10 } },
 	                        _react2.default.createElement(
 	                            'h2',
 	                            { style: itemHeaderStyle },
@@ -21967,13 +22012,13 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { marginTop: 5 } },
+	                        { style: { marginTop: 5, paddingLeft: 10 } },
 	                        this.props.data.description
 	                    ),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
 	                        'h2',
-	                        { style: itemHeaderStyle },
+	                        { style: { marginTop: 5, marginLeft: 10, marginBottom: 5 } },
 	                        'Comments'
 	                    )
 	                ),
@@ -22297,13 +22342,27 @@
 	        this.listData.push(createdEventData);
 	        this.dataContainerReactComponent.forceUpdate();
 	    },
+	    isJoined: function isJoined(id) {
+	        return this.userInfo.joinedEvents.indexOf(id) >= 0;
+	    },
 	    joinEvent: function joinEvent(id) {
-	        if (this.userInfo.joinedEvents.indexOf(id) < 0) {
+	        if (!this.isJoined(id)) {
 	            var item = this.listData.find(function (entry) {
 	                return entry.id == id;
 	            });
 	            item.joined += 1;
 	            this.userInfo.joinedEvents.push(id);
+	            this.dataContainerReactComponent.forceUpdate();
+	        }
+	    },
+	    unJoinEvent: function unJoinEvent(id) {
+	        if (this.isJoined(id)) {
+	            var item = this.listData.find(function (entry) {
+	                return entry.id == id;
+	            });
+	            item.joined -= 1;
+	            var index = this.userInfo.joinedEvents.indexOf(id);
+	            this.userInfo.joinedEvents.splice(index, 1);
 	            this.dataContainerReactComponent.forceUpdate();
 	        }
 	    },
