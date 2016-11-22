@@ -52,7 +52,6 @@ class DetailsView extends React.Component {
             color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : (this.props.data.joined >= this.props.data.maxPeople/2 ? 'orange' : 'green')
         }
         var textContainerStyle = {
-            marginLeft: 10, 
             borderBottom: '1px solid lightgrey',
             fontSize: '1.1em'
         }
@@ -92,15 +91,15 @@ class DetailsView extends React.Component {
                 <h2 style={joinedIndicatorStyle}>JOINED</h2>
                 <img style={{width: '100%'}} src={this.props.data.img} />
                 <div style={textContainerStyle}>
-                    <div style={{borderBottom: '1px solid lightgrey'}}>
+                    <div style={{borderBottom: '1px solid lightgrey', paddingLeft: 10}}>
                         <h2 style={itemHeaderStyle}>{this.props.data.title}</h2>
                         <i className='fa fa-map-marker' aria-hidden='true'></i> {this.props.data.location}<br/>
                         <i className='fa fa-clock-o' aria-hidden='true'></i> {this.props.data.startTime} - {this.props.data.endTime}<br/>
                         <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true'></i> {this.props.data.joined}/{this.props.data.maxPeople}</span>
                     </div>
-                    <div style={{marginTop: 5}}>{this.props.data.description}</div>
+                    <div style={{marginTop: 5, paddingLeft: 10}}>{this.props.data.description}</div>
                     <br/>
-                    <h2 style={itemHeaderStyle}>Comments</h2>
+                    <h2 style={{marginTop: 5, marginLeft: 10, marginBottom: 5}}>Comments</h2>
                 </div>
                 {this.props.data.comments.map((item, i) => <CommentView key = {i} data = {item} />)}
                 <div style={{padding: '10px'}}>
