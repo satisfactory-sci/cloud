@@ -5,7 +5,7 @@ class ListItem extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.swipeContainerTouchStart = this.swipeContainerTouchStart.bind(this);
         this.swipeContainerTouchMove = this.swipeContainerTouchMove.bind(this);
         this.swipeContainerTouchEnd = this.swipeContainerTouchEnd.bind(this);
@@ -43,7 +43,7 @@ class ListItem extends React.Component {
             this.props.dataHandler.registerLike(this.props.data.id);
         } else if (xChange <= -1*minSwipe) {
             this.props.dataHandler.registerDislike(this.props.data.id);
-        } 
+        }
         this.swipeContainer.style.left = "";
     }
 
@@ -88,9 +88,9 @@ class ListItem extends React.Component {
                 <div ref="swipecontainer" style={swipeContainerStyle} onTouchStart={this.swipeContainerTouchStart} onTouchMove={this.swipeContainerTouchMove} onTouchEnd={this.swipeContainerTouchEnd}>
                     <div style={textContainerStyle}>
                         <h2 style={itemHeaderStyle}>{this.props.data.title}</h2>
-                        <i className='fa fa-map-marker' aria-hidden='true'></i> {this.props.data.location}<br/>
-                        <i className='fa fa-clock-o' aria-hidden='true'></i> {this.props.data.startTime} - {this.props.data.endTime}<br/>
-                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true'></i> {this.props.data.joined}/{this.props.data.maxPeople}</span>
+                        <i className='fa fa-map-marker' aria-hidden='true' style={{width:'18px'}}></i>{this.props.data.location}<br/>
+                        <i className='fa fa-clock-o' aria-hidden='true' style={{width:'18px'}}></i>{this.props.data.startTime} - {this.props.data.endTime}<br/>
+                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true'style={{width:'18px'}}></i>{this.props.data.joined}/{this.props.data.maxPeople}</span>
                     </div>
                     <div style={imgContainerStyle}>
                         <img style={imgStyle} src={this.props.data.img} />
