@@ -14,7 +14,7 @@ class App extends React.Component {
             detailsViewVisible: false,
             chosenEvent: {}
         }
-        
+
         this.onChooseEvent = this.onChooseEvent.bind(this);
         this.onClickAddButton = this.onClickAddButton.bind(this);
         this.backToInitialState = this.backToInitialState.bind(this);
@@ -54,6 +54,8 @@ class App extends React.Component {
         var appStyle = {
             width: '100%',
             maxWidth: '800px',
+            position: 'relative',
+            overflow: 'hidden',
             margin: 'auto',
             display: 'inline-block'
         }
