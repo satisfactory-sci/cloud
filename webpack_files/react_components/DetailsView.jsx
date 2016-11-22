@@ -6,7 +6,7 @@ class DetailsView extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.joinEvent = this.joinEvent.bind(this);
         this.addComment = this.addComment.bind(this);
     };
@@ -18,6 +18,7 @@ class DetailsView extends React.Component {
     addComment(e) {
         var commentText = ReactDOM.findDOMNode(this.refs.newComment).value;
         this.props.dataHandler.addComment(this.props.data.id, commentText);
+        this.refs.newComment.value = "";
     }
 
     render() {
@@ -34,7 +35,7 @@ class DetailsView extends React.Component {
             position: 'fixed',
             opacity: '1',
             backgroundColor: 'white',
-            zIndex: '10',            
+            zIndex: '10',
         }
 
         var itemHeaderStyle = {
@@ -45,7 +46,7 @@ class DetailsView extends React.Component {
             color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : (this.props.data.joined >= this.props.data.maxPeople/2 ? 'orange' : 'green')
         }
         var textContainerStyle = {
-            marginLeft: 10, 
+            marginLeft: 10,
             borderBottom: '1px solid lightgrey',
             fontSize: '1.1em'
         }
