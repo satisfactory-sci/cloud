@@ -57,12 +57,12 @@ class DetailsView extends React.Component {
             fontSize: '1.1em'
         }
         var joinEventBtnStyle = {
-            float: 'right', 
+            float: 'right',
             color: 'green',
             display: isJoined ? 'none' : ''
         }
         var unjoinEventBtnStyle = {
-            float: 'right', 
+            float: 'right',
             color: 'red',
             display: isJoined ? '' : 'none'
         }
@@ -94,9 +94,9 @@ class DetailsView extends React.Component {
                 <div style={textContainerStyle}>
                     <div style={{borderBottom: '1px solid lightgrey', paddingLeft: 10}}>
                         <h2 style={itemHeaderStyle}>{this.props.data.title}</h2>
-                        <i className='fa fa-map-marker' aria-hidden='true'></i> {this.props.data.location}<br/>
-                        <i className='fa fa-clock-o' aria-hidden='true'></i> {this.props.data.startTime} - {this.props.data.endTime}<br/>
-                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true'></i> {this.props.data.joined}/{this.props.data.maxPeople}</span>
+                        <i className='fa fa-map-marker' aria-hidden='true' style={{width:'18px'}}></i> {this.props.data.location}<br/>
+                        <i className='fa fa-clock-o' aria-hidden='true' style={{width:'18px'}}></i> {this.props.data.startTime} - {this.props.data.endTime}<br/>
+                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true' style={{width:'18px'}}></i> {this.props.data.joined}/{this.props.data.maxPeople}</span>
                     </div>
                     <div style={{marginTop: 5, paddingLeft: 10}}>{this.props.data.description}</div>
                     <br/>
