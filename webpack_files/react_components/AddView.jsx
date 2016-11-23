@@ -5,7 +5,7 @@ class AddView extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.addEvent = this.addEvent.bind(this);
     };
 
@@ -40,7 +40,7 @@ class AddView extends React.Component {
             position: 'fixed',
             opacity: '1',
             backgroundColor: 'white',
-            zIndex: '10',            
+            zIndex: '10',
         }
         var formStyle = {
             marginLeft: 10,
@@ -58,7 +58,7 @@ class AddView extends React.Component {
             <div>
                 <div style={headerStyle}>
                     <h1 style={{margin: 10}}>
-                        <i onClick={this.props.onCancelClicked} style={{float: 'left', color: 'red'}} className="fa fa-times" aria-hidden="true"></i>
+                      <i onClick={this.props.onCancelClicked} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
                         Add
                         <i onClick={this.addEvent} style={{float: 'right', color: 'green'}} className="fa fa-check" aria-hidden="true"></i>
                     </h1>

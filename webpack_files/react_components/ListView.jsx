@@ -17,7 +17,7 @@ class ListView extends React.Component {
             position: 'fixed',
             opacity: '1',
             backgroundColor: 'white',
-            zIndex: '10',            
+            zIndex: '10',
         }
 
         return (
@@ -26,7 +26,7 @@ class ListView extends React.Component {
                     <h1 style={{margin: 10}}>
                         <i style={{float: 'left'}} className="fa fa-search" aria-hidden="true"></i>
                         Find
-                        <span onClick={this.props.onClickAddButton}><i style={{float: 'right'}} className="fa fa-plus" aria-hidden="true"></i></span>
+                        <span onClick={this.props.onClickAddButton}><i style={{float: 'right', marginTop: '4px'}} className="fa fa-plus" aria-hidden="true"></i></span>
                     </h1>
                 </div>
                 <div style={{height: '60px'}}></div>
