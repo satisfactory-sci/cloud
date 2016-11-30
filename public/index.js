@@ -60,7 +60,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var dataHandler = __webpack_require__(184);
+	var dataHandler = __webpack_require__(183);
 	dataHandler.initData();
 
 	_reactDom2.default.render(_react2.default.createElement(_App2.default, { dataHandler: dataHandler }), document.getElementById('app'));
@@ -21472,11 +21472,11 @@
 
 	var _ListView2 = _interopRequireDefault(_ListView);
 
-	var _DetailsView = __webpack_require__(181);
+	var _DetailsView = __webpack_require__(180);
 
 	var _DetailsView2 = _interopRequireDefault(_DetailsView);
 
-	var _AddView = __webpack_require__(183);
+	var _AddView = __webpack_require__(182);
 
 	var _AddView2 = _interopRequireDefault(_AddView);
 
@@ -21547,7 +21547,8 @@
 
 	            var appStyle = {
 	                width: '100%',
-	                maxWidth: '800px',
+	                position: 'relative',
+	                overflow: 'hidden',
 	                margin: 'auto',
 	                display: 'inline-block'
 	            };
@@ -21573,7 +21574,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21582,7 +21583,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ListItem = __webpack_require__(180);
+	var _ListItem = __webpack_require__(185);
 
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 
@@ -21595,65 +21596,174 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var ListView = function (_React$Component) {
-	    _inherits(ListView, _React$Component);
+	  _inherits(ListView, _React$Component);
 
-	    function ListView() {
-	        _classCallCheck(this, ListView);
+	  function ListView() {
+	    _classCallCheck(this, ListView);
 
-	        return _possibleConstructorReturn(this, (ListView.__proto__ || Object.getPrototypeOf(ListView)).apply(this, arguments));
-	    }
+	    return _possibleConstructorReturn(this, (ListView.__proto__ || Object.getPrototypeOf(ListView)).apply(this, arguments));
+	  }
 
-	    _createClass(ListView, [{
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
+	  _createClass(ListView, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
 
-	            if (!this.props.visible) {
-	                return _react2.default.createElement('div', null);
-	            }
+	      if (!this.props.visible) {
+	        return _react2.default.createElement('div', null);
+	      }
 
-	            var headerStyle = {
-	                width: '100%',
-	                color: 'orange',
-	                textAlign: 'center',
-	                borderBottom: '1px solid lightgrey',
-	                position: 'fixed',
-	                opacity: '1',
-	                backgroundColor: 'white',
-	                zIndex: '10'
-	            };
+	      var headerStyle = {
+	        width: '100%',
+	        color: 'orange',
+	        textAlign: 'center',
+	        borderBottom: '1px solid lightgrey',
+	        position: 'fixed',
+	        opacity: '1',
+	        backgroundColor: 'white',
+	        zIndex: '10'
+	      };
+	      var user = this.props.dataHandler.userInfo;
+	      var events = this.props.dataHandler.listData;
+	      var categoryStyle = { visibility: 'visible' };
 
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { style: headerStyle },
-	                    _react2.default.createElement(
-	                        'h1',
-	                        { style: { margin: 10 } },
-	                        _react2.default.createElement('i', { style: { float: 'left' }, className: 'fa fa-search', 'aria-hidden': 'true' }),
-	                        'Find',
-	                        _react2.default.createElement(
-	                            'span',
-	                            { onClick: this.props.onClickAddButton },
-	                            _react2.default.createElement('i', { style: { float: 'right' }, className: 'fa fa-plus', 'aria-hidden': 'true' })
-	                        )
-	                    )
-	                ),
-	                _react2.default.createElement('div', { style: { height: '60px' } }),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    this.props.dataHandler.listData.map(function (item, i) {
-	                        return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
-	                    })
-	                )
-	            );
+	      //Sorting to different categories
+	      var joined = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id && e.status == 3;
+	        });
+	        if (i > -1) {
+	          return true;
 	        }
-	    }]);
+	        return false;
+	      });
 
-	    return ListView;
+	      var joinElement = void 0;
+	      if (joined.length > 0) {
+	        joinElement = _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Joined'
+	          ),
+	          joined.map(function (item, i) {
+	            return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
+	          })
+	        );
+	      } else {
+	        joinElement = undefined;
+	      }
+
+	      var dumped = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id && e.status == 2;
+	        });
+	        if (i > -1) {
+	          return true;
+	        }
+	        return false;
+	      });
+
+	      var dumpElement = void 0;
+	      if (dumped.length > 0) {
+	        dumpElement = _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Dumped'
+	          ),
+	          dumped.map(function (item, i) {
+	            return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
+	          })
+	        );
+	      } else {
+	        dumpElement = undefined;
+	      }
+
+	      var starred = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id && e.status == 1;
+	        });
+	        if (i > -1) {
+	          return true;
+	        }
+	        return false;
+	      });
+	      var starElement = void 0;
+	      if (starred.length > 0) {
+	        starElement = _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Starred'
+	          ),
+	          starred.map(function (item, i) {
+	            return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
+	          })
+	        );
+	      } else {
+	        starElement = undefined;
+	      }
+
+	      var others = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id;
+	        });
+	        if (i == -1) {
+	          return true;
+	        }
+	        return false;
+	      });
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { style: headerStyle },
+	          _react2.default.createElement(
+	            'h1',
+	            { style: { margin: 10 } },
+	            _react2.default.createElement('i', { style: { float: 'left' }, className: 'fa fa-search', 'aria-hidden': 'true' }),
+	            'Find',
+	            _react2.default.createElement(
+	              'span',
+	              { onClick: this.props.onClickAddButton },
+	              _react2.default.createElement('i', { style: { float: 'right', marginTop: '4px' }, className: 'fa fa-plus', 'aria-hidden': 'true' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement('div', { style: { height: '60px' } }),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          joinElement,
+	          starElement,
+	          _react2.default.createElement(
+	            'div',
+	            { style: categoryStyle },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Find New'
+	            )
+	          ),
+	          others.map(function (item, i) {
+	            return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
+	          }),
+	          dumpElement
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ListView;
 	}(_react2.default.Component);
 
 	exports.default = ListView;
@@ -21674,177 +21784,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ListItem = function (_React$Component) {
-	    _inherits(ListItem, _React$Component);
-
-	    function ListItem(props) {
-	        _classCallCheck(this, ListItem);
-
-	        var _this = _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).call(this, props));
-
-	        _this.swipeContainerTouchStart = _this.swipeContainerTouchStart.bind(_this);
-	        _this.swipeContainerTouchMove = _this.swipeContainerTouchMove.bind(_this);
-	        _this.swipeContainerTouchEnd = _this.swipeContainerTouchEnd.bind(_this);
-	        _this.chooseItem = _this.chooseItem.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(ListItem, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.swipeContainer = _reactDom2.default.findDOMNode(this.refs.swipecontainer);
-	        }
-	    }, {
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate(prevProps, prevState) {
-	            this.swipeContainer = _reactDom2.default.findDOMNode(this.refs.swipecontainer);
-	        }
-	    }, {
-	        key: 'swipeContainerTouchStart',
-	        value: function swipeContainerTouchStart(e) {
-	            var touch = e.targetTouches[0];
-	            this.touchStartX = touch.pageX;
-	        }
-	    }, {
-	        key: 'swipeContainerTouchMove',
-	        value: function swipeContainerTouchMove(e) {
-	            var touch = e.targetTouches[0];
-	            var xChange = touch.pageX - this.touchStartX;
-	            var minSwipe = this.swipeContainer.clientWidth * 0.2;
-	            if (xChange >= minSwipe || xChange <= -1 * minSwipe) {
-	                this.swipeContainer.style.left = xChange + 'px';
-	            }
-	        }
-	    }, {
-	        key: 'swipeContainerTouchEnd',
-	        value: function swipeContainerTouchEnd(e) {
-	            var touch = e.changedTouches[0];
-	            var xChange = touch.pageX - this.touchStartX;
-	            var minSwipe = this.swipeContainer.clientWidth * 0.5;
-
-	            if (xChange >= minSwipe) {
-	                this.props.dataHandler.registerLike(this.props.data.id);
-	            } else if (xChange <= -1 * minSwipe) {
-	                this.props.dataHandler.registerDislike(this.props.data.id);
-	            }
-	            this.swipeContainer.style.left = "";
-	        }
-	    }, {
-	        key: 'chooseItem',
-	        value: function chooseItem(e) {
-	            this.props.onChooseEvent(this.props.data);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            var itemStyle = {
-	                width: '100%',
-	                height: '125px',
-	                borderBottom: '1px solid lightgrey'
-	            };
-	            var swipeContainerStyle = {
-	                position: 'absolute',
-	                width: '100%',
-	                height: '125px'
-	            };
-	            var textContainerStyle = {
-	                float: 'left',
-	                fontSize: '1.1em',
-	                marginLeft: '10px'
-	            };
-	            var itemHeaderStyle = {
-	                marginTop: '5px',
-	                marginBottom: '5px'
-	            };
-	            var imgContainerStyle = {
-	                float: 'right'
-	            };
-	            var imgStyle = {
-	                width: '125px',
-	                height: '125px'
-	            };
-	            var fullnessStyle = {
-	                color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : this.props.data.joined >= this.props.data.maxPeople / 2 ? 'orange' : 'green'
-	            };
-	            return _react2.default.createElement(
-	                'div',
-	                { onClick: this.chooseItem, style: itemStyle },
-	                _react2.default.createElement(
-	                    'div',
-	                    { ref: 'swipecontainer', style: swipeContainerStyle, onTouchStart: this.swipeContainerTouchStart, onTouchMove: this.swipeContainerTouchMove, onTouchEnd: this.swipeContainerTouchEnd },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { style: textContainerStyle },
-	                        _react2.default.createElement(
-	                            'h2',
-	                            { style: itemHeaderStyle },
-	                            this.props.data.title
-	                        ),
-	                        _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
-	                        ' ',
-	                        this.props.data.location,
-	                        _react2.default.createElement('br', null),
-	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' }),
-	                        ' ',
-	                        this.props.data.startTime,
-	                        ' - ',
-	                        this.props.data.endTime,
-	                        _react2.default.createElement('br', null),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { style: fullnessStyle },
-	                            _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }),
-	                            ' ',
-	                            this.props.data.joined,
-	                            '/',
-	                            this.props.data.maxPeople
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { style: imgContainerStyle },
-	                        _react2.default.createElement('img', { style: imgStyle, src: this.props.data.img })
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return ListItem;
-	}(_react2.default.Component);
-
-	exports.default = ListItem;
-
-/***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _CommentView = __webpack_require__(182);
+	var _CommentView = __webpack_require__(181);
 
 	var _CommentView2 = _interopRequireDefault(_CommentView);
 
@@ -21869,6 +21809,7 @@
 	        var _this = _possibleConstructorReturn(this, (DetailsView.__proto__ || Object.getPrototypeOf(DetailsView)).call(this, props));
 
 	        _this.joinEvent = _this.joinEvent.bind(_this);
+	        _this.unJoinEvent = _this.unJoinEvent.bind(_this);
 	        _this.addComment = _this.addComment.bind(_this);
 	        return _this;
 	    }
@@ -21879,10 +21820,16 @@
 	            this.props.dataHandler.joinEvent(this.props.data.id);
 	        }
 	    }, {
+	        key: 'unJoinEvent',
+	        value: function unJoinEvent(e) {
+	            this.props.dataHandler.unJoinEvent(this.props.data.id);
+	        }
+	    }, {
 	        key: 'addComment',
 	        value: function addComment(e) {
 	            var commentText = _reactDom2.default.findDOMNode(this.refs.newComment).value;
 	            this.props.dataHandler.addComment(this.props.data.id, commentText);
+	            this.refs.newComment.value = "";
 	        }
 	    }, {
 	        key: 'render',
@@ -21891,6 +21838,8 @@
 	            if (!this.props.visible) {
 	                return _react2.default.createElement('div', null);
 	            }
+
+	            var isJoined = this.props.dataHandler.isJoined(this.props.data.id);
 
 	            var headerStyle = {
 	                width: '100%',
@@ -21911,9 +21860,29 @@
 	                color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : this.props.data.joined >= this.props.data.maxPeople / 2 ? 'orange' : 'green'
 	            };
 	            var textContainerStyle = {
-	                marginLeft: 10,
 	                borderBottom: '1px solid lightgrey',
 	                fontSize: '1.1em'
+	            };
+	            var joinEventBtnStyle = {
+	                float: 'right',
+	                color: 'green',
+	                display: isJoined ? 'none' : ''
+	            };
+	            var unjoinEventBtnStyle = {
+	                float: 'right',
+	                color: 'red',
+	                display: isJoined ? '' : 'none'
+	            };
+	            var joinedIndicatorStyle = {
+	                color: 'green',
+	                display: isJoined ? '' : 'none',
+	                border: '4px solid green',
+	                position: 'absolute',
+	                top: 70,
+	                right: 20,
+	                padding: 7,
+	                transform: 'rotate(20deg)'
+
 	            };
 
 	            return _react2.default.createElement(
@@ -21925,29 +21894,35 @@
 	                    _react2.default.createElement(
 	                        'h1',
 	                        { style: { margin: 10 } },
-	                        _react2.default.createElement('i', { onClick: this.props.onCancelClicked, style: { float: 'left', color: 'red' }, className: 'fa fa-times', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { onClick: this.props.onCancelClicked, style: { float: 'left', color: 'orange' }, className: 'fa fa-arrow-left', 'aria-hidden': 'true' }),
 	                        'Join',
-	                        _react2.default.createElement('i', { onClick: this.joinEvent, style: { float: 'right', color: 'green' }, className: 'fa fa-check', 'aria-hidden': 'true' })
+	                        _react2.default.createElement('i', { onClick: this.joinEvent, style: joinEventBtnStyle, className: 'fa fa-check', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { onClick: this.unJoinEvent, style: unjoinEventBtnStyle, className: 'fa fa-times', 'aria-hidden': 'true' })
 	                    )
 	                ),
 	                _react2.default.createElement('div', { style: { height: '60px' } }),
+	                _react2.default.createElement(
+	                    'h2',
+	                    { style: joinedIndicatorStyle },
+	                    'JOINED'
+	                ),
 	                _react2.default.createElement('img', { style: { width: '100%' }, src: this.props.data.img }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { style: textContainerStyle },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { borderBottom: '1px solid lightgrey' } },
+	                        { style: { borderBottom: '1px solid lightgrey', paddingLeft: 10 } },
 	                        _react2.default.createElement(
 	                            'h2',
 	                            { style: itemHeaderStyle },
 	                            this.props.data.title
 	                        ),
-	                        _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true', style: { width: '18px' } }),
 	                        ' ',
 	                        this.props.data.location,
 	                        _react2.default.createElement('br', null),
-	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true', style: { width: '18px' } }),
 	                        ' ',
 	                        this.props.data.startTime,
 	                        ' - ',
@@ -21956,7 +21931,7 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            { style: fullnessStyle },
-	                            _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }),
+	                            _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true', style: { width: '18px' } }),
 	                            ' ',
 	                            this.props.data.joined,
 	                            '/',
@@ -21965,13 +21940,13 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { marginTop: 5 } },
+	                        { style: { marginTop: 5, paddingLeft: 10 } },
 	                        this.props.data.description
 	                    ),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
 	                        'h2',
-	                        { style: itemHeaderStyle },
+	                        { style: { marginTop: 5, marginLeft: 10, marginBottom: 5 } },
 	                        'Comments'
 	                    )
 	                ),
@@ -21999,7 +21974,7 @@
 	exports.default = DetailsView;
 
 /***/ },
-/* 182 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22078,7 +22053,7 @@
 	exports.default = CommentView;
 
 /***/ },
-/* 183 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22174,7 +22149,7 @@
 	                    _react2.default.createElement(
 	                        'h1',
 	                        { style: { margin: 10 } },
-	                        _react2.default.createElement('i', { onClick: this.props.onCancelClicked, style: { float: 'left', color: 'red' }, className: 'fa fa-times', 'aria-hidden': 'true' }),
+	                        _react2.default.createElement('i', { onClick: this.props.onCancelClicked, style: { float: 'left', color: 'orange' }, className: 'fa fa-arrow-left', 'aria-hidden': 'true' }),
 	                        'Add',
 	                        _react2.default.createElement('i', { onClick: this.addEvent, style: { float: 'right', color: 'green' }, className: 'fa fa-check', 'aria-hidden': 'true' })
 	                    )
@@ -22250,7 +22225,7 @@
 	exports.default = AddView;
 
 /***/ },
-/* 184 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22262,31 +22237,42 @@
 	    userInfo: {},
 
 	    initData: function initData() {
-	        this.listData = __webpack_require__(185);
+	        this.listData = __webpack_require__(184);
 	        this.userInfo = {
 	            userName: "Sanni69",
 	            img: "/images/sanni.jpg",
-	            joinedEvents: []
+	            events: [{}]
 	        };
 	    },
 	    start: function start(dataContainerReactComponent) {
 	        this.dataContainerReactComponent = dataContainerReactComponent;
 	    },
 	    registerLike: function registerLike(id) {
-	        var item = this.listData.find(function (entry) {
-	            return entry.id == id;
+	        var i = this.userInfo.events.findIndex(function (obj) {
+	            return obj.id == id;
 	        });
-	        var index = this.listData.indexOf(item);
-	        this.listData.splice(index, 1);
-	        this.listData.unshift(item);
+	        if (i > -1) {
+	            if (this.userInfo.events[i].status != 3) {
+	                this.userInfo.events.splice(i, 1);
+	                this.userInfo.events.push({ id: id, status: 1 });
+	            }
+	        } else {
+	            this.userInfo.events.push({ id: id, status: 1 });
+	        }
 	        this.dataContainerReactComponent.forceUpdate();
 	    },
 	    registerDislike: function registerDislike(id) {
-	        var item = this.listData.find(function (entry) {
-	            return entry.id == id;
+	        var i = this.userInfo.events.findIndex(function (obj) {
+	            return obj.id == id;
 	        });
-	        var index = this.listData.indexOf(item);
-	        this.listData.splice(index, 1);
+	        if (i > -1) {
+	            if (this.userInfo.events[i].status != 3) {
+	                this.userInfo.events.splice(i, 1);
+	                this.userInfo.events.push({ id: id, status: 2 });
+	            }
+	        } else {
+	            this.userInfo.events.push({ id: id, status: 2 });
+	        }
 	        this.dataContainerReactComponent.forceUpdate();
 	    },
 	    addNewEvent: function addNewEvent(createdEventData) {
@@ -22295,13 +22281,31 @@
 	        this.listData.push(createdEventData);
 	        this.dataContainerReactComponent.forceUpdate();
 	    },
+	    isJoined: function isJoined(id) {
+	        return this.userInfo.events.findIndex(function (obj) {
+	            return obj.id == id && obj.status == 3;
+	        }) >= 0;
+	    },
 	    joinEvent: function joinEvent(id) {
-	        if (this.userInfo.joinedEvents.indexOf(id) < 0) {
+	        if (!this.isJoined(id)) {
 	            var item = this.listData.find(function (entry) {
 	                return entry.id == id;
 	            });
 	            item.joined += 1;
-	            this.userInfo.joinedEvents.push(id);
+	            this.userInfo.events.push({ id: id, status: 3 });
+	            this.dataContainerReactComponent.forceUpdate();
+	        }
+	    },
+	    unJoinEvent: function unJoinEvent(id) {
+	        if (this.isJoined(id)) {
+	            var item = this.listData.find(function (entry) {
+	                return entry.id == id;
+	            });
+	            item.joined -= 1;
+	            var index = this.userInfo.events.findIndex(function (obj) {
+	                return obj.id == id;
+	            });
+	            this.userInfo.events.splice(index, 1);
 	            this.dataContainerReactComponent.forceUpdate();
 	        }
 	    },
@@ -22323,7 +22327,7 @@
 	};
 
 /***/ },
-/* 185 */
+/* 184 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22468,6 +22472,187 @@
 	        img: "/images/gandalf.jpg"
 	    }]
 	}];
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ListItem = function (_React$Component) {
+	    _inherits(ListItem, _React$Component);
+
+	    function ListItem(props) {
+	        _classCallCheck(this, ListItem);
+
+	        var _this = _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).call(this, props));
+
+	        _this.swipeContainerTouchStart = _this.swipeContainerTouchStart.bind(_this);
+	        _this.swipeContainerTouchMove = _this.swipeContainerTouchMove.bind(_this);
+	        _this.swipeContainerTouchEnd = _this.swipeContainerTouchEnd.bind(_this);
+	        _this.chooseItem = _this.chooseItem.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ListItem, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.swipeContainer = _reactDom2.default.findDOMNode(this.refs.swipecontainer);
+	            this.swipeBG = _reactDom2.default.findDOMNode(this.refs.swipebackground);
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            this.swipeContainer = _reactDom2.default.findDOMNode(this.refs.swipecontainer);
+	            this.swipeBG = _reactDom2.default.findDOMNode(this.refs.swipebackground);
+	        }
+	    }, {
+	        key: 'swipeContainerTouchStart',
+	        value: function swipeContainerTouchStart(e) {
+	            var touch = e.targetTouches[0];
+	            this.touchStartX = touch.pageX;
+	        }
+	    }, {
+	        key: 'swipeContainerTouchMove',
+	        value: function swipeContainerTouchMove(e) {
+	            var touch = e.targetTouches[0];
+	            var xChange = touch.pageX - this.touchStartX;
+	            var minSwipe = this.swipeContainer.clientWidth * 0.2;
+	            if (xChange >= minSwipe || xChange <= -1 * minSwipe) {
+	                this.swipeContainer.style.left = xChange + 'px';
+	                if (xChange > 0) {
+	                    var p = parseInt(255 - xChange / this.swipeContainer.clientWidth * 255);
+	                    this.swipeBG.style.backgroundColor = 'rgb(' + p + ',255,' + p + ')';
+	                } else {
+	                    var p = parseInt(255 - -xChange / this.swipeContainer.clientWidth * 255);
+	                    this.swipeBG.style.backgroundColor = 'rgb(255,' + p + ',' + p + ')';
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'swipeContainerTouchEnd',
+	        value: function swipeContainerTouchEnd(e) {
+	            var touch = e.changedTouches[0];
+	            var xChange = touch.pageX - this.touchStartX;
+	            var minSwipe = this.swipeContainer.clientWidth * 0.5;
+
+	            if (xChange >= minSwipe) {
+	                this.props.dataHandler.registerLike(this.props.data.id);
+	            } else if (xChange <= -1 * minSwipe) {
+	                this.props.dataHandler.registerDislike(this.props.data.id);
+	            }
+	            this.swipeContainer.style.left = "";
+	            this.swipeBG.style.background = '';
+	            this.swipeBG.style.opacity = 1;
+	        }
+	    }, {
+	        key: 'chooseItem',
+	        value: function chooseItem(e) {
+	            this.props.onChooseEvent(this.props.data);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            var itemStyle = {
+	                width: '100%',
+	                height: '125px',
+	                borderBottom: '1px solid lightgrey'
+	            };
+	            var swipeContainerStyle = {
+	                position: 'absolute',
+	                width: '100%',
+	                height: '125px',
+	                opacity: '1',
+	                backgroundColor: 'white'
+	            };
+	            var textContainerStyle = {
+	                fontSize: '1.1em',
+	                marginLeft: '10px'
+	            };
+	            var itemHeaderStyle = {
+	                marginTop: '5px',
+	                marginBottom: '5px'
+	            };
+	            var imgContainerStyle = {
+	                position: 'absolute',
+	                right: 0,
+	                top: 0
+	            };
+	            var imgStyle = {
+	                width: '125px',
+	                height: '125px'
+	            };
+	            var fullnessStyle = {
+	                color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : this.props.data.joined >= this.props.data.maxPeople / 2 ? 'orange' : 'green'
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                { onClick: this.chooseItem, style: itemStyle, ref: 'swipebackground' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { ref: 'swipecontainer', style: swipeContainerStyle, onTouchStart: this.swipeContainerTouchStart, onTouchMove: this.swipeContainerTouchMove, onTouchEnd: this.swipeContainerTouchEnd },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: textContainerStyle },
+	                        _react2.default.createElement(
+	                            'h2',
+	                            { style: itemHeaderStyle },
+	                            this.props.data.title
+	                        ),
+	                        _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true', style: { width: '18px' } }),
+	                        this.props.data.location,
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true', style: { width: '18px' } }),
+	                        this.props.data.startTime,
+	                        ' - ',
+	                        this.props.data.endTime,
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { style: fullnessStyle },
+	                            _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true', style: { width: '18px' } }),
+	                            this.props.data.joined,
+	                            '/',
+	                            this.props.data.maxPeople
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: imgContainerStyle },
+	                        _react2.default.createElement('img', { style: imgStyle, src: this.props.data.img })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ListItem;
+	}(_react2.default.Component);
+
+	exports.default = ListItem;
 
 /***/ }
 /******/ ]);

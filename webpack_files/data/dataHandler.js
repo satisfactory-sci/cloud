@@ -9,7 +9,7 @@ module.exports = {
         this.userInfo = {
             userName: "Sanni69",
             img: "/images/sanni.jpg",
-            joinedEvents: []
+            events: [{}]
         }
     },
 
@@ -18,17 +18,28 @@ module.exports = {
     },
 
     registerLike(id) {
-        var item = this.listData.find((entry) => { return entry.id == id});
-        var index = this.listData.indexOf(item);
-        this.listData.splice(index, 1);
-        this.listData.unshift(item);
+        let i = this.userInfo.events.findIndex((obj) => {return obj.id == id});
+        if(i > -1 ) {
+          if(this.userInfo.events[i].status != 3){
+            this.userInfo.events.splice(i, 1);
+            this.userInfo.events.push({id: id, status: 1});
+          }
+        }else{
+          this.userInfo.events.push({id: id, status: 1});
+        }
         this.dataContainerReactComponent.forceUpdate();
     },
 
     registerDislike(id) {
-        var item = this.listData.find((entry) => { return entry.id == id});
-        var index = this.listData.indexOf(item);
-        this.listData.splice(index, 1);
+        let i = this.userInfo.events.findIndex((obj) => {return obj.id == id});
+        if(i > -1 ) {
+          if(this.userInfo.events[i].status != 3){
+            this.userInfo.events.splice(i, 1);
+            this.userInfo.events.push({id: id, status: 2});
+          }
+        }else{
+          this.userInfo.events.push({id: id, status: 2});
+        }
         this.dataContainerReactComponent.forceUpdate();
     },
 
@@ -40,14 +51,14 @@ module.exports = {
     },
 
     isJoined(id) {
-        return this.userInfo.joinedEvents.indexOf(id) >= 0;
+        return this.userInfo.events.findIndex((obj) => {return obj.id == id && obj.status == 3}) >= 0;
     },
 
     joinEvent(id) {
         if (!this.isJoined(id)) {
             var item = this.listData.find((entry) => { return entry.id == id});
             item.joined += 1;
-            this.userInfo.joinedEvents.push(id);
+            this.userInfo.events.push({id:id, status:3});
             this.dataContainerReactComponent.forceUpdate();
         }
     },
@@ -56,8 +67,8 @@ module.exports = {
         if (this.isJoined(id)) {
             var item = this.listData.find((entry) => { return entry.id == id});
             item.joined -= 1;
-            var index = this.userInfo.joinedEvents.indexOf(id);
-            this.userInfo.joinedEvents.splice(index, 1);
+            var index = this.userInfo.events.findIndex((obj) => {return obj.id == id});
+            this.userInfo.events.splice(index, 1);
             this.dataContainerReactComponent.forceUpdate();
         }
     },
@@ -75,6 +86,4 @@ module.exports = {
         item.comments.unshift(comment);
         this.dataContainerReactComponent.forceUpdate();
     }
-
-
 }
