@@ -21626,6 +21626,7 @@
 
 	      var user = this.props.dataHandler.userInfo;
 	      var events = this.props.dataHandler.listData;
+	      //Styles for {star, dump, joined, neutral} -headers
 	      var categoryStyle = {
 	        width: '100%',
 	        textAlign: 'center',
@@ -21647,8 +21648,39 @@
 	        }
 	        return false;
 	      });
+	      var dumped = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id && e.status == 2;
+	        });
+	        if (i > -1) {
+	          return true;
+	        }
+	        return false;
+	      });
+	      var starred = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id && e.status == 1;
+	        });
+	        if (i > -1) {
+	          return true;
+	        }
+	        return false;
+	      });
+	      var others = events.filter(function (obj) {
+	        var i = user.events.findIndex(function (e) {
+	          return e.id == obj.id;
+	        });
+	        if (i == -1) {
+	          return true;
+	        }
+	        return false;
+	      });
 
+	      //Make elements for categories as needed.
 	      var joinElement = void 0;
+	      var dumpElement = void 0;
+	      var starElement = void 0;
+
 	      if (joined.length > 0) {
 	        joinElement = _react2.default.createElement(
 	          'div',
@@ -21665,18 +21697,6 @@
 	      } else {
 	        joinElement = undefined;
 	      }
-
-	      var dumped = events.filter(function (obj) {
-	        var i = user.events.findIndex(function (e) {
-	          return e.id == obj.id && e.status == 2;
-	        });
-	        if (i > -1) {
-	          return true;
-	        }
-	        return false;
-	      });
-
-	      var dumpElement = void 0;
 	      if (dumped.length > 0) {
 	        dumpElement = _react2.default.createElement(
 	          'div',
@@ -21693,17 +21713,6 @@
 	      } else {
 	        dumpElement = undefined;
 	      }
-
-	      var starred = events.filter(function (obj) {
-	        var i = user.events.findIndex(function (e) {
-	          return e.id == obj.id && e.status == 1;
-	        });
-	        if (i > -1) {
-	          return true;
-	        }
-	        return false;
-	      });
-	      var starElement = void 0;
 	      if (starred.length > 0) {
 	        starElement = _react2.default.createElement(
 	          'div',
@@ -21720,16 +21729,6 @@
 	      } else {
 	        starElement = undefined;
 	      }
-
-	      var others = events.filter(function (obj) {
-	        var i = user.events.findIndex(function (e) {
-	          return e.id == obj.id;
-	        });
-	        if (i == -1) {
-	          return true;
-	        }
-	        return false;
-	      });
 
 	      return _react2.default.createElement(
 	        'div',
@@ -22442,54 +22441,83 @@
 	            img: "/images/sanni.jpg",
 	            events: [{}]
 	        };
+	        //Initiate global socket
 	        this.socket = (0, _socket2.default)();
+	        //We request initial data
 	        this.socket.emit('requestItems');
+	        //We get the initial data
 	        this.socket.on('newItems', function (data) {
 	            console.log(data);
 	        });
+	        //We have a connection (Mainly for debugging reasons)
 	        this.socket.on('connect', function () {
 	            console.log("Socket connected!");
 	        });
+	        //Event listeners if somebody else joins
 	        this.socket.on('join', function (data) {
 	            console.log("Somebody else joined some event");
 	        });
+	        //Event listener if somebody commented some event
 	        this.socket.on('comment', function (comment) {
 	            console.log("Somebody commented something");
 	        });
 	    },
+
+
+	    //Start the dataHandler
 	    start: function start(dataContainerReactComponent) {
 	        this.dataContainerReactComponent = dataContainerReactComponent;
 	    },
+
+
+	    //Register star locally and send the information to server
 	    registerLike: function registerLike(id) {
+	        //Find the event
 	        var i = this.userInfo.events.findIndex(function (obj) {
 	            return obj.id == id;
 	        });
+	        //Have we already made some action to this object
 	        if (i > -1) {
+	            //We cannot star joined events so...
 	            if (this.userInfo.events[i].status != 3) {
+	                //Remove older entry
 	                this.userInfo.events.splice(i, 1);
+	                //Do the changes
 	                this.userInfo.events.push({ id: id, status: 1 });
 	                this.socket.emit('star', { id: id, userId: '0' });
 	            }
 	        } else {
+	            //Do the changes
 	            this.userInfo.events.push({ id: id, status: 1 });
 	            this.socket.emit('star', { id: id, userId: '0' });
 	        }
+	        //Update components
 	        this.dataContainerReactComponent.forceUpdate();
 	    },
+
+
+	    //Register dump locally and send the information to server
 	    registerDislike: function registerDislike(id) {
+	        //Find the Event
 	        var i = this.userInfo.events.findIndex(function (obj) {
 	            return obj.id == id;
 	        });
+	        //Have we already made some action to this object
 	        if (i > -1) {
+	            //We cannot dump joined events so...
 	            if (this.userInfo.events[i].status != 3) {
+	                //remove the older entry
 	                this.userInfo.events.splice(i, 1);
+	                //Do the changes
 	                this.userInfo.events.push({ id: id, status: 2 });
 	                this.socket.emit('dump', { id: id, userId: '0' });
 	            }
 	        } else {
+	            //Do the changes
 	            this.userInfo.events.push({ id: id, status: 2 });
 	            this.socket.emit('dump', { id: id, userId: '0' });
 	        }
+	        //update component
 	        this.dataContainerReactComponent.forceUpdate();
 	    },
 	    addNewEvent: function addNewEvent(createdEventData) {
@@ -22509,8 +22537,10 @@
 	                return entry.id == id;
 	            });
 	            item.joined += 1;
+	            //Do the changes
 	            this.userInfo.events.push({ id: id, status: 3 });
 	            this.socket.emit('join', { id: id, userId: '0' });
+	            //Update components
 	            this.dataContainerReactComponent.forceUpdate();
 	        }
 	    },
@@ -22524,6 +22554,7 @@
 	                return obj.id == id;
 	            });
 	            this.userInfo.events.splice(index, 1);
+	            //Inform backend
 	            this.socket.emit('cancel', { id: id, userId: '0' });
 	            this.dataContainerReactComponent.forceUpdate();
 	        }
@@ -22541,6 +22572,7 @@
 	            return entry.id == id;
 	        });
 	        item.comments.unshift(comment);
+	        //Inform backend
 	        this.socket.emit('comment', { id: id, comment: comment });
 	        this.dataContainerReactComponent.forceUpdate();
 	    }

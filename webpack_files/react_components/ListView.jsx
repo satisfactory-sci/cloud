@@ -22,6 +22,7 @@ class ListView extends React.Component {
 
         let user = this.props.dataHandler.userInfo;
         let events = this.props.dataHandler.listData;
+        //Styles for {star, dump, joined, neutral} -headers
         let categoryStyle = {
             width: '100%',
             textAlign: 'center',
@@ -42,15 +43,6 @@ class ListView extends React.Component {
           }
           return false;
         })
-
-        let joinElement;
-        if(joined.length > 0) {
-          joinElement = <div><div style={categoryStyle}>Joined</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
-        }else{
-          joinElement = undefined
-        }
-
-
         let dumped = events.filter((obj) => {
           let i = user.events.findIndex((e) => {return e.id == obj.id && e.status == 2 });
           if(i > -1){
@@ -58,14 +50,6 @@ class ListView extends React.Component {
           }
           return false;
         })
-
-        let dumpElement;
-        if(dumped.length > 0) {
-          dumpElement = <div><div style={categoryStyle}>Dumped</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
-        }else{
-          dumpElement = undefined
-        }
-
         let starred = events.filter((obj) => {
           let i = user.events.findIndex((e) => {return e.id == obj.id && e.status == 1 });
           if(i > -1){
@@ -73,13 +57,6 @@ class ListView extends React.Component {
           }
           return false;
         })
-        let starElement;
-        if(starred.length > 0) {
-          starElement = <div><div style={categoryStyle}>Starred</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
-        }else{
-          starElement = undefined
-        }
-
         let others = events.filter((obj) => {
           let i = user.events.findIndex((e) => {return e.id == obj.id});
           if(i == -1){
@@ -87,6 +64,27 @@ class ListView extends React.Component {
           }
           return false;
         })
+
+        //Make elements for categories as needed.
+        let joinElement;
+        let dumpElement;
+        let starElement;
+
+        if(joined.length > 0) {
+          joinElement = <div><div style={categoryStyle}>Joined</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+        }else{
+          joinElement = undefined
+        }
+        if(dumped.length > 0) {
+          dumpElement = <div><div style={categoryStyle}>Dumped</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+        }else{
+          dumpElement = undefined
+        }
+        if(starred.length > 0) {
+          starElement = <div><div style={categoryStyle}>Starred</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+        }else{
+          starElement = undefined
+        }
 
         return (
             <div>
