@@ -19,9 +19,19 @@ class ListView extends React.Component {
             backgroundColor: 'white',
             zIndex: '10',
         }
+
         let user = this.props.dataHandler.userInfo;
         let events = this.props.dataHandler.listData;
-        let categoryStyle = {visibility: 'visible'};
+        let categoryStyle = {
+            width: '100%',
+            textAlign: 'center',
+            paddingTop: '6px',
+            paddingBottom: '6px',
+            color: 'orange',
+            fontWeight: 'bold',
+            fontSize: '1.1em',
+            borderBottom: '1px solid lightgrey',
+        };
 
 
         //Sorting to different categories
@@ -35,7 +45,7 @@ class ListView extends React.Component {
 
         let joinElement;
         if(joined.length > 0) {
-          joinElement = <div><h3>Joined</h3>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          joinElement = <div><div style={categoryStyle}>Joined</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
         }else{
           joinElement = undefined
         }
@@ -51,7 +61,7 @@ class ListView extends React.Component {
 
         let dumpElement;
         if(dumped.length > 0) {
-          dumpElement = <div><h3>Dumped</h3>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          dumpElement = <div><div style={categoryStyle}>Dumped</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
         }else{
           dumpElement = undefined
         }
@@ -65,7 +75,7 @@ class ListView extends React.Component {
         })
         let starElement;
         if(starred.length > 0) {
-          starElement = <div><h3>Starred</h3>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          starElement = <div><div style={categoryStyle}>Starred</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
         }else{
           starElement = undefined
         }
@@ -91,8 +101,10 @@ class ListView extends React.Component {
                 <div>
                 {joinElement}
                 {starElement}
-                <div style={categoryStyle}><h3>Find New</h3></div>
-                {others.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}
+                <div>
+                  <div style={categoryStyle}>Find New</div>
+                  {others.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}
+                </div>
                 {dumpElement}
                 </div>
             </div>

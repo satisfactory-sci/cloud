@@ -21623,9 +21623,19 @@
 	        backgroundColor: 'white',
 	        zIndex: '10'
 	      };
+
 	      var user = this.props.dataHandler.userInfo;
 	      var events = this.props.dataHandler.listData;
-	      var categoryStyle = { visibility: 'visible' };
+	      var categoryStyle = {
+	        width: '100%',
+	        textAlign: 'center',
+	        paddingTop: '6px',
+	        paddingBottom: '6px',
+	        color: 'orange',
+	        fontWeight: 'bold',
+	        fontSize: '1.1em',
+	        borderBottom: '1px solid lightgrey'
+	      };
 
 	      //Sorting to different categories
 	      var joined = events.filter(function (obj) {
@@ -21644,8 +21654,8 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'h3',
-	            null,
+	            'div',
+	            { style: categoryStyle },
 	            'Joined'
 	          ),
 	          joined.map(function (item, i) {
@@ -21672,8 +21682,8 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'h3',
-	            null,
+	            'div',
+	            { style: categoryStyle },
 	            'Dumped'
 	          ),
 	          dumped.map(function (item, i) {
@@ -21699,8 +21709,8 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'h3',
-	            null,
+	            'div',
+	            { style: categoryStyle },
 	            'Starred'
 	          ),
 	          starred.map(function (item, i) {
@@ -21747,16 +21757,16 @@
 	          starElement,
 	          _react2.default.createElement(
 	            'div',
-	            { style: categoryStyle },
+	            null,
 	            _react2.default.createElement(
-	              'h3',
-	              null,
+	              'div',
+	              { style: categoryStyle },
 	              'Find New'
-	            )
+	            ),
+	            others.map(function (item, i) {
+	              return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
+	            })
 	          ),
-	          others.map(function (item, i) {
-	            return _react2.default.createElement(_ListItem2.default, { key: i, data: item, dataHandler: _this2.props.dataHandler, onChooseEvent: _this2.props.onChooseEvent });
-	          }),
 	          dumpElement
 	        )
 	      );
