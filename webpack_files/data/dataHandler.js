@@ -1,8 +1,12 @@
+import io from 'socket.io-client'
+
 module.exports = {
 
     listData: [],
 
     userInfo: {},
+
+    socket: {},
 
     initData() {
         this.listData = require("./dummyListItems.js");
@@ -11,6 +15,20 @@ module.exports = {
             img: "/images/sanni.jpg",
             events: [{}]
         }
+        this.socket = io();
+        this.socket.emit('requestItems');
+        this.socket.on('newItems', (data) => {
+          console.log(data);
+        });
+        this.socket.on('connect', () => {
+          console.log("Socket connected!")
+        })
+        this.socket.on('join', (data) => {
+          console.log("Somebody else joined some event")
+        })
+        this.socket.on('comment', (comment) => {
+          console.log("Somebody commented something");
+        })
     },
 
     start(dataContainerReactComponent) {
@@ -23,9 +41,11 @@ module.exports = {
           if(this.userInfo.events[i].status != 3){
             this.userInfo.events.splice(i, 1);
             this.userInfo.events.push({id: id, status: 1});
+            this.socket.emit('star', {id:id, userId: '0'})
           }
         }else{
           this.userInfo.events.push({id: id, status: 1});
+          this.socket.emit('star', {id:id, userId: '0'})
         }
         this.dataContainerReactComponent.forceUpdate();
     },
@@ -36,9 +56,11 @@ module.exports = {
           if(this.userInfo.events[i].status != 3){
             this.userInfo.events.splice(i, 1);
             this.userInfo.events.push({id: id, status: 2});
+            this.socket.emit('dump', {id:id, userId: '0'});
           }
         }else{
           this.userInfo.events.push({id: id, status: 2});
+          this.socket.emit('dump', {id:id, userId: '0'});
         }
         this.dataContainerReactComponent.forceUpdate();
     },
@@ -59,6 +81,7 @@ module.exports = {
             var item = this.listData.find((entry) => { return entry.id == id});
             item.joined += 1;
             this.userInfo.events.push({id:id, status:3});
+            this.socket.emit('join', {id:id, userId: '0'})
             this.dataContainerReactComponent.forceUpdate();
         }
     },
@@ -69,6 +92,7 @@ module.exports = {
             item.joined -= 1;
             var index = this.userInfo.events.findIndex((obj) => {return obj.id == id});
             this.userInfo.events.splice(index, 1);
+            this.socket.emit('cancel', {id:id, userId: '0'});
             this.dataContainerReactComponent.forceUpdate();
         }
     },
@@ -84,6 +108,7 @@ module.exports = {
         };
         var item = this.listData.find((entry) => { return entry.id == id});
         item.comments.unshift(comment);
+        this.socket.emit('comment', {id:id, comment: comment});
         this.dataContainerReactComponent.forceUpdate();
     }
 }

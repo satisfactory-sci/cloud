@@ -58,14 +58,14 @@ function handleEvent(client, newEvent, data) {
       if (debugServer) console.log('requestDashboardData => sendItems()');
       sendItems(client);
       break;
-    case 'like':
-      updateAction('like', data);
+    case 'star':
+      updateAction('star', data);
       break;
-    case 'dislike':
-      updateAction('dislike', data);
+    case 'dump':
+      updateAction('dump', data);
       break;
-    case 'superlike':
-      updateAction('superlike', data);
+    case 'join':
+      updateAction('join', data);
       break;
     default:
       if (debugServer) console.log('Unrecognized request');
@@ -82,21 +82,32 @@ io.on('connection', (client) => {
   client.on('requestItems', (data) => {
     handleEvent(client, 'requestItems');
   })
-  //Client liked an item
-  client.on('like', (data) => {
-    handleEvent(client, 'like', data);
-    dashboards.forEach( client => client.emit('like', data));
+  //Client stard an item
+  client.on('star', (data) => {
+    console.log("Somebody starred!");
+    handleEvent(client, 'star', data);
+    dashboards.forEach( client => client.emit('star', data));
   });
-  //Cliend superliked an item
-  client.on('superlike', (data) => {
-    handleEvent(client, 'superlike', data);
-    dashboards.forEach( client => client.emit('superlike', data));
+  //Cliend superstard an item
+  client.on('join', (data) => {
+    console.log("Somebody joined!");
+    handleEvent(client, 'join', data);
+    dashboards.forEach( client => client.emit('join', data));
   });
-  //Client disliked an item
-  client.on('dislike', (data) => {
-    handleEvent(client, 'dislike', data);
-    dashboards.forEach( client => client.emit('dislike', data));
+  //Client dumpd an item
+  client.on('dump', (data) => {
+    console.log("Somebody dumped!");
+    handleEvent(client, 'dump', data);
+    dashboards.forEach( client => client.emit('dump', data));
   });
+  //Client commented on an item
+  client.on('comment', (data) => {
+    console.log("Somebody commented");
+  });
+  //Client canceled an item
+  client.on('cancel', (data) => {
+    console.log("Somebody cancelled their join");
+  })
   //Client has an empty list
   client.on('empty', (data) => {
     handleEvent(client, 'empty', data);
@@ -166,7 +177,7 @@ app.put('/:dbPassword', (req, res) => {
 });
 
 app.get('/blog', (req, res) => {
-	res.redirect('http://medium.com/satisfactory');
+  res.redirect('http://medium.com/satisfactory');
 });
 
 app.get('/proto', (req, res) => {
