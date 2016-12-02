@@ -6,6 +6,18 @@ class SplashView extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      randomImages: [
+      "/images/hakan.jpg",
+      "/images/gandalf.jpg",
+      "/images/sanni.jpg",
+      "/images/stina.jpg",
+      "/images/teemuselanne.jpg",
+      "/images/tuomo.png",
+      "/images/max.png",
+      "/images/obama.jpg",
+    ]};
+
     this.removeOutline = this.removeOutline.bind(this);
     this.registerUser = this.registerUser.bind(this);
   }
@@ -32,6 +44,9 @@ class SplashView extends React.Component {
   registerUser(e) {
     let input = ReactDom.findDOMNode(this.refs.nameInput);
     this.props.dataHandler.userInfo.userName = input.value;
+    let index = Math.round(Math.random()*this.state.randomImages.length);
+    this.props.dataHandler.userInfo.img = this.state.randomImages[index];
+    console.log(this.props.dataHandler.userInfo.img);
     this.props.onRegister();
   }
 
