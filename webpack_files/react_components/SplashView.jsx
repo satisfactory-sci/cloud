@@ -43,10 +43,12 @@ class SplashView extends React.Component {
 
   registerUser(e) {
     let input = ReactDom.findDOMNode(this.refs.nameInput);
+    if(input.value.length == 0) {
+      return;
+    }
     this.props.dataHandler.userInfo.userName = input.value;
     let index = Math.round(Math.random()*this.state.randomImages.length);
     this.props.dataHandler.userInfo.img = this.state.randomImages[index];
-    console.log(this.props.dataHandler.userInfo.img);
     this.props.onRegister();
   }
 
@@ -59,7 +61,7 @@ class SplashView extends React.Component {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'white',
-      height: window.innerHeight + 'px',
+      height: window.innerHeight - 10 + 'px',
     }
     let items = {
       textAlign: 'center',
