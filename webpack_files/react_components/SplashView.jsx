@@ -16,24 +16,32 @@ class SplashView extends React.Component {
       "/images/tuomo.png",
       "/images/max.png",
       "/images/obama.jpg",
-    ]};
+      ],
+      welcome: false
+    };
 
     this.removeOutline = this.removeOutline.bind(this);
     this.registerUser = this.registerUser.bind(this);
+  }
+
+  fade(step, component, origin, test, cb) {
+    let opacity = origin;
+    let id = setInterval(() => {
+      if(test(opacity)){
+        clearInterval(id);
+        cb()
+      }else{
+        opacity += step;
+        component.style.opacity = opacity;
+      }
+    }, 5);
   }
 
   componentDidMount() {
     let splash = document.getElementById('splash');
     let opacity = 0;
     splash.style.opacity = 0;
-    let id = setInterval(() => {
-      if(opacity > 1){
-        clearInterval(id);
-      }else{
-        opacity += 0.01;
-        splash.style.opacity = opacity;
-      }
-    }, 5);
+    this.fade(0.01, splash, 0, (o) => {return o > 1} ,() => {});
   }
 
   removeOutline(e) {
@@ -49,7 +57,14 @@ class SplashView extends React.Component {
     this.props.dataHandler.userInfo.userName = input.value;
     let index = Math.round(Math.random()*this.state.randomImages.length);
     this.props.dataHandler.userInfo.img = this.state.randomImages[index];
-    this.props.onRegister();
+
+    let splash = document.getElementById('splash');
+    let opacity = 1;
+    this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
+      this.setState({
+        welcome: true
+      })
+    })
   }
 
   render() {
@@ -68,7 +83,26 @@ class SplashView extends React.Component {
       width: '100%',
       color: '#212121',
     }
-
+    if(this.state.welcome) {
+      let splash = document.getElementById('splash');
+      function wait() {
+        setTimeout(() => {
+          this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
+            this.props.onRegister();
+          })
+        }, 1000)
+      }
+      splash.style.opacity = 0;
+      this.fade(0.01, splash, 0, (o) => {return o > 1}, wait.bind(this));
+      return (
+        <div style={box} id='splash'>
+          <div style={{width: 'auto'}}>
+            <div style={items}><h1>Welcome</h1></div>
+            <div style={items}><h1>{this.props.dataHandler.userInfo.userName}</h1></div>
+          </div>
+        </div>
+      )
+    }
     let input = {
       padding:'0.6em 0.1em 0.1em 0.1em',
       border: '0px 0px 0px 0px',
