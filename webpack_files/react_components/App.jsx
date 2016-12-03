@@ -2,6 +2,7 @@ import React from 'react';
 import ListView from'./ListView.jsx';
 import DetailsView from'./DetailsView.jsx';
 import AddView from'./AddView.jsx';
+import SplashView from './SplashView.jsx';
 
 class App extends React.Component {
 
@@ -9,7 +10,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            listViewVisible: true,
+            splashViewVisible: true,
+            listViewVisible: false,
             addViewVisible: false,
             detailsViewVisible: false,
             chosenEvent: {}
@@ -22,6 +24,7 @@ class App extends React.Component {
 
     backToInitialState(e) {
         this.setState({
+            splashViewVisible: false,
             listViewVisible: true,
             addViewVisible: false,
             detailsViewVisible: false,
@@ -31,6 +34,7 @@ class App extends React.Component {
 
     onChooseEvent(eventData) {
         this.setState({
+            splashViewVisible: false,
             listViewVisible: false,
             addViewVisible: false,
             detailsViewVisible: true,
@@ -40,6 +44,7 @@ class App extends React.Component {
 
     onClickAddButton(e) {
         this.setState({
+            splashViewVisible: false,
             listViewVisible: false,
             addViewVisible: true,
             detailsViewVisible: false,
@@ -53,6 +58,7 @@ class App extends React.Component {
 
         var appStyle = {
             width: '100%',
+            height: '100%',
             position: 'relative',
             overflow: 'hidden',
             margin: 'auto',
@@ -60,6 +66,7 @@ class App extends React.Component {
         }
         return (
             <div style={appStyle}>
+                <SplashView visible={this.state.splashViewVisible} dataHandler={this.props.dataHandler} onRegister={this.backToInitialState}/>
                 <ListView visible={this.state.listViewVisible} dataHandler={this.props.dataHandler} onChooseEvent={this.onChooseEvent} onClickAddButton={this.onClickAddButton}/>
                 <DetailsView visible={this.state.detailsViewVisible} dataHandler={this.props.dataHandler} onCancelClicked={this.backToInitialState} data={this.state.chosenEvent}/>
                 <AddView visible={this.state.addViewVisible} dataHandler={this.props.dataHandler} onCancelClicked={this.backToInitialState} />
