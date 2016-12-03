@@ -20,11 +20,11 @@ class SplashView extends React.Component {
       welcome: false
     };
 
-    this.removeOutline = this.removeOutline.bind(this);
     this.registerUser = this.registerUser.bind(this);
   }
 
-  fade(step, component, origin, test, cb) {
+  //Helper function for fade in/out transitions
+  fade(step, elem, origin, test, cb) {
     let opacity = origin;
     let id = setInterval(() => {
       if(test(opacity)){
@@ -32,7 +32,7 @@ class SplashView extends React.Component {
         cb()
       }else{
         opacity += step;
-        component.style.opacity = opacity;
+        elem.style.opacity = opacity;
       }
     }, 5);
   }
@@ -44,20 +44,17 @@ class SplashView extends React.Component {
     this.fade(0.01, splash, 0, (o) => {return o > 1} ,() => {});
   }
 
-  removeOutline(e) {
-    let input = ReactDom.findDOMNode(this.refs.nameInput);
-    input.style.outline = 'none';
-  }
-
+  //Function called after user has submitted his/her name
   registerUser(e) {
     let input = ReactDom.findDOMNode(this.refs.nameInput);
     if(input.value.length == 0) {
       return;
     }
     this.props.dataHandler.userInfo.userName = input.value;
+    //Random image for user
     let index = Math.round(Math.random()*this.state.randomImages.length);
     this.props.dataHandler.userInfo.img = this.state.randomImages[index];
-
+    //transition to welcome screen
     let splash = document.getElementById('splash');
     let opacity = 1;
     this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
@@ -83,6 +80,8 @@ class SplashView extends React.Component {
       width: '100%',
       color: '#212121',
     }
+
+    //Transition to ListView
     if(this.state.welcome) {
       let splash = document.getElementById('splash');
       function wait() {
@@ -97,12 +96,13 @@ class SplashView extends React.Component {
       return (
         <div style={box} id='splash'>
           <div style={{width: 'auto'}}>
-            <div style={items}><h1>Welcome</h1></div>
+            <div style={items}><h1>Have a good afterwork</h1></div>
             <div style={items}><h1>{this.props.dataHandler.userInfo.userName}</h1></div>
           </div>
         </div>
       )
     }
+
     let input = {
       padding:'0.6em 0.1em 0.1em 0.1em',
       border: '0px 0px 0px 0px',
@@ -111,7 +111,8 @@ class SplashView extends React.Component {
       fontSize: '1.2em',
       fontFamily: '"Roboto", sans-serif',
       textAlign: 'center',
-      width:'40%'
+      width:'40%',
+      outline: 'none',
     }
 
     let button = {
@@ -129,7 +130,7 @@ class SplashView extends React.Component {
         <div style={{width: 'auto'}}>
           <div><img src="/images/logo_minified.png" style={{width: '100%'}}/></div>
           <div style={items}><h1>Who are you?</h1></div>
-          <div style={items}><input type="text" style={input} ref="nameInput" onClick={this.removeOutline}/></div>
+          <div style={items}><input type="text" style={input} ref="nameInput" placeholder="Name" autoFocus/></div>
           <div style={items}><button style={button} onClick={this.registerUser}>Begin</button></div>
         </div>
       </div>
