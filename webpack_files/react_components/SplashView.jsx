@@ -135,8 +135,8 @@ class SplashView extends React.Component {
     return (
       <div style={box} id="splash">
         <div style={{width: 'auto'}}>
-          <div><img src="/images/logo_minified.png" style={{width: '100%'}}/></div>
-          <div style={items}><h1>Who are you?</h1></div>
+          <div style={items}><img src="/images/logo_minified.png" style={{width: '90%'}}/></div>
+          <div style={items}><h2>Who are you?</h2></div>
           <div style={items}><input type="text" style={input} ref="nameInput" placeholder="Name" autoFocus onKeyDown={this.submit}/></div>
           <div style={items}><button style={button} onClick={this.registerUser}>Begin</button></div>
         </div>
