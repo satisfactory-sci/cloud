@@ -21,6 +21,7 @@ class SplashView extends React.Component {
     };
 
     this.registerUser = this.registerUser.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   //Helper function for fade in/out transitions
@@ -62,6 +63,12 @@ class SplashView extends React.Component {
         welcome: true
       })
     })
+  }
+
+  submit(e) {
+    if(e.keyCode == 13){
+      this.registerUser();
+    }
   }
 
   render() {
@@ -130,7 +137,7 @@ class SplashView extends React.Component {
         <div style={{width: 'auto'}}>
           <div><img src="/images/logo_minified.png" style={{width: '100%'}}/></div>
           <div style={items}><h1>Who are you?</h1></div>
-          <div style={items}><input type="text" style={input} ref="nameInput" placeholder="Name" autoFocus/></div>
+          <div style={items}><input type="text" style={input} ref="nameInput" placeholder="Name" autoFocus onKeyDown={this.submit}/></div>
           <div style={items}><button style={button} onClick={this.registerUser}>Begin</button></div>
         </div>
       </div>
