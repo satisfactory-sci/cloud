@@ -71,6 +71,19 @@ class SplashView extends React.Component {
     }
   }
 
+  getPhrase() {
+    const phrases = [
+      "Have a good afterwork",
+      "What shall we do tonight?",
+      "All we have to decide is what to do with the time that is given to us -Gandalf",
+      "Great men are not born great, they grow great -The Godfather",
+      "Every man dies, but not every man really lives -Braveheart",
+      '"Chug chug chug!"',
+    ];
+    let i = Math.round(Math.random() * phrases.length);
+    return phrases[i];
+  }
+
   render() {
     if(!this.props.visible) {
       return (<div></div>)
@@ -86,6 +99,7 @@ class SplashView extends React.Component {
       textAlign: 'center',
       width: '100%',
       color: '#212121',
+      fontSize: '1.2em',
     }
 
     //Transition to ListView
@@ -103,8 +117,8 @@ class SplashView extends React.Component {
       return (
         <div style={box} id='splash'>
           <div style={{width: 'auto'}}>
-            <div style={items}><h1>Have a good afterwork</h1></div>
-            <div style={items}><h1>{this.props.dataHandler.userInfo.userName}</h1></div>
+            <div style={items}><h2 style={{width: 'auto', padding: '2%'}}>{this.getPhrase()}</h2></div>
+            <div style={items}><h2>{this.props.dataHandler.userInfo.userName}</h2></div>
           </div>
         </div>
       )
