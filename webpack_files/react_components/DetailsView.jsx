@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link, browserHistory} from 'react-router'
 import CommentView from'./CommentView.jsx'
 import ReactDOM from 'react-dom';
 
@@ -10,29 +11,39 @@ class DetailsView extends React.Component {
         this.joinEvent = this.joinEvent.bind(this);
         this.unJoinEvent = this.unJoinEvent.bind(this);
         this.addComment = this.addComment.bind(this);
+
+        let event = window.dataHandler.listData.find((obj) => {
+            return obj.id == this.props.params.id;
+        })
+
+        this.state = {
+          dataHandler: window.dataHandler,
+          data: event
+        }
+
     };
 
     joinEvent(e) {
-        this.props.dataHandler.joinEvent(this.props.data.id);
+        this.state.dataHandler.joinEvent(this.state.data.id, this);
     }
 
     unJoinEvent(e) {
-        this.props.dataHandler.unJoinEvent(this.props.data.id);
+        this.state.dataHandler.unJoinEvent(this.state.data.id, this);
     }
 
     addComment(e) {
         var commentText = ReactDOM.findDOMNode(this.refs.newComment).value;
-        this.props.dataHandler.addComment(this.props.data.id, commentText);
+        this.state.dataHandler.addComment(this.state.data.id, commentText, this);
         this.refs.newComment.value = "";
+    }
+
+    moveBack() {
+      browserHistory.goBack();
     }
 
     render() {
 
-        if (!this.props.visible) {
-            return (<div></div>);
-        }
-
-        var isJoined = this.props.dataHandler.isJoined(this.props.data.id);
+        var isJoined = this.state.dataHandler.isJoined(this.state.data.id);
 
         var headerStyle = {
             width: '100%',
@@ -50,7 +61,7 @@ class DetailsView extends React.Component {
             marginBottom: '5px',
         }
         var fullnessStyle = {
-            color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : (this.props.data.joined >= this.props.data.maxPeople/2 ? 'orange' : 'green')
+            color: this.state.data.joined >= this.state.data.maxPeople ? 'red' : (this.state.data.joined >= this.state.data.maxPeople/2 ? 'orange' : 'green')
         }
         var textContainerStyle = {
             borderBottom: '1px solid lightgrey',
@@ -82,7 +93,7 @@ class DetailsView extends React.Component {
             <div>
                 <div style={headerStyle}>
                     <h1 style={{margin: 10}}>
-                        <i onClick={this.props.onCancelClicked} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
+                        <i onClick={this.moveBack} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
                         Join
                         <i onClick={this.joinEvent} style={joinEventBtnStyle} className="fa fa-check" aria-hidden="true"></i>
                         <i onClick={this.unJoinEvent} style={unjoinEventBtnStyle} className="fa fa-times" aria-hidden="true"></i>
@@ -90,19 +101,19 @@ class DetailsView extends React.Component {
                 </div>
                 <div style={{height: '60px'}}></div>
                 <h2 style={joinedIndicatorStyle}>JOINED</h2>
-                <img style={{width: '100%'}} src={this.props.data.img} />
+                <img style={{width: '100%'}} src={this.state.data.img} />
                 <div style={textContainerStyle}>
                     <div style={{borderBottom: '1px solid lightgrey', paddingLeft: 10}}>
-                        <h2 style={itemHeaderStyle}>{this.props.data.title}</h2>
-                        <i className='fa fa-map-marker' aria-hidden='true' style={{width:'18px'}}></i> {this.props.data.location}<br/>
-                        <i className='fa fa-clock-o' aria-hidden='true' style={{width:'18px'}}></i> {this.props.data.startTime} - {this.props.data.endTime}<br/>
-                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true' style={{width:'18px'}}></i> {this.props.data.joined}/{this.props.data.maxPeople}</span>
+                        <h2 style={itemHeaderStyle}>{this.state.data.title}</h2>
+                        <i className='fa fa-map-marker' aria-hidden='true' style={{width:'18px'}}></i> {this.state.data.location}<br/>
+                        <i className='fa fa-clock-o' aria-hidden='true' style={{width:'18px'}}></i> {this.state.data.startTime} - {this.state.data.endTime}<br/>
+                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true' style={{width:'18px'}}></i> {this.state.data.joined}/{this.state.data.maxPeople}</span>
                     </div>
-                    <div style={{marginTop: 5, paddingLeft: 10}}>{this.props.data.description}</div>
+                    <div style={{marginTop: 5, paddingLeft: 10}}>{this.state.data.description}</div>
                     <br/>
                     <h2 style={{marginTop: 5, marginLeft: 10, marginBottom: 5}}>Comments</h2>
                 </div>
-                {this.props.data.comments.map((item, i) => <CommentView key = {i} data = {item} />)}
+                {this.state.data.comments.map((item, i) => <CommentView key = {i} data = {item} />)}
                 <div style={{padding: '10px'}}>
                     <textarea rows="3" style={{width: '95%'}} type="text" ref="newComment" ></textarea><br/>
                     <button onClick={this.addComment}>Add comment</button>
