@@ -93,18 +93,18 @@ class ListView extends React.Component {
                     <h1 style={{margin: 10}}>
                         <i style={{float: 'left'}} className="fa fa-search" aria-hidden="true"></i>
                         Find
-                        <Link to="/add"><i style={{float: 'right', marginTop: '4px'}} className="fa fa-plus" aria-hidden="true"></i></Link>
+                        <Link to="/add"><i style={{float: 'right', marginTop: '4px', color: 'orange'}} className="fa fa-plus" aria-hidden="true"></i></Link>
                     </h1>
                 </div>
                 <div style={{height: '60px'}}></div>
                 <div>
-                  {joinElement}
-                  {starElement}
-                  <div>
-                    <div style={categoryStyle}>Find New</div>
-                    {others.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}
-                  </div>
-                  {dumpElement}
+                {joinElement}
+                {starElement}
+                <div>
+                  <div style={categoryStyle}>Find New</div>
+                  {others.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}
+                </div>
+                {dumpElement}
                 </div>
             </div>
         );

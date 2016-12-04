@@ -69,6 +69,7 @@ class ListItem extends React.Component {
             width: '100%',
             height: '125px',
             borderBottom: '1px solid lightgrey',
+            color: '#212121',
         }
         var swipeContainerStyle = {
             position: 'absolute',

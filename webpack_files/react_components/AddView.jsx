@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link, browserHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 
 
 class AddView extends React.Component {
@@ -31,6 +31,10 @@ class AddView extends React.Component {
         browserHistory.goBack();
     }
 
+    moveBack() {
+      browserHistory.goBack();
+    }
+
     render() {
         var headerStyle = {
             width: '100%',
@@ -58,7 +62,7 @@ class AddView extends React.Component {
             <div>
                 <div style={headerStyle}>
                     <h1 style={{margin: 10}}>
-                      <Link to="/"><i style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i></Link>
+                      <i onClick={this.moveBack} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
                         Add
                       <i onClick={this.addEvent} style={{float: 'right', color: 'green'}} className="fa fa-check" aria-hidden="true"></i>
                     </h1>
