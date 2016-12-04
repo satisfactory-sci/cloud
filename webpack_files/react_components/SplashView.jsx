@@ -53,7 +53,7 @@ class SplashView extends React.Component {
     }
     this.props.dataHandler.userInfo.userName = input.value;
     //Random image for user
-    let index = Math.round(Math.random()*this.state.randomImages.length);
+    let index = Math.round(Math.random()*(this.state.randomImages.length - 1));
     this.props.dataHandler.userInfo.img = this.state.randomImages[index];
     //transition to welcome screen
     let splash = document.getElementById('splash');
@@ -73,15 +73,10 @@ class SplashView extends React.Component {
 
   getPhrase() {
     const phrases = [
-      "Have a good afterwork",
-      "What shall we do tonight?",
-      "All we have to decide is what to do with the time that is given to us -Gandalf",
-      "Great men are not born great, they grow great -The Godfather",
-      "Every man dies, but not every man really lives -Braveheart",
-      '"Chug chug chug!"',
+      "Enjoy your afterwork",
     ];
-    let i = Math.round(Math.random() * phrases.length);
-    return phrases[i];
+    //let i = Math.round(Math.random() * phrases.length);
+    return phrases[0];
   }
 
   render() {
