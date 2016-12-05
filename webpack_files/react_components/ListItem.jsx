@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Link} from 'react-router';
 
 class ListItem extends React.Component {
 
@@ -68,6 +69,7 @@ class ListItem extends React.Component {
             width: '100%',
             height: '125px',
             borderBottom: '1px solid lightgrey',
+            color: '#212121',
         }
         var swipeContainerStyle = {
             position: 'absolute',
@@ -97,7 +99,8 @@ class ListItem extends React.Component {
             color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : (this.props.data.joined >= this.props.data.maxPeople/2 ? 'orange' : 'green')
         }
         return (
-            <div onClick={this.chooseItem} style={itemStyle} ref="swipebackground">
+          <Link to={`event/${this.props.data.id}`}>
+            <div style={itemStyle} ref="swipebackground">
                 <div ref="swipecontainer" style={swipeContainerStyle} onTouchStart={this.swipeContainerTouchStart} onTouchMove={this.swipeContainerTouchMove} onTouchEnd={this.swipeContainerTouchEnd}>
                     <div style={textContainerStyle}>
                         <h2 style={itemHeaderStyle}>{this.props.data.title}</h2>
@@ -108,9 +111,9 @@ class ListItem extends React.Component {
                     <div style={imgContainerStyle}>
                         <img style={imgStyle} src={this.props.data.img} />
                     </div>
-
                 </div>
             </div>
+          </Link>
         );
     }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {browserHistory} from 'react-router';
+
 
 class AddView extends React.Component {
 
@@ -7,6 +9,9 @@ class AddView extends React.Component {
         super(props);
 
         this.addEvent = this.addEvent.bind(this);
+        this.state = {
+          dataHandler: window.dataHandler,
+        }
     };
 
     addEvent(e) {
@@ -22,16 +27,15 @@ class AddView extends React.Component {
             joined: 0,
             comments: []
         };
-        this.props.dataHandler.addNewEvent(createdEventData);
-        this.props.onCancelClicked({});
+        this.state.dataHandler.addNewEvent(createdEventData);
+        browserHistory.goBack();
+    }
+
+    moveBack() {
+      browserHistory.goBack();
     }
 
     render() {
-
-        if (!this.props.visible) {
-            return (<div></div>);
-        }
-
         var headerStyle = {
             width: '100%',
             color: 'orange',
@@ -58,9 +62,9 @@ class AddView extends React.Component {
             <div>
                 <div style={headerStyle}>
                     <h1 style={{margin: 10}}>
-                      <i onClick={this.props.onCancelClicked} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
+                      <i onClick={this.moveBack} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
                         Add
-                        <i onClick={this.addEvent} style={{float: 'right', color: 'green'}} className="fa fa-check" aria-hidden="true"></i>
+                      <i onClick={this.addEvent} style={{float: 'right', color: 'green'}} className="fa fa-check" aria-hidden="true"></i>
                     </h1>
                 </div>
                 <div style={{height: '60px'}}></div>

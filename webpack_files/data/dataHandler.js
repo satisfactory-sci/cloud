@@ -4,17 +4,17 @@ module.exports = {
 
     listData: [],
 
-    userInfo: {},
+    userInfo: {
+      userName: "",
+      img: "",
+      events: [{}]
+    },
 
     socket: {},
 
     initData() {
         this.listData = require("./dummyListItems.js");
-        this.userInfo = {
-            userName: "Sanni69",
-            img: "/images/sanni.jpg",
-            events: [{}]
-        }
+
         //Initiate global socket
         this.socket = io();
         //We request initial data
@@ -43,7 +43,7 @@ module.exports = {
     },
 
     //Register star locally and send the information to server
-    registerLike(id) {
+    registerLike(id, container) {
         //Find the event
         let i = this.userInfo.events.findIndex((obj) => {return obj.id == id});
         //Have we already made some action to this object
@@ -92,14 +92,13 @@ module.exports = {
         var d = new Date();
         createdEventData.id = d.getTime();
         this.listData.push(createdEventData);
-        this.dataContainerReactComponent.forceUpdate();
     },
 
     isJoined(id) {
         return this.userInfo.events.findIndex((obj) => {return obj.id == id && obj.status == 3}) >= 0;
     },
 
-    joinEvent(id) {
+    joinEvent(id, container) {
         if (!this.isJoined(id)) {
             var item = this.listData.find((entry) => { return entry.id == id});
             item.joined += 1;
@@ -107,11 +106,11 @@ module.exports = {
             this.userInfo.events.push({id:id, status:3});
             this.socket.emit('join', {id:id, userId: '0'})
             //Update components
-            this.dataContainerReactComponent.forceUpdate();
+            container.forceUpdate();
         }
     },
 
-    unJoinEvent(id) {
+    unJoinEvent(id, container) {
         if (this.isJoined(id)) {
             var item = this.listData.find((entry) => { return entry.id == id});
             item.joined -= 1;
@@ -119,11 +118,11 @@ module.exports = {
             this.userInfo.events.splice(index, 1);
             //Inform backend
             this.socket.emit('cancel', {id:id, userId: '0'});
-            this.dataContainerReactComponent.forceUpdate();
+            container.forceUpdate();
         }
     },
 
-    addComment(id, commentText) {
+    addComment(id, commentText, container) {
         var d = new Date();
         var comment = {
             user: this.userInfo.userName,
@@ -136,6 +135,6 @@ module.exports = {
         item.comments.unshift(comment);
         //Inform backend
         this.socket.emit('comment', {id:id, comment: comment});
-        this.dataContainerReactComponent.forceUpdate();
+        container.forceUpdate();
     }
 }

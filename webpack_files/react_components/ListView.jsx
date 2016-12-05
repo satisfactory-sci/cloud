@@ -1,5 +1,6 @@
 import React from 'react';
-import ListItem from'./ListItem.jsx'
+import {Link} from 'react-router';
+import ListItem from'./ListItem.jsx';
 
 class ListView extends React.Component {
 
@@ -92,7 +93,7 @@ class ListView extends React.Component {
                     <h1 style={{margin: 10}}>
                         <i style={{float: 'left'}} className="fa fa-search" aria-hidden="true"></i>
                         Find
-                        <span onClick={this.props.onClickAddButton}><i style={{float: 'right', marginTop: '4px'}} className="fa fa-plus" aria-hidden="true"></i></span>
+                        <Link to="/add"><i style={{float: 'right', marginTop: '4px', color: 'orange'}} className="fa fa-plus" aria-hidden="true"></i></Link>
                     </h1>
                 </div>
                 <div style={{height: '60px'}}></div>
