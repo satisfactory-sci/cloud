@@ -26,7 +26,8 @@ class ListView extends React.Component {
         //Styles for {star, dump, joined, neutral} -headers
         let categoryStyle = {
             width: '100%',
-            textAlign: 'center',
+            textAlign: 'left',
+            paddingLeft: '10px',
             paddingTop: '6px',
             paddingBottom: '6px',
             color: 'orange',
@@ -72,17 +73,17 @@ class ListView extends React.Component {
         let starElement;
 
         if(joined.length > 0) {
-          joinElement = <div><div style={categoryStyle}>Joined</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          joinElement = <div><div style={categoryStyle}>Joined events</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
         }else{
           joinElement = undefined
         }
         if(dumped.length > 0) {
-          dumpElement = <div><div style={categoryStyle}>Dumped</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          dumpElement = <div><div style={categoryStyle}>Dumped events</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
         }else{
           dumpElement = undefined
         }
         if(starred.length > 0) {
-          starElement = <div><div style={categoryStyle}>Starred</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          starElement = <div><div style={categoryStyle}>Starred events</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
         }else{
           starElement = undefined
         }
@@ -101,7 +102,7 @@ class ListView extends React.Component {
                 {joinElement}
                 {starElement}
                 <div>
-                  <div style={categoryStyle}>Find New</div>
+                  <div style={categoryStyle}>New events</div>
                   {others.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}
                 </div>
                 {dumpElement}
