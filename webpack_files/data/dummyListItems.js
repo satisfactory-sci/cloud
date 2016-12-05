@@ -1,6 +1,6 @@
 module.exports = [
     {
-        title: "Itsenäisyyspäivän juhlakonsertti",
+        title: "Juhlakonsertti",
         description: "Tunnelmalliset musiikkiesitykset siivittävät konserttia. Tapahtuma alkaa vuoden 2016 Espoo-mitalien jaolla.\nKonserttiin on vapaa pääsy ja lippujen jako alkaa 1.11.2016 Espoon yhteispalvelupisteissä.\nKonserttia voi seurata myös suorana verkosta sekä 30 päivää tapahtuman jälkeen osoitteessa espoo.fi/itsenaisyyspaiva.\nEspoo toivottaa kaikki kaupunkilaiset lämpimästi tervetulleiksi nauttimaan kauniista musiikista\nTapahtuman tuotannosta vastaa Espoon tapahtuma- ja kulttuuripalvelut. Lisätietoja: tapahtumaespoo@espoo.fi\nOhjelmamuutokset mahdollisia.\nwww.espoo.fi/itsenaisyyspaiva\nwww.esbo.fi/sjalvstandighetsdagen\nwww.espoo.fi/independenceday",
         img: "https://upload.wikimedia.org/wikipedia/fi/3/3c/EspooMetroAreena_logo.jpg",
         location: "Metro areena, Espoo",
