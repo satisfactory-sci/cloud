@@ -15,7 +15,7 @@ class DetailsView extends React.Component {
         let event = window.dataHandler.listData.find((obj) => {
             return obj.id == this.props.params.id;
         })
-
+        window.scrollTo(0,0);
         this.state = {
           dataHandler: window.dataHandler,
           data: event
