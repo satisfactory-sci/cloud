@@ -136,7 +136,7 @@ class AddView extends React.Component {
 
         xhr.onreadystatechange = function() {
             if(xhr.readyState === 4){
-                if(xhr.status === 204){
+                if(xhr.status === 204 || xhr.status === 200){
                     saveIndicator.style.display = "none";
                     browserHistory.goBack();
                 } else {
