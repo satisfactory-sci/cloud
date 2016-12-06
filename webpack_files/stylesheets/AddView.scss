@@ -1,0 +1,35 @@
+#add-container {
+  color: lightgrey;
+}
+
+#add-header {
+  margin: 10px;
+}
+
+#add-back {
+  float: left;
+  color: orange;
+}
+
+#add-add {
+  float: right;
+  color: green;
+}
+
+#add-img {
+  height: 60px;
+}
+
+#add-img-input {
+  display: none;
+}
+
+.add-icon {
+  flex: 0px 0px 18px;
+}
+
+#add-description {
+  margin-top: 5px;
+  padding-left: 10px;
+  display: flex;
+}

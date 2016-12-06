@@ -21,7 +21,6 @@ module.exports = {
         this.socket.emit('requestItems');
         //We get the initial data
         this.socket.on('newItems', (data) => {
-          console.log(data);
         });
         //We have a connection (Mainly for debugging reasons)
         this.socket.on('connect', () => {

@@ -2,6 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import ListItem from'./ListItem.jsx';
 
+require("../stylesheets/ListView.scss");
+
+
 class ListView extends React.Component {
 
     render() {
@@ -10,31 +13,8 @@ class ListView extends React.Component {
             return (<div></div>);
         }
 
-        var headerStyle = {
-            width: '100%',
-            color: 'orange',
-            textAlign: 'center',
-            borderBottom: '1px solid lightgrey',
-            position: 'fixed',
-            opacity: '1',
-            backgroundColor: 'white',
-            zIndex: '10',
-        }
-
         let user = this.props.dataHandler.userInfo;
         let events = this.props.dataHandler.listData;
-        //Styles for {star, dump, joined, neutral} -headers
-        let categoryStyle = {
-            width: '100%',
-            textAlign: 'center',
-            paddingTop: '6px',
-            paddingBottom: '6px',
-            color: 'orange',
-            fontWeight: 'bold',
-            fontSize: '1.1em',
-            borderBottom: '1px solid lightgrey',
-        };
-
 
         //Sorting to different categories
         let joined = events.filter((obj) => {
@@ -72,36 +52,36 @@ class ListView extends React.Component {
         let starElement;
 
         if(joined.length > 0) {
-          joinElement = <div><div style={categoryStyle}>Joined</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          joinElement = <div><div className="list-category">Joined</div>{joined.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} />)}</div>;
         }else{
           joinElement = undefined
         }
         if(dumped.length > 0) {
-          dumpElement = <div><div style={categoryStyle}>Dumped</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          dumpElement = <div><div className="list-category">Dumped</div>{dumped.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} />)}</div>;
         }else{
           dumpElement = undefined
         }
         if(starred.length > 0) {
-          starElement = <div><div style={categoryStyle}>Starred</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}</div>;
+          starElement = <div><div className="list-category">Starred</div>{starred.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} />)}</div>;
         }else{
           starElement = undefined
         }
 
         return (
             <div>
-                <div style={headerStyle}>
-                    <h1 style={{margin: 10}}>
-                        <i style={{float: 'left'}} className="fa fa-search" aria-hidden="true"></i>
+                <div id="list-header">
+                    <h1 id="list-header-container">
+                        <i id="list-header-search" className="fa fa-search" aria-hidden="true"></i>
                         Find
-                        <Link to="/add"><i style={{float: 'right', marginTop: '4px', color: 'orange'}} className="fa fa-plus" aria-hidden="true"></i></Link>
+                        <Link to="/add"><i id="list-header-add" className="fa fa-plus" aria-hidden="true"></i></Link>
                     </h1>
                 </div>
-                <div style={{height: '60px'}}></div>
+                <div id="list-padding"></div>
                 <div>
                 {joinElement}
                 {starElement}
                 <div>
-                  <div style={categoryStyle}>Find New</div>
+                  <div className="list-category">Find New</div>
                   {others.map((item, i) => <ListItem key = {i} data = {item} dataHandler={this.props.dataHandler} onChooseEvent={this.props.onChooseEvent} />)}
                 </div>
                 {dumpElement}

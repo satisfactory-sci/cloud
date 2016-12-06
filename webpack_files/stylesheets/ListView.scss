@@ -1,0 +1,39 @@
+#list-header {
+  width: 100%;
+  color: orange;
+  text-align: center;
+  border-bottom: 1px solid lightgrey;
+  position: fixed;
+  opacity: 1;
+  background-color: white;
+  z-index: 10;
+}
+
+#list-header-container {
+  margin: 10px;
+}
+
+#list-header-search {
+  float: left;
+}
+
+#list-header-add {
+  float: right;
+  margin-top: 4px;
+  color: orange;
+}
+
+#list-padding {
+  height: 60px;
+}
+
+.list-category {
+  width: 100%;
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: orange;
+  font-weight: bold;
+  font-size: 1.1em;
+  border-bottom: 1px solid lightgrey;
+}

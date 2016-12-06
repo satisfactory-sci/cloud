@@ -3,6 +3,8 @@ import {Link, browserHistory} from 'react-router'
 import CommentView from'./CommentView.jsx'
 import ReactDOM from 'react-dom';
 
+require("../stylesheets/DetailsView.scss");
+
 class DetailsView extends React.Component {
 
     constructor(props) {
@@ -36,7 +38,7 @@ class DetailsView extends React.Component {
         if (commentText.length > 0) {
             this.state.dataHandler.addComment(this.state.data.id, commentText, this);
             this.refs.newComment.value = "";
-        }            
+        }
     }
 
     moveBack() {
@@ -46,28 +48,8 @@ class DetailsView extends React.Component {
     render() {
 
         var isJoined = this.state.dataHandler.isJoined(this.state.data.id);
-
-        var headerStyle = {
-            width: '100%',
-            color: 'orange',
-            textAlign: 'center',
-            borderBottom: '1px solid lightgrey',
-            position: 'fixed',
-            opacity: '1',
-            backgroundColor: 'white',
-            zIndex: '10',
-        }
-
-        var itemHeaderStyle = {
-            marginTop: '5px',
-            marginBottom: '5px',
-        }
         var fullnessStyle = {
             color: this.state.data.joined >= this.state.data.maxPeople ? 'red' : (this.state.data.joined >= this.state.data.maxPeople/2 ? 'orange' : 'green')
-        }
-        var textContainerStyle = {
-            borderBottom: '1px solid lightgrey',
-            fontSize: '1.1em'
         }
         var joinEventBtnStyle = {
             float: 'right',
@@ -93,31 +75,31 @@ class DetailsView extends React.Component {
 
         return (
             <div>
-                <div style={headerStyle}>
-                    <h1 style={{margin: 10}}>
-                        <i onClick={this.moveBack} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
+                <div id="detail-header">
+                    <h1 id="detail-header-container">
+                        <i onClick={this.moveBack} id="detail-header-back" className="fa fa-arrow-left" aria-hidden="true"></i>
                         Join
                         <i onClick={this.joinEvent} style={joinEventBtnStyle} className="fa fa-check" aria-hidden="true"></i>
                         <i onClick={this.unJoinEvent} style={unjoinEventBtnStyle} className="fa fa-times" aria-hidden="true"></i>
                     </h1>
                 </div>
-                <div style={{height: '60px'}}></div>
+                <div id="list-padding"></div>
                 <h2 style={joinedIndicatorStyle}>JOINED</h2>
-                <img style={{width: '100%'}} src={this.state.data.img} />
-                <div style={textContainerStyle}>
-                    <div style={{borderBottom: '1px solid lightgrey', paddingLeft: 10}}>
-                        <h2 style={itemHeaderStyle}>{this.state.data.title}</h2>
-                        <i className='fa fa-map-marker' aria-hidden='true' style={{width:'18px'}}></i> {this.state.data.location}<br/>
-                        <i className='fa fa-clock-o' aria-hidden='true' style={{width:'18px'}}></i> {this.state.data.startTime} - {this.state.data.endTime}<br/>
-                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true' style={{width:'18px'}}></i> {this.state.data.joined}/{this.state.data.maxPeople}</span>
+                <img id="detail-img" src={this.state.data.img} />
+                <div id="detail-container">
+                    <div id="detail-meta-container">
+                        <h2 id="detail-description-header">{this.state.data.title}</h2>
+                        <i className='fa fa-map-marker detail-icon' aria-hidden='true' ></i> {this.state.data.location}<br/>
+                        <i className='fa fa-clock-o detail-icon' aria-hidden='true'></i> {this.state.data.startTime} - {this.state.data.endTime}<br/>
+                        <span style={fullnessStyle}><i className='fa fa-user detail-icon' aria-hidden='true'></i> {this.state.data.joined}/{this.state.data.maxPeople}</span>
                     </div>
-                    <div style={{marginTop: 5, paddingLeft: 10}}>{this.state.data.description}</div>
+                    <div id="detail-description">{this.state.data.description}</div>
                     <br/>
-                    <h2 style={{marginTop: 5, marginLeft: 10, marginBottom: 5}}>Comments</h2>
+                    <h2 id="detail-comment">Comments</h2>
                 </div>
-                <div ref="addCommentBox" style={{padding: '10px', display: 'flex', flexDirection: 'row'}}>
-                    <textarea placeholder="Write down your comment" rows="3" style={{padding: 5, flex: 1, border: 0}} type="text" ref="newComment" ></textarea>
-                    <i onClick={this.addComment} className='fa fa-paper-plane' aria-hidden='true' style={{marginLeft: 5, marginTop: 20, fontSize: 25, color: 'blue', flex:'0 0 25px'}}></i>
+                <div ref="addCommentBox" id="detail-comment-container">
+                    <textarea id="detail-comment-input" placeholder="Write down your comment" rows="3" type="text" ref="newComment" ></textarea>
+                    <i onClick={this.addComment} className='fa fa-paper-plane detail-comment-submit' aria-hidden='true' ></i>
                 </div>
                 {this.state.data.comments.map((item, i) => <CommentView key = {i} data = {item} />)}
             </div>

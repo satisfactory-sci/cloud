@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {browserHistory} from 'react-router';
 
+require("../stylesheets/AddView.scss");
 
 class AddView extends React.Component {
 
@@ -172,29 +173,29 @@ class AddView extends React.Component {
         }
 
         return (
-            <div style={{color: 'lightgrey'}}>
+            <div id="add-container">
                 <div ref="saveIndicator" className="saving-data-indicator"><h1>Saving ..</h1></div>
                 <div className='header'>
-                    <h1 style={{margin: 10}}>
-                      <i onClick={this.moveBack} style={{float: 'left', color: 'orange'}} className="fa fa-arrow-left" aria-hidden="true"></i>
+                    <h1 id="add-header">
+                      <i onClick={this.moveBack} id="add-back" className="fa fa-arrow-left" aria-hidden="true"></i>
                         Add
-                      <i onClick={this.addEvent} style={{float: 'right', color: 'green'}} className="fa fa-check" aria-hidden="true"></i>
+                      <i onClick={this.addEvent} id="add-add" className="fa fa-check" aria-hidden="true"></i>
                     </h1>
                 </div>
-                <div style={{height: '60px'}}></div>
+                <div id="add-img"></div>
                 <label>
                     <div ref="imgFileName" className="add-view-img-file-name"></div>
                     <div style={addFileStyle} ref='imgInputContainer'><i className='fa fa-camera' aria-hidden='true' ></i></div>
-                    <input onChange={this.fileChanged} type="file" ref="img" style={{display: 'none'}} />
+                    <input onChange={this.fileChanged} type="file" ref="img" id="add-img-input" />
                 </label>
                 <div>
                     <div className="add-view-text-container">
                         <div className="add-view-input-row"><input className="add-view-input title" type="text" ref="title" placeholder="Title" maxLength="22" /></div>
-                        <div className="add-view-input-row"><i className='fa fa-map-marker' aria-hidden='true' style={{flex: '0 0 18px'}}></i><input className="add-view-input" placeholder="Location" type="text" ref="location" maxLength="30" /></div>
+                        <div className="add-view-input-row"><i className='fa fa-map-marker add-icon' aria-hidden='true' ></i><input className="add-view-input" placeholder="Location" type="text" ref="location" maxLength="30" /></div>
                         <div className="add-view-input-row">
-                            <i className='fa fa-clock-o' aria-hidden='true' style={{flex: '0 0 18px'}}></i>
-                            <input className="add-view-date-select" placeholder="Starts (hh:mm)" type="text" ref="startTime" maxLength="5" /> - 
-                            <input className="add-view-date-select" placeholder="Ends (hh:mm)" type="text" ref="endTime" maxLength="5" />                            
+                            <i className='fa fa-clock-o add-icon' aria-hidden='true'></i>
+                            <input className="add-view-date-select" placeholder="Starts (hh:mm)" type="text" ref="startTime" maxLength="5" /> -
+                            <input className="add-view-date-select" placeholder="Ends (hh:mm)" type="text" ref="endTime" maxLength="5" />
                         </div>
                         <div className="add-view-input-row">
                             <select ref='date' className="add-view-input">
@@ -202,9 +203,9 @@ class AddView extends React.Component {
                                 <option value="tomorrow">Tomorrow</option>
                             </select>
                         </div>
-                        <div className="add-view-input-row"><i className='fa fa-user' aria-hidden='true' style={{flex: '0 0 18px'}}></i><input className="add-view-input" placeholder="Max participants" type="text" ref="maxPeople" /></div>
+                        <div className="add-view-input-row"><i className='fa fa-user add-icon' aria-hidden='true'></i><input className="add-view-input" placeholder="Max participants" type="text" ref="maxPeople" /></div>
                     </div>
-                    <div style={{marginTop: 5, paddingLeft: 10, display: 'flex'}}><textarea rows="4" className="add-view-input" type="text" ref="description" placeholder="A nice description about your very own event :)" ></textarea></div>
+                    <div id="add-description"><textarea rows="4" className="add-view-input" type="text" ref="description" placeholder="A nice description about your very own event :)" ></textarea></div>
                 </div>
             </div>
         );

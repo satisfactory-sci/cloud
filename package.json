@@ -32,5 +32,11 @@
   },
   "engines": {
     "node": "6.6.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "node-sass": "^3.13.0",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1"
   }
 }
