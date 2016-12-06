@@ -144,6 +144,11 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(__dirname + '/public/Dashboard/index.html');
 });
 
+// Add new event to database
+app.post('/newevent', (req, res) => {
+  res.status(204).json({message: "post successful, though nothing is implemented yet"});
+});
+
 //Reset databases with delete TODO REFACTOR/REMOVE
 app.delete('/:dbPassword', (req, res) => {
   if (debugServer) console.log('Requesting clientDB deletion: ' + req.params.dbPassword);

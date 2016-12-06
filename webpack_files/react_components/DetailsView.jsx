@@ -33,8 +33,10 @@ class DetailsView extends React.Component {
 
     addComment(e) {
         var commentText = ReactDOM.findDOMNode(this.refs.newComment).value;
-        this.state.dataHandler.addComment(this.state.data.id, commentText, this);
-        this.refs.newComment.value = "";
+        if (commentText.length > 0) {
+            this.state.dataHandler.addComment(this.state.data.id, commentText, this);
+            this.refs.newComment.value = "";
+        }            
     }
 
     moveBack() {
@@ -113,11 +115,11 @@ class DetailsView extends React.Component {
                     <br/>
                     <h2 style={{marginTop: 5, marginLeft: 10, marginBottom: 5}}>Comments</h2>
                 </div>
-                {this.state.data.comments.map((item, i) => <CommentView key = {i} data = {item} />)}
-                <div style={{padding: '10px'}}>
-                    <textarea rows="3" style={{width: '95%'}} type="text" ref="newComment" ></textarea><br/>
-                    <button onClick={this.addComment}>Add comment</button>
+                <div ref="addCommentBox" style={{padding: '10px', display: 'flex', flexDirection: 'row'}}>
+                    <textarea placeholder="Write down your comment" rows="3" style={{padding: 5, flex: 1, border: 0}} type="text" ref="newComment" ></textarea>
+                    <i onClick={this.addComment} className='fa fa-paper-plane' aria-hidden='true' style={{marginLeft: 5, marginTop: 20, fontSize: 25, color: 'blue', flex:'0 0 25px'}}></i>
                 </div>
+                {this.state.data.comments.map((item, i) => <CommentView key = {i} data = {item} />)}
             </div>
         );
     }

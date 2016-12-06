@@ -11,7 +11,7 @@ class SplashView extends React.Component {
       "/images/hakan.jpg",
       "/images/gandalf.jpg",
       "/images/sanni.jpg",
-      "/images/stina.jpg",
+      "/images/stina.jpeg",
       "/images/teemuselanne.jpg",
       "/images/tuomo.png",
       "/images/max.png",
