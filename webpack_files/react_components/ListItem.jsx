@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 
+require("../stylesheets/ListItem.scss");
+
 class ListItem extends React.Component {
 
     constructor(props) {
@@ -65,51 +67,22 @@ class ListItem extends React.Component {
 
     render() {
 
-        var itemStyle = {
-            width: '100%',
-            height: '125px',
-            borderBottom: '1px solid lightgrey',
-            color: '#212121',
-        }
-        var swipeContainerStyle = {
-            position: 'absolute',
-            width: '100%',
-            height: '125px',
-            opacity: '1',
-            backgroundColor: 'white',
-        }
-        var textContainerStyle = {
-            fontSize: '1.1em',
-            marginLeft: '10px',
-        }
-        var itemHeaderStyle = {
-            marginTop: '5px',
-            marginBottom: '5px',
-        }
-        var imgContainerStyle = {
-            position: 'absolute',
-            right: 0,
-            top: 0
-        }
-        var imgStyle = {
-            width: '125px',
-            height: '125px',
-        }
         var fullnessStyle = {
             color: this.props.data.joined >= this.props.data.maxPeople ? 'red' : (this.props.data.joined >= this.props.data.maxPeople/2 ? 'orange' : 'green')
         }
+
         return (
           <Link to={`event/${this.props.data.id}`}>
-            <div style={itemStyle} ref="swipebackground">
-                <div ref="swipecontainer" style={swipeContainerStyle} onTouchStart={this.swipeContainerTouchStart} onTouchMove={this.swipeContainerTouchMove} onTouchEnd={this.swipeContainerTouchEnd}>
-                    <div style={textContainerStyle}>
-                        <h2 style={itemHeaderStyle}>{this.props.data.title}</h2>
-                        <i className='fa fa-map-marker' aria-hidden='true' style={{width:'18px'}}></i>{this.props.data.location}<br/>
-                        <i className='fa fa-clock-o' aria-hidden='true' style={{width:'18px'}}></i>{this.props.data.startTime} - {this.props.data.endTime}<br/>
-                        <span style={fullnessStyle}><i className='fa fa-user' aria-hidden='true'style={{width:'18px'}}></i>{this.props.data.joined}/{this.props.data.maxPeople}</span>
+            <div className="list-item" ref="swipebackground">
+                <div ref="swipecontainer" className="list-item-container" onTouchStart={this.swipeContainerTouchStart} onTouchMove={this.swipeContainerTouchMove} onTouchEnd={this.swipeContainerTouchEnd}>
+                    <div className="list-item-text">
+                        <h2 className="list-item-header">{this.props.data.title}</h2>
+                        <i className='fa fa-map-marker list-item-icon' aria-hidden='true' ></i>{this.props.data.location}<br/>
+                        <i className='fa fa-clock-o list-item-icon' aria-hidden='true' ></i>{this.props.data.startTime} - {this.props.data.endTime}<br/>
+                        <span style={fullnessStyle}><i className='fa fa-user list-item-icon' aria-hidden='true'></i>{this.props.data.joined}/{this.props.data.maxPeople}</span>
                     </div>
-                    <div style={imgContainerStyle}>
-                        <img style={imgStyle} src={this.props.data.img} />
+                    <div className="list-item-img-container">
+                        <img className="list-item-img" src={this.props.data.img} />
                     </div>
                 </div>
             </div>

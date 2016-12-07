@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
+require("../stylesheets/SplashView.scss");
+
 class SplashView extends React.Component {
 
   constructor(props) {
@@ -11,7 +13,7 @@ class SplashView extends React.Component {
       "/images/hakan.jpg",
       "/images/gandalf.jpg",
       "/images/sanni.jpg",
-      "/images/stina.jpg",
+      "/images/stina.jpeg",
       "/images/teemuselanne.jpg",
       "/images/tuomo.png",
       "/images/max.png",
@@ -24,25 +26,9 @@ class SplashView extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
-  //Helper function for fade in/out transitions
-  fade(step, elem, origin, test, cb) {
-    let opacity = origin;
-    let id = setInterval(() => {
-      if(test(opacity)){
-        clearInterval(id);
-        cb()
-      }else{
-        opacity += step;
-        elem.style.opacity = opacity;
-      }
-    }, 5);
-  }
-
   componentDidMount() {
     let splash = document.getElementById('splash');
-    let opacity = 0;
-    splash.style.opacity = 0;
-    this.fade(0.01, splash, 0, (o) => {return o > 1} ,() => {});
+    splash.className += "fade-in";
   }
 
   //Function called after user has submitted his/her name
@@ -57,12 +43,13 @@ class SplashView extends React.Component {
     this.props.dataHandler.userInfo.img = this.state.randomImages[index];
     //transition to welcome screen
     let splash = document.getElementById('splash');
-    let opacity = 1;
-    this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
+    splash.className = "fade-out";
+    setTimeout(() => {
       this.setState({
-        welcome: true
+        welcome: true,
       })
-    })
+    }, 1000)
+
   }
 
   submit(e) {
@@ -84,70 +71,38 @@ class SplashView extends React.Component {
       return (<div></div>)
     }
     let box = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'white',
       height: window.innerHeight - 10 + 'px',
-    }
-    let items = {
-      textAlign: 'center',
-      width: '100%',
-      color: '#212121',
-      fontSize: '1.2em',
     }
 
     //Transition to ListView
     if(this.state.welcome) {
       let splash = document.getElementById('splash');
-      function wait() {
-        setTimeout(() => {
-          this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
-            this.props.onRegister();
-          })
+      splash.className = "fade-in";
+
+      setTimeout(() => {
+        splash.className = "welcome-out"
+            setTimeout(() => {
+              this.props.onRegister();
+            }, 1500)
         }, 1000)
-      }
-      splash.style.opacity = 0;
-      this.fade(0.01, splash, 0, (o) => {return o > 1}, wait.bind(this));
+
       return (
         <div style={box} id='splash'>
-          <div style={{width: 'auto'}}>
-            <div style={items}><h2 style={{width: 'auto', padding: '2%'}}>{this.getPhrase()}</h2></div>
-            <div style={items}><h2>{this.props.dataHandler.userInfo.userName}</h2></div>
+          <div className="splash-container">
+            <div className="splash-item"><h2 id="splash-phrase">{this.getPhrase()}</h2></div>
+            <div className="splash-item"><h2>{this.props.dataHandler.userInfo.userName}</h2></div>
           </div>
         </div>
       )
     }
 
-    let input = {
-      padding:'0.6em 0.1em 0.1em 0.1em',
-      border: '0px 0px 0px 0px',
-      borderWidth: '0px 0px 2px 0px',
-      boxShadow: 'none',
-      fontSize: '1.2em',
-      fontFamily: '"Roboto", sans-serif',
-      textAlign: 'center',
-      width:'40%',
-      outline: 'none',
-    }
-
-    let button = {
-      marginTop: '1em',
-      padding: '0.5em 1.2em 0.5em 1.2em',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '1em',
-      fontFamily: '"Roboto", sans-serif',
-      backgroundColor: '#FB8C00',
-      color: 'white',
-    }
     return (
       <div style={box} id="splash">
-        <div style={{width: 'auto'}}>
-          <div style={items}><img src="/images/logo_minified.png" style={{width: '90%'}}/></div>
-          <div style={items}><h2>Who are you?</h2></div>
-          <div style={items}><input type="text" style={input} ref="nameInput" placeholder="Name" autoFocus onKeyDown={this.submit}/></div>
-          <div style={items}><button style={button} onClick={this.registerUser}>Begin</button></div>
+        <div className="splash-container">
+          <div className="splash-item"><img src="/images/logo_minified.png" id="splash-logo"/></div>
+          <div className="splash-item"><h2>Who are you?</h2></div>
+          <div className="splash-item"><input type="text" id="splash-input" ref="nameInput" placeholder="Name" autoFocus onKeyDown={this.submit}/></div>
+          <div className="splash-item"><button id="splash-button" onClick={this.registerUser}>Begin</button></div>
         </div>
       </div>
     )
