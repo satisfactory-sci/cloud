@@ -8,12 +8,11 @@ class Home extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             splashViewVisible: true,
             listViewVisible: false,
+            first: false,
         }
-
         this.backToInitialState = this.backToInitialState.bind(this);
     };
 
@@ -21,25 +20,24 @@ class Home extends React.Component {
         this.setState({
             splashViewVisible: false,
             listViewVisible: true,
+            first: true
         });
     }
 
     render() {
 
         window.dataHandler.start(this);
-
         //Has the user logged in?
         if(window.dataHandler.userInfo.userName == "") {
           return (
               <div id="app">
                   <SplashView visible={this.state.splashViewVisible} dataHandler={window.dataHandler} onRegister={this.backToInitialState}/>
-                  <ListView visible={this.state.listViewVisible} dataHandler={window.dataHandler} />
               </div>
           );
         }else{
           return (
               <div id="app">
-                  <ListView visible={true} dataHandler={window.dataHandler} />
+                  <ListView first={this.state.first} visible={true} dataHandler={window.dataHandler} />
               </div>
           );
         }

@@ -10,7 +10,7 @@ class ListView extends React.Component {
     render() {
 
         if (!this.props.visible) {
-            return (<div></div>);
+            return (<div ></div>);
         }
 
         let user = this.props.dataHandler.userInfo;
@@ -66,9 +66,10 @@ class ListView extends React.Component {
         }else{
           starElement = undefined
         }
+        let fadeIn = this.props.first ? "fade-in" : "";
 
         return (
-            <div>
+            <div className={fadeIn} id="list">
                 <div id="list-header">
                     <h1 id="list-header-container">
                         <i id="list-header-search" className="fa fa-search" aria-hidden="true"></i>
