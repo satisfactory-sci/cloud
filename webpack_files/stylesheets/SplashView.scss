@@ -13,6 +13,12 @@
   opacity: 0;
 }
 
+#splash.welcome-out {
+  opacity: 0;
+  -webkit-transition-delay: 0.5s; /* Safari */
+  transition-delay: 0.5s;
+}
+
 #splash.fade-in {
   opacity: 1;
 }

@@ -80,10 +80,10 @@ class SplashView extends React.Component {
       splash.className = "fade-in";
 
       setTimeout(() => {
-        splash.className = "fade-out"
+        splash.className = "welcome-out"
             setTimeout(() => {
               this.props.onRegister();
-            }, 1000)
+            }, 1500)
         }, 1000)
 
       return (
