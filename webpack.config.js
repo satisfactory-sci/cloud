@@ -1,6 +1,5 @@
 var config = {
    entry: './webpack_files/entry.js',
-
    output: {
       path:'./',
       filename: 'public/index.js',
@@ -22,7 +21,7 @@ var config = {
            loaders: ["style-loader", "css-loader", "sass-loader"]
          }
       ]
-   }
+   },
 }
 
 module.exports = config;

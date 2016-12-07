@@ -26,25 +26,9 @@ class SplashView extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
-  //Helper function for fade in/out transitions
-  fade(step, elem, origin, test, cb) {
-    let opacity = origin;
-    let id = setInterval(() => {
-      if(test(opacity)){
-        clearInterval(id);
-        cb()
-      }else{
-        opacity += step;
-        elem.style.opacity = opacity;
-      }
-    }, 5);
-  }
-
   componentDidMount() {
     let splash = document.getElementById('splash');
-    let opacity = 0;
-    splash.style.opacity = 0;
-    this.fade(0.01, splash, 0, (o) => {return o > 1} ,() => {});
+    splash.className += "fade-in";
   }
 
   //Function called after user has submitted his/her name
@@ -59,12 +43,13 @@ class SplashView extends React.Component {
     this.props.dataHandler.userInfo.img = this.state.randomImages[index];
     //transition to welcome screen
     let splash = document.getElementById('splash');
-    let opacity = 1;
-    this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
+    splash.className = "fade-out";
+    setTimeout(() => {
       this.setState({
-        welcome: true
+        welcome: true,
       })
-    })
+    }, 1000)
+
   }
 
   submit(e) {
@@ -92,15 +77,15 @@ class SplashView extends React.Component {
     //Transition to ListView
     if(this.state.welcome) {
       let splash = document.getElementById('splash');
-      function wait() {
-        setTimeout(() => {
-          this.fade(-0.01, splash, 1, (o) => {return o <= 0}, () => {
-            this.props.onRegister();
-          })
+      splash.className = "fade-in";
+
+      setTimeout(() => {
+        splash.className = "fade-out"
+            setTimeout(() => {
+              this.props.onRegister();
+            }, 1000)
         }, 1000)
-      }
-      splash.style.opacity = 0;
-      this.fade(0.01, splash, 0, (o) => {return o > 1}, wait.bind(this));
+
       return (
         <div style={box} id='splash'>
           <div className="splash-container">

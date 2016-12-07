@@ -68,13 +68,13 @@
 
 	var _DetailsView2 = _interopRequireDefault(_DetailsView);
 
-	var _AddView = __webpack_require__(252);
+	var _AddView = __webpack_require__(254);
 
 	var _AddView2 = _interopRequireDefault(_AddView);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var dataHandler = __webpack_require__(253);
+	var dataHandler = __webpack_require__(257);
 	dataHandler.initData();
 	window.dataHandler = dataHandler;
 
@@ -26414,7 +26414,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(316);
+	__webpack_require__(245);
 
 	var Home = function (_React$Component) {
 	    _inherits(Home, _React$Component);
@@ -26500,7 +26500,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(312);
+	__webpack_require__(240);
 
 	var ListView = function (_React$Component) {
 	  _inherits(ListView, _React$Component);
@@ -26692,7 +26692,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(314);
+	__webpack_require__(236);
 
 	var ListItem = function (_React$Component) {
 	    _inherits(ListItem, _React$Component);
@@ -26824,8 +26824,46 @@
 	exports.default = ListItem;
 
 /***/ },
-/* 236 */,
-/* 237 */,
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(237);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListItem.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListItem.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-item {\n  width: 100%;\n  height: 125px;\n  border-bottom: 1px solid lightgrey;\n  color: #212121; }\n\n.list-item-container {\n  position: absolute;\n  width: 100%;\n  height: 125px;\n  opacity: 1;\n  background-color: white; }\n\n.list-item-text {\n  font-size: 1.1em;\n  margin-left: 10px; }\n\n.list-item-header {\n  margin-top: 5px;\n  margin-bottom: 5px; }\n\n.list-item-img-container {\n  position: absolute;\n  right: 0px;\n  top: 0px; }\n\n.list-item-img {\n  width: 125px;\n  height: 125px; }\n\n.list-item-icon {\n  width: 18px; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 238 */
 /***/ function(module, exports) {
 
@@ -27134,8 +27172,46 @@
 
 
 /***/ },
-/* 240 */,
-/* 241 */,
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(241);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListView.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListView.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#list-header {\n  width: 100%;\n  color: orange;\n  text-align: center;\n  border-bottom: 1px solid lightgrey;\n  position: fixed;\n  opacity: 1;\n  background-color: white;\n  z-index: 10; }\n\n#list-header-container {\n  margin: 10px; }\n\n#list-header-search {\n  float: left; }\n\n#list-header-add {\n  float: right;\n  margin-top: 4px;\n  color: orange; }\n\n#list-padding {\n  height: 60px; }\n\n.list-category {\n  width: 100%;\n  text-align: center;\n  padding-top: 6px;\n  padding-bottom: 6px;\n  color: orange;\n  font-weight: bold;\n  font-size: 1.1em;\n  border-bottom: 1px solid lightgrey; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27165,7 +27241,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(310);
+	__webpack_require__(243);
 
 	var SplashView = function (_React$Component) {
 	  _inherits(SplashView, _React$Component);
@@ -27185,32 +27261,11 @@
 	    return _this;
 	  }
 
-	  //Helper function for fade in/out transitions
-
-
 	  _createClass(SplashView, [{
-	    key: 'fade',
-	    value: function fade(step, elem, origin, test, cb) {
-	      var opacity = origin;
-	      var id = setInterval(function () {
-	        if (test(opacity)) {
-	          clearInterval(id);
-	          cb();
-	        } else {
-	          opacity += step;
-	          elem.style.opacity = opacity;
-	        }
-	      }, 5);
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var splash = document.getElementById('splash');
-	      var opacity = 0;
-	      splash.style.opacity = 0;
-	      this.fade(0.01, splash, 0, function (o) {
-	        return o > 1;
-	      }, function () {});
+	      splash.className += "fade-in";
 	    }
 
 	    //Function called after user has submitted his/her name
@@ -27230,14 +27285,12 @@
 	      this.props.dataHandler.userInfo.img = this.state.randomImages[index];
 	      //transition to welcome screen
 	      var splash = document.getElementById('splash');
-	      var opacity = 1;
-	      this.fade(-0.01, splash, 1, function (o) {
-	        return o <= 0;
-	      }, function () {
+	      splash.className = "fade-out";
+	      setTimeout(function () {
 	        _this2.setState({
 	          welcome: true
 	        });
-	      });
+	      }, 1000);
 	    }
 	  }, {
 	    key: 'submit',
@@ -27256,7 +27309,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this3 = this;
 
 	      if (!this.props.visible) {
 	        return _react2.default.createElement('div', null);
@@ -27268,24 +27321,16 @@
 	      //Transition to ListView
 	      if (this.state.welcome) {
 	        var _ret = function () {
-	          var wait = function wait() {
-	            var _this3 = this;
-
-	            setTimeout(function () {
-	              _this3.fade(-0.01, splash, 1, function (o) {
-	                return o <= 0;
-	              }, function () {
-	                _this3.props.onRegister();
-	              });
-	            }, 1000);
-	          };
-
 	          var splash = document.getElementById('splash');
+	          splash.className = "fade-in";
 
-	          splash.style.opacity = 0;
-	          _this4.fade(0.01, splash, 0, function (o) {
-	            return o > 1;
-	          }, wait.bind(_this4));
+	          setTimeout(function () {
+	            splash.className = "fade-out";
+	            setTimeout(function () {
+	              _this3.props.onRegister();
+	            }, 1000);
+	          }, 1000);
+
 	          return {
 	            v: _react2.default.createElement(
 	              'div',
@@ -27299,7 +27344,7 @@
 	                  _react2.default.createElement(
 	                    'h2',
 	                    { id: 'splash-phrase' },
-	                    _this4.getPhrase()
+	                    _this3.getPhrase()
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -27308,7 +27353,7 @@
 	                  _react2.default.createElement(
 	                    'h2',
 	                    null,
-	                    _this4.props.dataHandler.userInfo.userName
+	                    _this3.props.dataHandler.userInfo.userName
 	                  )
 	                )
 	              )
@@ -27364,10 +27409,86 @@
 	exports.default = SplashView;
 
 /***/ },
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(244);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./SplashView.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./SplashView.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#splash {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: white;\n  opacity: 0;\n  -webkit-transition: opacity 1s;\n  transition: opacity 1s;\n  transition-timing-function: ease-in-out; }\n\n#splash.fade-out {\n  opacity: 0; }\n\n#splash.fade-in {\n  opacity: 1; }\n\n.splash-container {\n  width: auto; }\n\n.splash-item {\n  text-align: center;\n  width: 100%;\n  color: #212121;\n  font-size: 1.2em; }\n\n#splash-logo {\n  width: 90%; }\n\n#splash-input {\n  padding: 0.6em 0.1em 0.1em 0.1em;\n  border: 0px 0px 0px 0px;\n  border-width: 0px 0px 2px 0px;\n  box-shadow: none;\n  font-size: 1.2em;\n  font-family: \"Roboto\", sans-serif;\n  text-align: center;\n  width: 40%;\n  outline: none; }\n\n#splash-button {\n  margin-top: 1em;\n  padding: 0.5em 1.2em 0.5em 1.2em;\n  border: none;\n  border-radius: 4px;\n  font-size: 1em;\n  font-family: \"Roboto\", sans-serif;\n  background-color: #FB8C00;\n  color: white; }\n\n#splash-phrase {\n  width: auto;\n  padding: 2%; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(246);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./HomeView.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./HomeView.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#app {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  overflow: hidden;\n  margin: auto;\n  display: inline-block; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27454,7 +27575,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(318);
+	__webpack_require__(252);
 
 	var DetailsView = function (_React$Component) {
 	    _inherits(DetailsView, _React$Component);
@@ -27641,7 +27762,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(308);
+	__webpack_require__(250);
 
 	var CommentView = function (_React$Component) {
 	    _inherits(CommentView, _React$Component);
@@ -27688,9 +27809,87 @@
 	exports.default = CommentView;
 
 /***/ },
-/* 250 */,
-/* 251 */,
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(251);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./CommentView.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./CommentView.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".comment-container {\n  width: 100%;\n  height: 125px;\n  border-bottom: 1px solid lightgrey; }\n\n.comment-img {\n  float: right;\n  width: 125px;\n  height: 125px; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(253);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./DetailsView.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./DetailsView.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#detail-header {\n  width: 100%;\n  color: orange;\n  text-align: center;\n  border-bottom: 1px solid lightgrey;\n  position: fixed;\n  opacity: 1;\n  background-color: white;\n  z-index: 10; }\n\n#detail-header-container {\n  margin: 10px; }\n\n#detail-header-back {\n  float: left;\n  color: orange; }\n\n#detail-container {\n  border-bottom: 1px solid lightgrey;\n  font-size: 1.1em; }\n\n#detail-meta-container {\n  border-bottom: 1px solid lightgrey;\n  padding-left: 10px; }\n\n.detail-icon {\n  width: 18px; }\n\n#detail-img {\n  width: 100%; }\n\n#detail-description-header {\n  margin-top: 5px;\n  margin-bottom: 5px; }\n\n#detail-description {\n  margin-top: 5px;\n  padding-left: 10px; }\n\n#detail-comment {\n  margin-top: 5px;\n  margin-left: 10px;\n  margin-bottom: 5px; }\n\n#detail-comment-container {\n  padding: 10px;\n  display: flex;\n  flex-direction: row; }\n\n#detail-comment-input {\n  padding: 5px;\n  flex: 1px;\n  border: 0px; }\n\n.detail-comment-submit {\n  margin-left: 5px;\n  margin-top: 20px;\n  font-size: 25px;\n  color: blue;\n  flex: 0px 0px 25px; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27719,7 +27918,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(306);
+	__webpack_require__(255);
 
 	var AddView = function (_React$Component) {
 	    _inherits(AddView, _React$Component);
@@ -27998,12 +28197,52 @@
 	exports.default = AddView;
 
 /***/ },
-/* 253 */
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(256);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(239)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./AddView.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./AddView.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(238)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#add-container {\n  color: lightgrey; }\n\n#add-header {\n  margin: 10px; }\n\n#add-back {\n  float: left;\n  color: orange; }\n\n#add-add {\n  float: right;\n  color: green; }\n\n#add-img {\n  height: 60px; }\n\n#add-img-input {\n  display: none; }\n\n.add-icon {\n  flex: 0px 0px 18px; }\n\n#add-description {\n  margin-top: 5px;\n  padding-left: 10px;\n  display: flex; }\n\n.header {\n  width: 100%;\n  color: orange;\n  text-align: center;\n  border-bottom: 1px solid lightgrey;\n  position: fixed;\n  opacity: 1;\n  background-color: white;\n  z-index: 10; }\n\n.add-view-input {\n  flex: 1 1 0px;\n  padding: 5px;\n  padding-left: 10px;\n  border-width: 0px;\n  color: black; }\n\n.add-view-input.title {\n  font-size: 25px;\n  font-weight: bold; }\n\n.add-view-input:active {\n  border-width: 0px; }\n\n.add-view-input-row {\n  display: flex;\n  flex-direction: row;\n  padding-bottom: 3;\n  padding-top: 3; }\n\n.add-view-text-container {\n  display: flex;\n  flex-direction: column;\n  margin-left: 10px; }\n\n.add-view-date-select {\n  flex: 0;\n  width: 100px;\n  padding: 5px;\n  padding-left: 10px;\n  border-width: 0px;\n  color: black; }\n\n.invalid {\n  border-width: 1px;\n  border-color: red; }\n\n.saving-data-indicator {\n  display: none;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n  text-align: center;\n  padding-top: 50%;\n  color: green;\n  background-color: #dddddd;\n  opacity: 0.5; }\n\n.add-view-img-file-name {\n  font-size: 20px;\n  font-weight: bold;\n  color: green;\n  position: absolute;\n  top: 160px;\n  text-align: center;\n  width: 100%; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _socket = __webpack_require__(254);
+	var _socket = __webpack_require__(258);
 
 	var _socket2 = _interopRequireDefault(_socket);
 
@@ -28022,7 +28261,7 @@
 	    socket: {},
 
 	    initData: function initData() {
-	        this.listData = __webpack_require__(301);
+	        this.listData = __webpack_require__(305);
 
 	        //Initiate global socket
 	        this.socket = (0, _socket2.default)();
@@ -28159,7 +28398,7 @@
 	};
 
 /***/ },
-/* 254 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28167,10 +28406,10 @@
 	 * Module dependencies.
 	 */
 
-	var url = __webpack_require__(255);
-	var parser = __webpack_require__(260);
-	var Manager = __webpack_require__(268);
-	var debug = __webpack_require__(257)('socket.io-client');
+	var url = __webpack_require__(259);
+	var parser = __webpack_require__(264);
+	var Manager = __webpack_require__(272);
+	var debug = __webpack_require__(261)('socket.io-client');
 
 	/**
 	 * Module exports.
@@ -28269,12 +28508,12 @@
 	 * @api public
 	 */
 
-	exports.Manager = __webpack_require__(268);
-	exports.Socket = __webpack_require__(294);
+	exports.Manager = __webpack_require__(272);
+	exports.Socket = __webpack_require__(298);
 
 
 /***/ },
-/* 255 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -28282,8 +28521,8 @@
 	 * Module dependencies.
 	 */
 
-	var parseuri = __webpack_require__(256);
-	var debug = __webpack_require__(257)('socket.io-client:url');
+	var parseuri = __webpack_require__(260);
+	var debug = __webpack_require__(261)('socket.io-client:url');
 
 	/**
 	 * Module exports.
@@ -28356,7 +28595,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 256 */
+/* 260 */
 /***/ function(module, exports) {
 
 	/**
@@ -28401,7 +28640,7 @@
 
 
 /***/ },
-/* 257 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28411,7 +28650,7 @@
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(258);
+	exports = module.exports = __webpack_require__(262);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -28575,7 +28814,7 @@
 
 
 /***/ },
-/* 258 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28591,7 +28830,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(259);
+	exports.humanize = __webpack_require__(263);
 
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -28778,7 +29017,7 @@
 
 
 /***/ },
-/* 259 */
+/* 263 */
 /***/ function(module, exports) {
 
 	/**
@@ -28909,7 +29148,7 @@
 
 
 /***/ },
-/* 260 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28917,11 +29156,11 @@
 	 * Module dependencies.
 	 */
 
-	var debug = __webpack_require__(257)('socket.io-parser');
-	var json = __webpack_require__(261);
-	var Emitter = __webpack_require__(264);
-	var binary = __webpack_require__(265);
-	var isBuf = __webpack_require__(267);
+	var debug = __webpack_require__(261)('socket.io-parser');
+	var json = __webpack_require__(265);
+	var Emitter = __webpack_require__(268);
+	var binary = __webpack_require__(269);
+	var isBuf = __webpack_require__(271);
 
 	/**
 	 * Protocol version.
@@ -29319,14 +29558,14 @@
 
 
 /***/ },
-/* 261 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
 	;(function () {
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(263);
+	  var isLoader = "function" === "function" && __webpack_require__(267);
 
 	  // A set of types used to distinguish objects from primitives.
 	  var objectTypes = {
@@ -30225,10 +30464,10 @@
 	  }
 	}).call(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(262)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(266)(module), (function() { return this; }())))
 
 /***/ },
-/* 262 */
+/* 266 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -30244,7 +30483,7 @@
 
 
 /***/ },
-/* 263 */
+/* 267 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -30252,7 +30491,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 264 */
+/* 268 */
 /***/ function(module, exports) {
 
 	
@@ -30422,7 +30661,7 @@
 
 
 /***/ },
-/* 265 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -30431,8 +30670,8 @@
 	 * Module requirements
 	 */
 
-	var isArray = __webpack_require__(266);
-	var isBuf = __webpack_require__(267);
+	var isArray = __webpack_require__(270);
+	var isBuf = __webpack_require__(271);
 
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -30570,7 +30809,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 266 */
+/* 270 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -30579,7 +30818,7 @@
 
 
 /***/ },
-/* 267 */
+/* 271 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -30599,7 +30838,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 268 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -30607,15 +30846,15 @@
 	 * Module dependencies.
 	 */
 
-	var eio = __webpack_require__(269);
-	var Socket = __webpack_require__(294);
-	var Emitter = __webpack_require__(295);
-	var parser = __webpack_require__(260);
-	var on = __webpack_require__(297);
-	var bind = __webpack_require__(298);
-	var debug = __webpack_require__(257)('socket.io-client:manager');
-	var indexOf = __webpack_require__(292);
-	var Backoff = __webpack_require__(300);
+	var eio = __webpack_require__(273);
+	var Socket = __webpack_require__(298);
+	var Emitter = __webpack_require__(299);
+	var parser = __webpack_require__(264);
+	var on = __webpack_require__(301);
+	var bind = __webpack_require__(302);
+	var debug = __webpack_require__(261)('socket.io-client:manager');
+	var indexOf = __webpack_require__(296);
+	var Backoff = __webpack_require__(304);
 
 	/**
 	 * IE6+ hasOwnProperty
@@ -31165,19 +31404,19 @@
 
 
 /***/ },
-/* 269 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(270);
+	module.exports = __webpack_require__(274);
 
 
 /***/ },
-/* 270 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(271);
+	module.exports = __webpack_require__(275);
 
 	/**
 	 * Exports parser
@@ -31185,25 +31424,25 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(278);
+	module.exports.parser = __webpack_require__(282);
 
 
 /***/ },
-/* 271 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var transports = __webpack_require__(272);
-	var Emitter = __webpack_require__(264);
-	var debug = __webpack_require__(257)('engine.io-client:socket');
-	var index = __webpack_require__(292);
-	var parser = __webpack_require__(278);
-	var parseuri = __webpack_require__(256);
-	var parsejson = __webpack_require__(293);
-	var parseqs = __webpack_require__(286);
+	var transports = __webpack_require__(276);
+	var Emitter = __webpack_require__(268);
+	var debug = __webpack_require__(261)('engine.io-client:socket');
+	var index = __webpack_require__(296);
+	var parser = __webpack_require__(282);
+	var parseuri = __webpack_require__(260);
+	var parsejson = __webpack_require__(297);
+	var parseqs = __webpack_require__(290);
 
 	/**
 	 * Module exports.
@@ -31330,9 +31569,9 @@
 	 */
 
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(277);
-	Socket.transports = __webpack_require__(272);
-	Socket.parser = __webpack_require__(278);
+	Socket.Transport = __webpack_require__(281);
+	Socket.transports = __webpack_require__(276);
+	Socket.parser = __webpack_require__(282);
 
 	/**
 	 * Creates transport of the given type.
@@ -31927,17 +32166,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 272 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies
 	 */
 
-	var XMLHttpRequest = __webpack_require__(273);
-	var XHR = __webpack_require__(275);
-	var JSONP = __webpack_require__(289);
-	var websocket = __webpack_require__(290);
+	var XMLHttpRequest = __webpack_require__(277);
+	var XHR = __webpack_require__(279);
+	var JSONP = __webpack_require__(293);
+	var websocket = __webpack_require__(294);
 
 	/**
 	 * Export transports.
@@ -31987,12 +32226,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 273 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {// browser shim for xmlhttprequest module
 
-	var hasCORS = __webpack_require__(274);
+	var hasCORS = __webpack_require__(278);
 
 	module.exports = function (opts) {
 	  var xdomain = opts.xdomain;
@@ -32031,7 +32270,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 274 */
+/* 278 */
 /***/ function(module, exports) {
 
 	
@@ -32054,18 +32293,18 @@
 
 
 /***/ },
-/* 275 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module requirements.
 	 */
 
-	var XMLHttpRequest = __webpack_require__(273);
-	var Polling = __webpack_require__(276);
-	var Emitter = __webpack_require__(264);
-	var inherit = __webpack_require__(287);
-	var debug = __webpack_require__(257)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(277);
+	var Polling = __webpack_require__(280);
+	var Emitter = __webpack_require__(268);
+	var inherit = __webpack_require__(291);
+	var debug = __webpack_require__(261)('engine.io-client:polling-xhr');
 
 	/**
 	 * Module exports.
@@ -32478,19 +32717,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 276 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(277);
-	var parseqs = __webpack_require__(286);
-	var parser = __webpack_require__(278);
-	var inherit = __webpack_require__(287);
-	var yeast = __webpack_require__(288);
-	var debug = __webpack_require__(257)('engine.io-client:polling');
+	var Transport = __webpack_require__(281);
+	var parseqs = __webpack_require__(290);
+	var parser = __webpack_require__(282);
+	var inherit = __webpack_require__(291);
+	var yeast = __webpack_require__(292);
+	var debug = __webpack_require__(261)('engine.io-client:polling');
 
 	/**
 	 * Module exports.
@@ -32503,7 +32742,7 @@
 	 */
 
 	var hasXHR2 = (function () {
-	  var XMLHttpRequest = __webpack_require__(273);
+	  var XMLHttpRequest = __webpack_require__(277);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -32729,15 +32968,15 @@
 
 
 /***/ },
-/* 277 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(278);
-	var Emitter = __webpack_require__(264);
+	var parser = __webpack_require__(282);
+	var Emitter = __webpack_require__(268);
 
 	/**
 	 * Module exports.
@@ -32890,22 +33129,22 @@
 
 
 /***/ },
-/* 278 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var keys = __webpack_require__(279);
-	var hasBinary = __webpack_require__(280);
-	var sliceBuffer = __webpack_require__(281);
-	var after = __webpack_require__(282);
-	var utf8 = __webpack_require__(283);
+	var keys = __webpack_require__(283);
+	var hasBinary = __webpack_require__(284);
+	var sliceBuffer = __webpack_require__(285);
+	var after = __webpack_require__(286);
+	var utf8 = __webpack_require__(287);
 
 	var base64encoder;
 	if (global && global.ArrayBuffer) {
-	  base64encoder = __webpack_require__(284);
+	  base64encoder = __webpack_require__(288);
 	}
 
 	/**
@@ -32963,7 +33202,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 
-	var Blob = __webpack_require__(285);
+	var Blob = __webpack_require__(289);
 
 	/**
 	 * Encodes a packet.
@@ -33506,7 +33745,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 279 */
+/* 283 */
 /***/ function(module, exports) {
 
 	
@@ -33531,7 +33770,7 @@
 
 
 /***/ },
-/* 280 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -33539,7 +33778,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(266);
+	var isArray = __webpack_require__(270);
 
 	/**
 	 * Module exports.
@@ -33596,7 +33835,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 281 */
+/* 285 */
 /***/ function(module, exports) {
 
 	/**
@@ -33631,7 +33870,7 @@
 
 
 /***/ },
-/* 282 */
+/* 286 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -33665,7 +33904,7 @@
 
 
 /***/ },
-/* 283 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/wtf8 v1.0.0 by @mathias */
@@ -33901,10 +34140,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(262)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(266)(module), (function() { return this; }())))
 
 /***/ },
-/* 284 */
+/* 288 */
 /***/ function(module, exports) {
 
 	/*
@@ -33977,7 +34216,7 @@
 
 
 /***/ },
-/* 285 */
+/* 289 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -34080,7 +34319,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 286 */
+/* 290 */
 /***/ function(module, exports) {
 
 	/**
@@ -34123,7 +34362,7 @@
 
 
 /***/ },
-/* 287 */
+/* 291 */
 /***/ function(module, exports) {
 
 	
@@ -34135,7 +34374,7 @@
 	};
 
 /***/ },
-/* 288 */
+/* 292 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34209,7 +34448,7 @@
 
 
 /***/ },
-/* 289 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -34217,8 +34456,8 @@
 	 * Module requirements.
 	 */
 
-	var Polling = __webpack_require__(276);
-	var inherit = __webpack_require__(287);
+	var Polling = __webpack_require__(280);
+	var inherit = __webpack_require__(291);
 
 	/**
 	 * Module exports.
@@ -34447,19 +34686,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 290 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(277);
-	var parser = __webpack_require__(278);
-	var parseqs = __webpack_require__(286);
-	var inherit = __webpack_require__(287);
-	var yeast = __webpack_require__(288);
-	var debug = __webpack_require__(257)('engine.io-client:websocket');
+	var Transport = __webpack_require__(281);
+	var parser = __webpack_require__(282);
+	var parseqs = __webpack_require__(290);
+	var inherit = __webpack_require__(291);
+	var yeast = __webpack_require__(292);
+	var debug = __webpack_require__(261)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 
 	/**
@@ -34471,7 +34710,7 @@
 	var WebSocket = BrowserWebSocket;
 	if (!WebSocket && typeof window === 'undefined') {
 	  try {
-	    WebSocket = __webpack_require__(291);
+	    WebSocket = __webpack_require__(295);
 	  } catch (e) { }
 	}
 
@@ -34728,13 +34967,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 291 */
+/* 295 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 292 */
+/* 296 */
 /***/ function(module, exports) {
 
 	
@@ -34749,7 +34988,7 @@
 	};
 
 /***/ },
-/* 293 */
+/* 297 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -34787,7 +35026,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 294 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -34795,13 +35034,13 @@
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(260);
-	var Emitter = __webpack_require__(295);
-	var toArray = __webpack_require__(296);
-	var on = __webpack_require__(297);
-	var bind = __webpack_require__(298);
-	var debug = __webpack_require__(257)('socket.io-client:socket');
-	var hasBin = __webpack_require__(299);
+	var parser = __webpack_require__(264);
+	var Emitter = __webpack_require__(299);
+	var toArray = __webpack_require__(300);
+	var on = __webpack_require__(301);
+	var bind = __webpack_require__(302);
+	var debug = __webpack_require__(261)('socket.io-client:socket');
+	var hasBin = __webpack_require__(303);
 
 	/**
 	 * Module exports.
@@ -35212,7 +35451,7 @@
 
 
 /***/ },
-/* 295 */
+/* 299 */
 /***/ function(module, exports) {
 
 	
@@ -35379,7 +35618,7 @@
 
 
 /***/ },
-/* 296 */
+/* 300 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -35398,7 +35637,7 @@
 
 
 /***/ },
-/* 297 */
+/* 301 */
 /***/ function(module, exports) {
 
 	
@@ -35428,7 +35667,7 @@
 
 
 /***/ },
-/* 298 */
+/* 302 */
 /***/ function(module, exports) {
 
 	/**
@@ -35457,7 +35696,7 @@
 
 
 /***/ },
-/* 299 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -35465,7 +35704,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(266);
+	var isArray = __webpack_require__(270);
 
 	/**
 	 * Module exports.
@@ -35523,7 +35762,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 300 */
+/* 304 */
 /***/ function(module, exports) {
 
 	
@@ -35614,7 +35853,7 @@
 
 
 /***/ },
-/* 301 */
+/* 305 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35759,290 +35998,6 @@
 	        img: "/images/gandalf.jpg"
 	    }]
 	}];
-
-/***/ },
-/* 302 */,
-/* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(307);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./AddView.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./AddView.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#add-container {\n  color: lightgrey; }\n\n#add-header {\n  margin: 10px; }\n\n#add-back {\n  float: left;\n  color: orange; }\n\n#add-add {\n  float: right;\n  color: green; }\n\n#add-img {\n  height: 60px; }\n\n#add-img-input {\n  display: none; }\n\n.add-icon {\n  flex: 0px 0px 18px; }\n\n#add-description {\n  margin-top: 5px;\n  padding-left: 10px;\n  display: flex; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 308 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(309);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./CommentView.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./CommentView.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 309 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".comment-container {\n  width: 100%;\n  height: 125px;\n  border-bottom: 1px solid lightgrey; }\n\n.comment-img {\n  float: right;\n  width: 125px;\n  height: 125px; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(311);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./SplashView.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./SplashView.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 311 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#splash {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: white; }\n\n.splash-container {\n  width: auto; }\n\n.splash-item {\n  text-align: center;\n  width: 100%;\n  color: #212121;\n  font-size: 1.2em; }\n\n#splash-logo {\n  width: 90%; }\n\n#splash-input {\n  padding: 0.6em 0.1em 0.1em 0.1em;\n  border: 0px 0px 0px 0px;\n  border-width: 0px 0px 2px 0px;\n  box-shadow: none;\n  font-size: 1.2em;\n  font-family: \"Roboto\", sans-serif;\n  text-align: center;\n  width: 40%;\n  outline: none; }\n\n#splash-button {\n  margin-top: 1em;\n  padding: 0.5em 1.2em 0.5em 1.2em;\n  border: none;\n  border-radius: 4px;\n  font-size: 1em;\n  font-family: \"Roboto\", sans-serif;\n  background-color: #FB8C00;\n  color: white; }\n\n#splash-phrase {\n  width: auto;\n  padding: 2%; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 312 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(313);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListView.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListView.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 313 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#list-header {\n  width: 100%;\n  color: orange;\n  text-align: center;\n  border-bottom: 1px solid lightgrey;\n  position: fixed;\n  opacity: 1;\n  background-color: white;\n  z-index: 10; }\n\n#list-header-container {\n  margin: 10px; }\n\n#list-header-search {\n  float: left; }\n\n#list-header-add {\n  float: right;\n  margin-top: 4px;\n  color: orange; }\n\n#list-padding {\n  height: 60px; }\n\n.list-category {\n  width: 100%;\n  text-align: center;\n  padding-top: 6px;\n  padding-bottom: 6px;\n  color: orange;\n  font-weight: bold;\n  font-size: 1.1em;\n  border-bottom: 1px solid lightgrey; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 314 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(315);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListItem.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./ListItem.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 315 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".list-item {\n  width: 100%;\n  height: 125px;\n  border-bottom: 1px solid lightgrey;\n  color: #212121; }\n\n.list-item-container {\n  position: absolute;\n  width: 100%;\n  height: 125px;\n  opacity: 1;\n  background-color: white; }\n\n.list-item-text {\n  font-size: 1.1em;\n  margin-left: 10px; }\n\n.list-item-header {\n  margin-top: 5px;\n  margin-bottom: 5px; }\n\n.list-item-img-container {\n  position: absolute;\n  right: 0px;\n  top: 0px; }\n\n.list-item-img {\n  width: 125px;\n  height: 125px; }\n\n.list-item-icon {\n  width: 18px; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(317);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./HomeView.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./HomeView.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 317 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#app {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  overflow: hidden;\n  margin: auto;\n  display: inline-block; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 318 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(319);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(239)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./DetailsView.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./DetailsView.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 319 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(238)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#detail-header {\n  width: 100%;\n  color: orange;\n  text-align: center;\n  border-bottom: 1px solid lightgrey;\n  position: fixed;\n  opacity: 1;\n  background-color: white;\n  z-index: 10; }\n\n#detail-header-container {\n  margin: 10px; }\n\n#detail-header-back {\n  float: left;\n  color: orange; }\n\n#detail-container {\n  border-bottom: 1px solid lightgrey;\n  font-size: 1.1em; }\n\n#detail-meta-container {\n  border-bottom: 1px solid lightgrey;\n  padding-left: 10px; }\n\n.detail-icon {\n  width: 18px; }\n\n#detail-img {\n  width: 100%; }\n\n#detail-description-header {\n  margin-top: 5px;\n  margin-bottom: 5px; }\n\n#detail-description {\n  margin-top: 5px;\n  padding-left: 10px; }\n\n#detail-comment {\n  margin-top: 5px;\n  margin-left: 10px;\n  margin-bottom: 5px; }\n\n#detail-comment-container {\n  padding: 10px;\n  display: flex;\n  flex-direction: row; }\n\n#detail-comment-input {\n  padding: 5px;\n  flex: 1px;\n  border: 0px; }\n\n.detail-comment-submit {\n  margin-left: 5px;\n  margin-top: 20px;\n  font-size: 25px;\n  color: blue;\n  flex: 0px 0px 25px; }\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

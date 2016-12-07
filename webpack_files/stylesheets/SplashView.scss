@@ -3,6 +3,18 @@
   align-items: center;
   justify-content: center;
   background-color: white;
+  opacity:0;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+  transition-timing-function: ease-in-out;
+}
+
+#splash.fade-out {
+  opacity: 0;
+}
+
+#splash.fade-in {
+  opacity: 1;
 }
 
 .splash-container{
