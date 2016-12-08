@@ -88,9 +88,6 @@ module.exports = {
       if (debugDB) console.log(count + " items in eventsDB");
     });
   },
-  resetDB() {
-    resetEvents({});
-  },
   loadMovies() {
     xmlToJson(apiURL, (err, data) => {
       if (err) {
@@ -104,6 +101,12 @@ module.exports = {
     eventsDB.find({}, (err, docs) => {
       if (err) callback(err, null);
       //if (debugDB) docs.forEach( movie => console.log(movie.title));
+      callback(null, docs);
+    });
+  },
+  addEvent(json, callback) {
+    eventsDB.insert(json, (err, docs) => {
+      if (err) callback(err, null);
       callback(null, docs);
     });
   },

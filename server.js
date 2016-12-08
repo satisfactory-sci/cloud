@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const formidable = require('express-formidable');
+const moment = require('moment');
 const http = require('http');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -14,7 +16,9 @@ const dashboards = [];
 //App definitions
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
+app.use(express.static('public/images'));
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(formidable({uploadDir: './public/images/', keepExtensions:true}));
 
 //Client requesting new items
 function sendItems(client) {
@@ -134,23 +138,6 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(__dirname + '/public/Dashboard/index.html');
 });
 
-// Add new event to database
-app.post('/newevent', (req, res) => {
-  res.json({message: "post successful, though nothing is implemented yet"});
-  console.log(req.body)
-});
-
-//Reset databases with delete TODO REFACTOR/REMOVE
-app.delete('/:dbPassword', (req, res) => {
-  if (debugServer) console.log('Requesting eventsDB deletion: ' + req.params.dbPassword);
-  if (req.params.dbPassword === process.env.DBPASSWORD) {
-    db.resetDB();
-    res.status(200).json({message: "database reset", targetDB: 'eventsDB'});
-  } else {
-    res.status(403).json({message: "wrong PW"});
-  }
-});
-
 //Update movie DB with PUT
 app.put('/:dbPassword', (req, res) => {
   if (debugServer) console.log('Requesting eventsDB updating: ' + req.params.dbPassword);
@@ -176,6 +163,30 @@ app.get('/database', (req, res) => {
     else res.json(data)
   })
 })
+
+var imgCount = 0;
+// Add new event to database
+app.post('/newevent', (req, res) => {
+  const eventData = {
+    title: req.fields.title,
+    description: req.fields.description,
+    img: 'http://satisfactory.fi/' + req.files.file.path,
+    location: req.fields.location,
+    startTime: req.fields.startTime, //TODO: format
+    endTime: req.fields.endTime,
+    date: req.fields.date,
+    maxPeople: req.fields.maxPeople,
+    joined: 0,
+    starred: 0,
+    dumped: 0,
+    comments: []
+  }
+  if (debugServer) console.log(JSON.stringify(eventData, null, 2));
+  db.addEvent(eventData, (err, docs) => {
+    if (err) res.status(500).json({err: err});
+    res.json(docs);
+  });
+});
 
 //Start server
 server.listen(port, () => console.log('Running on ' + port));
