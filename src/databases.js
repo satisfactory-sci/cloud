@@ -8,7 +8,7 @@ const defaultItems = require('./data/defaultItems.js');
 const parseString = require('xml2js').parseString;
 const movieTheaterString = "Tennispalatsi, Helsinki";
 const apiURL = "http://www.finnkino.fi/xml/Schedule/?area=1031";
-const debugDB = true;
+const debugDB = false;
 
 function xmlToJson(url, callback) {
   http.get(url, (res) => {

@@ -9,7 +9,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const xml2js = require('xml2js').parseString;
 const port = 5000;
-const debugServer = true;
+const debugServer = false;
 const debugClient = true;
 const db = require('./src/databases.js');
 const dashboards = [];
@@ -184,6 +184,7 @@ app.post('/newevent', (req, res) => {
   if (debugServer) console.log(JSON.stringify(eventData, null, 2));
   db.addEvent(eventData, (err, docs) => {
     if (err) res.status(500).json({err: err});
+    io.sockets.emit('addItem', docs);
     res.json(docs);
   });
 });
