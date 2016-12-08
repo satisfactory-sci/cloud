@@ -7,7 +7,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const xml2js = require('xml2js').parseString;
 const port = 5000;
-const debugServer = true;
+const debugServer = false;
 const debugClient = true;
 const db = require('./src/databases.js');
 const dashboards = [];
@@ -33,7 +33,6 @@ function sendItems(client) {
 function updateAction(action, data) {
   if (debugServer) console.log("updateAction " + action + " with ", data);
   db.voteMovie( action, data, (err, count) => {
-    if (err) console.log(err);
     if (debugServer) console.log(count + " changes for " + data.id + " (" + action + ")");
   });
 }
@@ -75,29 +74,29 @@ io.on('connection', (client) => {
   })
   //Client stard an item
   client.on('star', (data) => {
-    console.log("Somebody starred!");
+    if (debugServer) console.log("Somebody starred!");
     handleEvent(client, 'star', data);
     dashboards.forEach( client => client.emit('star', data));
   });
   //Cliend superstard an item
   client.on('join', (data) => {
-    console.log("Somebody joined!");
+    if (debugServer) console.log("Somebody joined!");
     handleEvent(client, 'join', data);
     dashboards.forEach( client => client.emit('join', data));
   });
   //Client dumpd an item
   client.on('dump', (data) => {
-    console.log("Somebody dumped!");
+    if (debugServer) console.log("Somebody dumped!");
     handleEvent(client, 'dump', data);
     dashboards.forEach( client => client.emit('dump', data));
   });
   //Client commented on an item
   client.on('comment', (data) => {
-    console.log("Somebody commented");
+    if (debugServer) console.log("Somebody commented");
   });
   //Client canceled an item
   client.on('cancel', (data) => {
-    console.log("Somebody cancelled their join");
+    if (debugServer) console.log("Somebody cancelled their join");
   })
   //Client has an empty list
   client.on('empty', (data) => {

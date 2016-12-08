@@ -111,9 +111,12 @@ module.exports = {
     switch (action) {
       case 'star':
         eventsDB.find({_id: data._id}, (err, doc) => {
+          if (debugDB) console.log(doc);
           if (err) callback(err, null);
           if (doc && doc[0]) {
             const starred = doc[0].starred;
+            if (debugDB) console.log(starred + ", " + data.vote);
+            if (debugDB) console.log(starred + data.vote);
             eventsDB.update({_id: data._id}, { $set: { starred: starred + data.vote}}, (err, doc) => {
               if (err) callback(err, null);
               callback(null, doc);
