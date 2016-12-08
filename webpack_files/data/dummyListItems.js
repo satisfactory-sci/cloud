@@ -9,6 +9,8 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 20,
         joined: 15,
+        starred: 0,
+        dumped: 0,
         _id: 1,
         comments: [
             {
@@ -38,6 +40,8 @@ module.exports = [
         date: "2016-12-05",
         maxPeople: 4,
         joined: 2,
+        starred: 0,
+        dumped: 0,
         _id: 2,
         comments: []
     },
@@ -51,6 +55,8 @@ module.exports = [
         date: "2016-11-20",
         maxPeople: 50,
         joined: 2,
+        starred: 0,
+        dumped: 0,
         _id: 3,
         comments: [
             {
@@ -80,6 +86,8 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 6,
         joined: 3,
+        starred: 0,
+        dumped: 0,
         _id: 4,
         comments: [
             {
@@ -116,6 +124,8 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 10,
         joined: 3,
+        starred: 0,
+        dumped: 0,
         _id: 5,
         comments: []
     },
@@ -129,6 +139,8 @@ module.exports = [
         date: "2016-12-05",
         maxPeople: 15,
         joined: 9,
+        starred: 0,
+        dumped: 0,
         _id: 6,
         comments: [
             {
@@ -158,6 +170,8 @@ module.exports = [
         date: "2016-12-10",
         maxPeople: 20,
         joined: 13,
+        starred: 0,
+        dumped: 0,
         _id: 7,
         comments: [
             {
@@ -193,6 +207,8 @@ module.exports = [
         date: "2016-12-12",
         maxPeople: 15,
         joined: 7,
+        starred: 0,
+        dumped: 0,
         _id: 8,
         comments: [
             {
