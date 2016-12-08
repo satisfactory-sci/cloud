@@ -24,20 +24,27 @@ module.exports = {
         //We get the initial data
         this.socket.on('newItems', (data) => {
           this.listData = data;
-          console.log('listData: ', this.listData);
         });
+        this.socket.on('addItem', (data) => {
+          this.listData = this.listData.concat(data);
+          this.dataContainerReactComponent.forceUpdate();
+        })
         //We have a connection (Mainly for debugging reasons)
         this.socket.on('connect', () => {
-          console.log("Socket connected!")
         })
         //Event listeners if somebody else joins
         this.socket.on('join', (data) => {
-          console.log("Somebody else joined some event")
+          let i = this.listData.findIndex((obj) => { return obj.id == data._id});
+          this.listData[i].joined += data.vote;
+          this.dataContainerReactComponent.forceUpdate();
         })
         //Event listener if somebody commented some event
         this.socket.on('comment', (comment) => {
-          console.log("Somebody commented something");
+          let i = this.listData.findIndex((obj) => { return obj.id == data._id});
+          this.listData[i].comments.push(comment.comment);
+          this.dataContainerReactComponent.forceUpdate();
         })
+
     },
 
     //Start the dataHandler
@@ -51,12 +58,8 @@ module.exports = {
         let i = this.userInfo.events.findIndex((obj) => {return obj._id == _id});
         //Have we already made some action to this object
         if(i > -1 ) {
-          //We cannot star joined events so...
-          if(this.userInfo.events[i].status != 3){
-            //You have already starred this
-            if(this.userInfo.events[i].status == 1) {
-              return;
-            }
+          //Cancel a dump
+          if(this.userInfo.events[i].status == 2){
             //Remove older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
@@ -77,12 +80,8 @@ module.exports = {
         let i = this.userInfo.events.findIndex((obj) => {return obj._id == _id});
         //Have we already made some action to this object
         if(i > -1 ) {
-          //We cannot dump joined events so...
-          if(this.userInfo.events[i].status != 3){
-            //You have already disliked this
-            if(this.userInfo.events[i].status == 2) {
-              return;
-            }
+          //Cancel a like
+          if(this.userInfo.events[i].status == 1){
             //remove the older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
