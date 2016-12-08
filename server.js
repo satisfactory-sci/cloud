@@ -7,7 +7,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const xml2js = require('xml2js').parseString;
 const port = 5000;
-const debugServer = false;
+const debugServer = true;
 const debugClient = true;
 const db = require('./src/databases.js');
 const dashboards = [];
@@ -33,7 +33,7 @@ function sendItems(client) {
 function updateAction(action, data) {
   if (debugServer) console.log("updateAction " + action + " with ", data);
   db.voteMovie( action, data, (err, count) => {
-    if (debugServer) console.log(count + " changes for " + data.id + " (" + action + ")");
+    if (debugServer) console.log(count + " changes for " + data._id + " (" + action + ")");
   });
 }
 

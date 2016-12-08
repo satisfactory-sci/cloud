@@ -9,7 +9,9 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 20,
         joined: 15,
-        id: 1,
+        starred: 0,
+        dumped: 0,
+        _id: 1,
         comments: [
             {
                 user: "MaxSamarin",
@@ -38,7 +40,9 @@ module.exports = [
         date: "2016-12-05",
         maxPeople: 4,
         joined: 2,
-        id: 2,
+        starred: 0,
+        dumped: 0,
+        _id: 2,
         comments: []
     },
     {
@@ -51,7 +55,9 @@ module.exports = [
         date: "2016-11-20",
         maxPeople: 50,
         joined: 2,
-        id: 3,
+        starred: 0,
+        dumped: 0,
+        _id: 3,
         comments: [
             {
                 user: "Stina",
@@ -80,7 +86,9 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 6,
         joined: 3,
-        id: 4,
+        starred: 0,
+        dumped: 0,
+        _id: 4,
         comments: [
             {
                 user: "BarackOba",
@@ -116,7 +124,9 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 10,
         joined: 3,
-        id: 5,
+        starred: 0,
+        dumped: 0,
+        _id: 5,
         comments: []
     },
     {
@@ -129,7 +139,9 @@ module.exports = [
         date: "2016-12-05",
         maxPeople: 15,
         joined: 9,
-        id: 6,
+        starred: 0,
+        dumped: 0,
+        _id: 6,
         comments: [
             {
                 user: "Teemu8",
@@ -146,6 +158,66 @@ module.exports = [
                 img: "/images/gandalf.jpg",
             },
 
+        ]
+    },
+    {
+        title: "Messilä Alpine Skiing",
+        description: "Let's go skiing on Saturday!",
+        img: "http://www.ess.fi/incoming/2015/04/28/1152332_.jpg/ALTERNATES/w980/1152332_.jpg",
+        location: "Messiläntie 308",
+        startTime: "13:00",
+        endTime: "19:00",
+        date: "2016-12-10",
+        maxPeople: 20,
+        joined: 13,
+        starred: 0,
+        dumped: 0,
+        _id: 7,
+        comments: [
+            {
+                user: "TuomoT",
+                time: "12:25",
+                date: "2016-12-08",
+                text: "Skiing season has begun",
+                img: "/images/tuomo.png",
+            },
+            {
+                user: "Teemu8",
+                time: "19:22",
+                date: "2016-12-08",
+                text: "Let's also stay for dinner there?",
+                img: "/images/teemuselanne.jpg",
+            },
+            {
+                user: "MaxSamarin",
+                time: "19:26",
+                date: "2016-12-08",
+                text: "Dinner.. you mean afterski?",
+                img: "/images/max.png",
+            },
+        ]
+    },
+    {
+        title: "Helsinki Street Food Lunch",
+        description: "Exceptionally sunny weather promised for Monday. This means lunch outside.",
+        img: "http://tasteofsundays.com/files/3514/0645/0428/StreetFood-post_thai.jpg",
+        location: "Kauppatori",
+        startTime: "12:00",
+        endTime: "13:00",
+        date: "2016-12-12",
+        maxPeople: 15,
+        joined: 7,
+        starred: 0,
+        dumped: 0,
+        _id: 8,
+        comments: [
+            {
+                user: "BarackOba",
+                time: "13:21",
+                date: "2016-12-08",
+                text: "Street food in the cold? I'm in.",
+                img: "/images/obama.jpg",
+            },
         ]
     },
 ];
