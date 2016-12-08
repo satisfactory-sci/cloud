@@ -16,7 +16,7 @@ const dashboards = [];
 //App definitions
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
-app.use(express.static('public/images'));
+app.use('/public/', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(formidable({uploadDir: './public/images/', keepExtensions:true}));
 
