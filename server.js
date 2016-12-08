@@ -18,7 +18,7 @@ app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
 app.use('/public/', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true}));
-app.use(formidable({uploadDir: './public/images/', keepExtensions:true}));
+app.use(formidable({uploadDir: './public/images/', keepExtensions:true, limit: '5mb'}));
 
 //Client requesting new items
 function sendItems(client) {
