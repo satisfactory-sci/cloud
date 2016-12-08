@@ -16,7 +16,7 @@ ReactDOM.render((
     <Route path="/" component={App}>
       <IndexRoute component={HomeView} />
       <Route path="add" component={AddView} />
-      <Route path="event/:id" component={DetailsView} />
+      <Route path="event/:_id" component={DetailsView} />
     </Route>
   </Router>
 ),document.getElementById('app'));

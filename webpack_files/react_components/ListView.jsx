@@ -18,28 +18,28 @@ class ListView extends React.Component {
 
         //Sorting to different categories
         let joined = events.filter((obj) => {
-          let i = user.events.findIndex((e) => {return e.id == obj.id && e.status == 3 });
+          let i = user.events.findIndex((e) => {return e._id == obj._id && e.status == 3 });
           if(i > -1){
             return true;
           }
           return false;
         })
         let dumped = events.filter((obj) => {
-          let i = user.events.findIndex((e) => {return e.id == obj.id && e.status == 2 });
+          let i = user.events.findIndex((e) => {return e._id == obj._id && e.status == 2 });
           if(i > -1){
             return true;
           }
           return false;
         })
         let starred = events.filter((obj) => {
-          let i = user.events.findIndex((e) => {return e.id == obj.id && e.status == 1 });
+          let i = user.events.findIndex((e) => {return e._id == obj._id && e.status == 1 });
           if(i > -1){
             return true;
           }
           return false;
         })
         let others = events.filter((obj) => {
-          let i = user.events.findIndex((e) => {return e.id == obj.id});
+          let i = user.events.findIndex((e) => {return e._id == obj._id});
           if(i == -1){
             return true;
           }

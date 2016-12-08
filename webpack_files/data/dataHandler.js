@@ -2,6 +2,8 @@ import io from 'socket.io-client'
 
 module.exports = {
 
+    dataContainerReactComponent: null,
+
     listData: [],
 
     userInfo: {
@@ -44,9 +46,9 @@ module.exports = {
     },
 
     //Register star locally and send the information to server
-    registerLike(id, container) {
+    registerLike(_id, container) {
         //Find the event
-        let i = this.userInfo.events.findIndex((obj) => {return obj.id == id});
+        let i = this.userInfo.events.findIndex((obj) => {return obj._id == _id});
         //Have we already made some action to this object
         if(i > -1 ) {
           //We cannot star joined events so...
@@ -54,22 +56,22 @@ module.exports = {
             //Remove older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
-            this.userInfo.events.push({id: id, status: 1});
-            this.socket.emit('star', {id:id, userId: '0'})
+            this.userInfo.events.push({_id: _id, status: 1});
+            this.socket.emit('star', {_id:_id, userId: '0'})
           }
         }else{
           //Do the changes
-          this.userInfo.events.push({id: id, status: 1});
-          this.socket.emit('star', {id:id, userId: '0'})
+          this.userInfo.events.push({_id: _id, status: 1});
+          this.socket.emit('star', {_id:_id, userId: '0'})
         }
         //Update components
         this.dataContainerReactComponent.forceUpdate();
     },
 
     //Register dump locally and send the information to server
-    registerDislike(id) {
+    registerDislike(_id) {
         //Find the Event
-        let i = this.userInfo.events.findIndex((obj) => {return obj.id == id});
+        let i = this.userInfo.events.findIndex((obj) => {return obj._id == _id});
         //Have we already made some action to this object
         if(i > -1 ) {
           //We cannot dump joined events so...
@@ -77,13 +79,13 @@ module.exports = {
             //remove the older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
-            this.userInfo.events.push({id: id, status: 2});
-            this.socket.emit('dump', {id:id, userId: '0'});
+            this.userInfo.events.push({_id: _id, status: 2});
+            this.socket.emit('dump', {_id:_id, userId: '0'});
           }
         }else{
           //Do the changes
-          this.userInfo.events.push({id: id, status: 2});
-          this.socket.emit('dump', {id:id, userId: '0'});
+          this.userInfo.events.push({_id: _id, status: 2});
+          this.socket.emit('dump', {_id:_id, userId: '0'});
         }
         //update component
         this.dataContainerReactComponent.forceUpdate();
@@ -91,39 +93,39 @@ module.exports = {
 
     addNewEvent(createdEventData) {
         var d = new Date();
-        createdEventData.id = d.getTime();
+        createdEventData._id = d.getTime();
         this.listData.push(createdEventData);
     },
 
-    isJoined(id) {
-        return this.userInfo.events.findIndex((obj) => {return obj.id == id && obj.status == 3}) >= 0;
+    isJoined(_id) {
+        return this.userInfo.events.findIndex((obj) => {return obj._id == _id && obj.status == 3}) >= 0;
     },
 
-    joinEvent(id, container) {
-        if (!this.isJoined(id)) {
-            var item = this.listData.find((entry) => { return entry.id == id});
+    joinEvent(_id, container) {
+        if (!this.isJoined(_id)) {
+            var item = this.listData.find((entry) => { return entry._id == _id});
             item.joined += 1;
             //Do the changes
-            this.userInfo.events.push({id:id, status:3});
-            this.socket.emit('join', {id:id, userId: '0'})
+            this.userInfo.events.push({_id:_id, status:3});
+            this.socket.emit('join', {_id:_id, userId: '0'})
             //Update components
             container.forceUpdate();
         }
     },
 
-    unJoinEvent(id, container) {
-        if (this.isJoined(id)) {
-            var item = this.listData.find((entry) => { return entry.id == id});
+    unJoinEvent(_id, container) {
+        if (this.isJoined(_id)) {
+            var item = this.listData.find((entry) => { return entry._id == _id});
             item.joined -= 1;
-            var index = this.userInfo.events.findIndex((obj) => {return obj.id == id});
+            var index = this.userInfo.events.findIndex((obj) => {return obj._id == _id});
             this.userInfo.events.splice(index, 1);
             //Inform backend
-            this.socket.emit('cancel', {id:id, userId: '0'});
+            this.socket.emit('cancel', {_id:_id, userId: '0'});
             container.forceUpdate();
         }
     },
 
-    addComment(id, commentText, container) {
+    addComment(_id, commentText, container) {
         var d = new Date();
         var comment = {
             user: this.userInfo.userName,
@@ -132,10 +134,10 @@ module.exports = {
             text: commentText,
             img: this.userInfo.img,
         };
-        var item = this.listData.find((entry) => { return entry.id == id});
+        var item = this.listData.find((entry) => { return entry._id == _id});
         item.comments.unshift(comment);
         //Inform backend
-        this.socket.emit('comment', {id:id, comment: comment});
+        this.socket.emit('comment', {_id:_id, comment: comment});
         container.forceUpdate();
     }
 }

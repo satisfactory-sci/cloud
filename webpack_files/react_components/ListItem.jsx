@@ -52,9 +52,9 @@ class ListItem extends React.Component {
         var minSwipe = this.swipeContainer.clientWidth*0.5;
 
         if (xChange >= minSwipe) {
-            this.props.dataHandler.registerLike(this.props.data.id);
+            this.props.dataHandler.registerLike(this.props.data._id);
         } else if (xChange <= -1*minSwipe) {
-            this.props.dataHandler.registerDislike(this.props.data.id);
+            this.props.dataHandler.registerDislike(this.props.data._id);
         }
         this.swipeContainer.style.left = "";
         this.swipeBG.style.background = '';
@@ -72,7 +72,7 @@ class ListItem extends React.Component {
         }
 
         return (
-          <Link to={`event/${this.props.data.id}`}>
+          <Link to={`event/${this.props.data._id}`}>
             <div className="list-item" ref="swipebackground">
                 <div ref="swipecontainer" className="list-item-container" onTouchStart={this.swipeContainerTouchStart} onTouchMove={this.swipeContainerTouchMove} onTouchEnd={this.swipeContainerTouchEnd}>
                     <div className="list-item-text">

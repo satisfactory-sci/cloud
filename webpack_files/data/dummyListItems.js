@@ -9,7 +9,7 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 20,
         joined: 15,
-        id: 1,
+        _id: 1,
         comments: [
             {
                 user: "MaxSamarin",
@@ -38,7 +38,7 @@ module.exports = [
         date: "2016-12-05",
         maxPeople: 4,
         joined: 2,
-        id: 2,
+        _id: 2,
         comments: []
     },
     {
@@ -51,7 +51,7 @@ module.exports = [
         date: "2016-11-20",
         maxPeople: 50,
         joined: 2,
-        id: 3,
+        _id: 3,
         comments: [
             {
                 user: "Stina",
@@ -80,7 +80,7 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 6,
         joined: 3,
-        id: 4,
+        _id: 4,
         comments: [
             {
                 user: "BarackOba",
@@ -116,7 +116,7 @@ module.exports = [
         date: "2016-12-06",
         maxPeople: 10,
         joined: 3,
-        id: 5,
+        _id: 5,
         comments: []
     },
     {
@@ -129,7 +129,7 @@ module.exports = [
         date: "2016-12-05",
         maxPeople: 15,
         joined: 9,
-        id: 6,
+        _id: 6,
         comments: [
             {
                 user: "Teemu8",

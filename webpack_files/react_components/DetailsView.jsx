@@ -15,7 +15,7 @@ class DetailsView extends React.Component {
         this.addComment = this.addComment.bind(this);
 
         let event = window.dataHandler.listData.find((obj) => {
-            return obj.id == this.props.params.id;
+            return obj._id == this.props.params._id;
         })
         window.scrollTo(0,0);
         this.state = {
@@ -26,17 +26,17 @@ class DetailsView extends React.Component {
     };
 
     joinEvent(e) {
-        this.state.dataHandler.joinEvent(this.state.data.id, this);
+        this.state.dataHandler.joinEvent(this.state.data._id, this);
     }
 
     unJoinEvent(e) {
-        this.state.dataHandler.unJoinEvent(this.state.data.id, this);
+        this.state.dataHandler.unJoinEvent(this.state.data._id, this);
     }
 
     addComment(e) {
         var commentText = ReactDOM.findDOMNode(this.refs.newComment).value;
         if (commentText.length > 0) {
-            this.state.dataHandler.addComment(this.state.data.id, commentText, this);
+            this.state.dataHandler.addComment(this.state.data._id, commentText, this);
             this.refs.newComment.value = "";
         }
     }
@@ -47,7 +47,7 @@ class DetailsView extends React.Component {
 
     render() {
 
-        var isJoined = this.state.dataHandler.isJoined(this.state.data.id);
+        var isJoined = this.state.dataHandler.isJoined(this.state.data._id);
         var fullnessStyle = {
             color: this.state.data.joined >= this.state.data.maxPeople ? 'red' : (this.state.data.joined >= this.state.data.maxPeople/2 ? 'orange' : 'green')
         }
