@@ -166,7 +166,7 @@ app.get('/database', (req, res) => {
 
 var imgCount = 0;
 // Add new event to database
-app.post('/newevent', (req, res) => {
+app.post('/newevent', bodyParser({limit: '50mb'}), (req, res) => {
   const eventData = {
     title: req.fields.title,
     description: req.fields.description,
