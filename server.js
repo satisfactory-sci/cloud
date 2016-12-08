@@ -7,37 +7,32 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const xml2js = require('xml2js').parseString;
 const port = 5000;
-const debugServer = false;
+const debugServer = true;
 const debugClient = true;
-const dbs = require('./src/databases.js');
+const db = require('./src/databases.js');
 const dashboards = [];
 //App definitions
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
 app.use(bodyParser.urlencoded({ extended: true}));
 
-//Fetch items for client
-function fetchClientItems() {
-  const items = dbs.getMovies();
-  if (debugServer) console.log('fetched items: ', items);
-  return items;
-}
-
 //Client requesting new items
 function sendItems(client) {
   if (debugClient) client.emit('debug', 'Server sending items');
-  dbs.getMovies( (err, items) => {
+  db.getEvents( (err, items) => {
     if (items) {
       if (debugClient) client.emit('debug', items);
       client.emit('newItems', items);
       if (debugClient) client.emit('debug', 'Server sent items');
+    } else {
+      if (debugClient) console.log('no data found');
     }
   });
 }
 
 function updateAction(action, data) {
   if (debugServer) console.log("updateAction " + action + " with ", data);
-  dbs.voteMovie( action, data, (err, count) => {
+  db.voteMovie( action, data, (err, count) => {
     if (err) console.log(err);
     if (debugServer) console.log(count + " changes for " + data.id + " (" + action + ")");
   });
@@ -52,10 +47,6 @@ function handleEvent(client, newEvent, data) {
   switch (newEvent) {
     case 'requestItems':
       if (debugServer) console.log('requestItems => sendItems()');
-      sendItems(client);
-      break;
-    case 'requestDashboardData':
-      if (debugServer) console.log('requestDashboardData => sendItems()');
       sendItems(client);
       break;
     case 'star':
@@ -151,20 +142,10 @@ app.post('/newevent', (req, res) => {
 
 //Reset databases with delete TODO REFACTOR/REMOVE
 app.delete('/:dbPassword', (req, res) => {
-  if (debugServer) console.log('Requesting clientDB deletion: ' + req.params.dbPassword);
+  if (debugServer) console.log('Requesting eventsDB deletion: ' + req.params.dbPassword);
   if (req.params.dbPassword === process.env.DBPASSWORD) {
-    dbs.resetDB('clientDB');
-    res.status(200).json({message: "database reset", targetDB: 'clientDB'});
-  } else {
-    res.status(403).json({message: "wrong PW"});
-  }
-});
-
-app.delete('/dashboard/:dbPassword', (req, res) => {
-  if (debugServer) console.log('Requesting dashboardDB deletion: ' + req.params.dbPassword);
-  if (req.params.dbPassword === process.env.DBPASSWORD) {
-    dbs.resetDB('dashboardDB');
-    res.status(200).json({message: "database reset", targetDB: 'dashboardDB'});
+    db.resetDB();
+    res.status(200).json({message: "database reset", targetDB: 'eventsDB'});
   } else {
     res.status(403).json({message: "wrong PW"});
   }
@@ -172,10 +153,10 @@ app.delete('/dashboard/:dbPassword', (req, res) => {
 
 //Update movie DB with PUT
 app.put('/:dbPassword', (req, res) => {
-  if (debugServer) console.log('Requesting movieDB updating: ' + req.params.dbPassword);
+  if (debugServer) console.log('Requesting eventsDB updating: ' + req.params.dbPassword);
   if (req.params.dbPassword === process.env.DBPASSWORD) {
-    dbs.loadMovies();
-    res.status(200).json({message: "database updated", targetDB: 'movieDB'});
+    db.loadMovies();
+    res.status(200).json({message: "database updated", targetDB: 'eventsDB'});
   } else {
     res.status(403).json({message: "wrong PW"});
   }
@@ -189,11 +170,18 @@ app.get('/proto', (req, res) => {
   res.redirect('http://flinto.com/p/c7b2c2ba');
 });
 
+app.get('/database', (req, res) => {
+  db.getEvents( (err, data) => {
+    if (err) res.status(500).json({err: err});
+    else res.json(data)
+  })
+})
+
 //Start server
 server.listen(port, () => console.log('Running on ' + port));
 module.exports = {app: app, server:server};
 
 //Debug item count
 if (debugServer) {
-  dbs.debugDBs();
+  db.debugDB();
 }

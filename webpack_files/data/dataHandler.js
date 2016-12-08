@@ -13,7 +13,7 @@ module.exports = {
     socket: {},
 
     initData() {
-        this.listData = require("./dummyListItems.js");
+        //this.listData = require("./dummyListItems.js");
 
         //Initiate global socket
         this.socket = io();
@@ -21,6 +21,8 @@ module.exports = {
         this.socket.emit('requestItems');
         //We get the initial data
         this.socket.on('newItems', (data) => {
+          this.listData = data;
+          console.log('listData: ', this.listData);
         });
         //We have a connection (Mainly for debugging reasons)
         this.socket.on('connect', () => {

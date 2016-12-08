@@ -1,16 +1,14 @@
 "use strict";
 //Load data, use dummy data for now
-const dummyDataClient = require('./data/dummyDataClient.json');
-const dummyDataDashboard = require('./data/dummyDataDashboard.json');
-const Datastore = require('nedb');
 const http = require('http');
-const clientDB = new Datastore({ filename: './data/clientData.db', autoload: true });
-const dashboardDB = new Datastore({ filename: './data/dashboardData.db', autoload: true });
-const movieDB = new Datastore({ filename: './data/movies.db', autoload: true });
-const debugDB = false;
+const moment = require('moment');
+const Datastore = require('nedb');
+const eventsDB = new Datastore({ filename: './data/events.db', autoload: true });
+const defaultItems = require('./data/defaultItems.js');
 const parseString = require('xml2js').parseString;
 const movieTheaterString = "Tennispalatsi, Helsinki";
 const apiURL = "http://www.finnkino.fi/xml/Schedule/?area=1031";
+const debugDB = false;
 
 function xmlToJson(url, callback) {
   http.get(url, (res) => {
@@ -32,16 +30,23 @@ function xmlToJson(url, callback) {
   });
 }
 
+
+
 function parseMovie(movie) {
   if (movie && movie.ID && movie.Title && movie.Genres && movie.Images) {
     return {
-      movieID: movie.ID[0],
       title: movie.Title[0],
       description: movie.Genres[0],
       img: movie.Images[0].EventMediumImagePortrait[0],
-      likes: 0,
-      dislikes: 0,
-      superlikes: 0,
+      location: movieTheaterString,
+      startTime: moment(movie.dttmShowStart[0]).format('HH:MM'), //TODO: format
+      endTime: moment(movie.dttmShowEnd[0]).format('HH:MM'),
+      date: moment(movie.dttmShowStart[0]).format('DD.MM.YYYY'),
+      maxPeople: 10,
+      joined: 0,
+      starred: 0,
+      dumped: 0,
+      comments: []
     }
   } else {
     return null;
@@ -51,85 +56,52 @@ function parseMovie(movie) {
 function addMovies(json) {
   const titlesAdded = [];
   const movies = json.Schedule.Shows[0].Show.map(parseMovie);
-  movies.forEach( movie => {
+  movies.forEach( (movie) => {
     if (movie && titlesAdded.indexOf(movie.title) === -1) {
       titlesAdded.push(movie.title);
-      movieDB.insert(movie);
+      eventsDB.insert(movie);
     }
   });
-  if (debugDB) console.log(titlesAdded.length + " movies added to movieDB");
+  if (debugDB) console.log(titlesAdded.length + ' movies added to eventsDB');
 }
 
-function resetMovies(json) {
-  movieDB.remove({}, { multi: true }, (err, numRemoved) => {
-    if (debugDB) console.log(numRemoved + ' items removed from movieDB');
+function addDefault() {
+  defaultItems.forEach( (item) => {
+    if (item) {
+      eventsDB.insert(item);
+    }
+  })
+  if (debugDB) console.log(defaultItems.length + ' events added to eventsDB')
+}
+
+function resetEvents(json) {
+  eventsDB.remove({}, { multi: true }, (err, numRemoved) => {
+    if (debugDB) console.log(numRemoved + ' items removed from eventsDB');
     addMovies(json);
-  });
-}
-
-function resetClientDB() {
-  clientDB.remove({}, {multi:true}, (err, numRemoved) => {
-    if (debugDB) console.log(numRemoved + ' items removed from clientDB');
-    clientDB.insert(dummyDataClient, (err, docs) => {
-      if (debugDB) {
-        console.log('Initializing clientDB');
-        docs.forEach(d => console.log('Adding \n', d));
-        console.log('clientDB reset done');
-      }
-    });
-  });
-}
-
-function resetDashboardDB() {
-  dashboardDB.remove({}, {multi:true}, (err, numRemoved) => {
-    if (debugDB) console.log(numRemoved + ' items removed from dashboardDB');
-    dashboardDB.insert(dummyDataDashboard, (err, docs) => {
-      if (debugDB) {
-         console.log('Initializing dashboardDB');
-        docs.forEach(d => console.log('Adding \n', d));
-        console.log('dashboardDB reset done');
-      }
-    });
+    addDefault();
   });
 }
 
 module.exports = {
-  dummyDataClient,
-  dummyDataDashboard,
-  debugDBs() {
-    clientDB.count({}, (err, count) => {
-      if (debugDB) console.log(count + " items in clientDB");
-    });
-    dashboardDB.count({}, (err, count) => {
-      if (debugDB) console.log(count + " items in dashboardDB");
+  debugDB() {
+    eventsDB.count({}, (err, count) => {
+      if (debugDB) console.log(count + " items in eventsDB");
     });
   },
-  resetDB(database) {
-    switch (database) {
-      //Reset clientDB
-      case 'clientDB':
-        resetClientDB();
-        break;
-      //Reset dashboardDB
-      case 'dashboardDB':
-        resetDashboardDB();
-        break;
-      default:
-        if (debugDB) console.log(database + ' not found')
-        break;
-    }
+  resetDB() {
+    resetEvents({});
   },
   loadMovies() {
     xmlToJson(apiURL, (err, data) => {
       if (err) {
         console.log(err);
       } else {
-        resetMovies(data);
+        resetEvents(data);
       }
     });
   },
-  getMovies(callback) {
-    movieDB.find({}, (err, docs) => {
+  getEvents(callback) {
+    eventsDB.find({}, (err, docs) => {
       if (err) callback(err, null);
       //if (debugDB) docs.forEach( movie => console.log(movie.title));
       callback(null, docs);
@@ -138,11 +110,11 @@ module.exports = {
   voteMovie(action, data, callback) {
     switch (action) {
       case 'star':
-        movieDB.find({movieID: data.id}, (err, doc) => {
+        eventsDB.find({_id: data._id}, (err, doc) => {
           if (err) callback(err, null);
           if (doc && doc[0]) {
-            const likes = doc[0].likes;
-            movieDB.update({movieID: data.id}, { $set: { likes: likes + data.vote}}, (err, doc) => {
+            const starred = doc[0].starred;
+            eventsDB.update({_id: data._id}, { $set: { starred: starred + data.vote}}, (err, doc) => {
               if (err) callback(err, null);
               callback(null, doc);
             });
@@ -152,11 +124,11 @@ module.exports = {
         });
         break;
       case 'join':
-        movieDB.find({movieID: data.id}, (err, doc) => {
+        eventsDB.find({_id: data._id}, (err, doc) => {
           if (err) callback(err, null);
           if (doc && doc[0]) {
-            const superlikes = doc[0].superlikes;
-            movieDB.update({movieID: data.id}, { $set: { superlikes: superlikes + data.vote}}, (err, doc) => {
+            const joined = doc[0].joined;
+            eventsDB.update({_id: data._id}, { $set: { joined: joined + data.vote}}, (err, doc) => {
               if (err) callback(err, null);
               callback(null, doc);
             });
@@ -166,11 +138,11 @@ module.exports = {
         });
         break;
       case 'dump':
-        movieDB.find({movieID: data.id}, (err, doc) => {
+        eventsDB.find({_id: data._id}, (err, doc) => {
           if (err) callback(err, null);
           if (doc && doc[0] && data) {
-            const dislikes = doc[0].dislikes;
-            movieDB.update({movieID: data.id}, { $set: { dislikes: dislikes + data.vote}}, (err, doc) => {
+            const dumped = doc[0].dumped;
+            eventsDB.update({_id: data._id}, { $set: { dumped: dumped + data.vote}}, (err, doc) => {
               if (err) callback(err, null);
               callback(null, doc);
             });
