@@ -17,8 +17,8 @@ const dashboards = [];
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
 app.use('/public/', express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(formidable({uploadDir: './public/images/', keepExtensions:true, limit: '5mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
+app.use(formidable({uploadDir: './public/images/', keepExtensions:true, limit: '50mb'}));
 
 //Client requesting new items
 function sendItems(client) {
