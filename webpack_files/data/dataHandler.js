@@ -53,16 +53,21 @@ module.exports = {
         if(i > -1 ) {
           //We cannot star joined events so...
           if(this.userInfo.events[i].status != 3){
+            //You have already starred this
+            if(this.userInfo.events[i].status == 1) {
+              return;
+            }
             //Remove older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
             this.userInfo.events.push({_id: _id, status: 1});
-            this.socket.emit('star', {_id:_id, userId: '0'})
+            this.socket.emit('dump', {_id:_id, vote: -1});
+            this.socket.emit('star', {_id:_id, vote:  1});
           }
         }else{
           //Do the changes
           this.userInfo.events.push({_id: _id, status: 1});
-          this.socket.emit('star', {_id:_id, userId: '0'})
+          this.socket.emit('star', {_id:_id, vote:  1})
         }
         //Update components
         this.dataContainerReactComponent.forceUpdate();
@@ -76,16 +81,21 @@ module.exports = {
         if(i > -1 ) {
           //We cannot dump joined events so...
           if(this.userInfo.events[i].status != 3){
+            //You have already disliked this
+            if(this.userInfo.events[i].status == 2) {
+              return;
+            }
             //remove the older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
             this.userInfo.events.push({_id: _id, status: 2});
-            this.socket.emit('dump', {_id:_id, userId: '0'});
+            this.socket.emit('star', {_id: _id, vote: -1})
+            this.socket.emit('dump', {_id:_id, vote: 1});
           }
         }else{
           //Do the changes
           this.userInfo.events.push({_id: _id, status: 2});
-          this.socket.emit('dump', {_id:_id, userId: '0'});
+          this.socket.emit('dump', {_id:_id, vote: 1});
         }
         //update component
         this.dataContainerReactComponent.forceUpdate();
@@ -107,7 +117,7 @@ module.exports = {
             item.joined += 1;
             //Do the changes
             this.userInfo.events.push({_id:_id, status:3});
-            this.socket.emit('join', {_id:_id, userId: '0'})
+            this.socket.emit('join', {_id:_id, vote: 1})
             //Update components
             container.forceUpdate();
         }
@@ -120,7 +130,7 @@ module.exports = {
             var index = this.userInfo.events.findIndex((obj) => {return obj._id == _id});
             this.userInfo.events.splice(index, 1);
             //Inform backend
-            this.socket.emit('cancel', {_id:_id, userId: '0'});
+            this.socket.emit('join', {_id:_id, vote: -1});
             container.forceUpdate();
         }
     },
