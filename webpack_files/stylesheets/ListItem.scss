@@ -11,11 +11,15 @@
   height: 125px;
   opacity: 1;
   background-color: white;
+  overflow: hidden;
 }
 
 .list-item-text {
   font-size: 1.1em;
   margin-left: 10px;
+  h2 {
+    white-space: nowrap;
+  }
 }
 
 .list-item-header {
