@@ -136,7 +136,8 @@ app.get('/dashboard', (req, res) => {
 
 // Add new event to database
 app.post('/newevent', (req, res) => {
-  res.status(202).json({message: "post successful, though nothing is implemented yet"});
+  res.json({message: "post successful, though nothing is implemented yet"});
+  console.log(req.body)
 });
 
 //Reset databases with delete TODO REFACTOR/REMOVE
