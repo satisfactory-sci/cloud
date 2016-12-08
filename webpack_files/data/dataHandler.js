@@ -60,9 +60,7 @@ module.exports = {
             //Remove older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
-            this.userInfo.events.push({_id: _id, status: 1});
             this.socket.emit('dump', {_id:_id, vote: -1});
-            this.socket.emit('star', {_id:_id, vote:  1});
           }
         }else{
           //Do the changes
@@ -88,9 +86,7 @@ module.exports = {
             //remove the older entry
             this.userInfo.events.splice(i, 1);
             //Do the changes
-            this.userInfo.events.push({_id: _id, status: 2});
             this.socket.emit('star', {_id: _id, vote: -1})
-            this.socket.emit('dump', {_id:_id, vote: 1});
           }
         }else{
           //Do the changes
