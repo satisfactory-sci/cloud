@@ -17,8 +17,8 @@ const dashboards = [];
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
 app.use('/public/', express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
-app.use(formidable({uploadDir: './public/images/', keepExtensions:true, limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(formidable({uploadDir: './public/images/', keepExtensions:true}));
 
 //Client requesting new items
 function sendItems(client) {
@@ -166,7 +166,7 @@ app.get('/database', (req, res) => {
 
 var imgCount = 0;
 // Add new event to database
-app.post('/newevent', bodyParser({limit: '50mb'}), (req, res) => {
+app.post('/newevent', (req, res) => {
   const eventData = {
     title: req.fields.title,
     description: req.fields.description,
@@ -187,6 +187,10 @@ app.post('/newevent', bodyParser({limit: '50mb'}), (req, res) => {
     io.sockets.emit('addItem', docs);
     res.json(docs);
   });
+});
+
+app.all('*', (req, res) => {
+  res.redirect('http://satisfactory.fi');
 });
 
 //Start server
