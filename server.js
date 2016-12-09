@@ -25,6 +25,7 @@ function sendItems(client) {
   if (debugClient) client.emit('debug', 'Server sending items');
   db.getEvents( (err, items) => {
     if (items) {
+      items = items.sort((a, b) => {return b.starred - a.starred});
       if (debugClient) client.emit('debug', items);
       client.emit('newItems', items);
       if (debugClient) client.emit('debug', 'Server sent items');
