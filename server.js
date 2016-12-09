@@ -167,6 +167,7 @@ app.get('/database', (req, res) => {
 var imgCount = 0;
 // Add new event to database
 app.post('/newevent', (req, res) => {
+  console.log('/newevent')
   const eventData = {
     title: req.fields.title,
     description: req.fields.description,
@@ -181,6 +182,7 @@ app.post('/newevent', (req, res) => {
     dumped: 0,
     comments: []
   }
+  console.log(JSON.stringify(eventData, null, 2));
   if (debugServer) console.log(JSON.stringify(eventData, null, 2));
   db.addEvent(eventData, (err, docs) => {
     if (err) res.status(500).json({err: err});
