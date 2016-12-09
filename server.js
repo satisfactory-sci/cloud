@@ -170,7 +170,7 @@ app.post('/newevent', bodyParser({limit: '50mb'}), (req, res) => {
   const eventData = {
     title: req.fields.title,
     description: req.fields.description,
-    img: 'http://satisfactory.fi/' + req.files.file.path,
+    img: '/' +req.files.file.path,
     location: req.fields.location,
     startTime: req.fields.startTime, //TODO: format
     endTime: req.fields.endTime,
