@@ -17,8 +17,8 @@ const dashboards = [];
 app.use(express.static('public'));
 app.use(express.static('public/Dashboard'));
 app.use('/public/', express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
-app.use(formidable({uploadDir: './public/images/', keepExtensions:true, limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(formidable({uploadDir: './public/images/', keepExtensions:true}));
 
 //Client requesting new items
 function sendItems(client) {
@@ -167,7 +167,8 @@ app.get('/database', (req, res) => {
 
 var imgCount = 0;
 // Add new event to database
-app.post('/newevent', bodyParser({limit: '50mb'}), (req, res) => {
+app.post('/newevent', (req, res) => {
+  console.log('/newevent')
   const eventData = {
     title: req.fields.title,
     description: req.fields.description,
@@ -182,12 +183,17 @@ app.post('/newevent', bodyParser({limit: '50mb'}), (req, res) => {
     dumped: 0,
     comments: []
   }
+  console.log(JSON.stringify(eventData, null, 2));
   if (debugServer) console.log(JSON.stringify(eventData, null, 2));
   db.addEvent(eventData, (err, docs) => {
     if (err) res.status(500).json({err: err});
     io.sockets.emit('addItem', docs);
     res.json(docs);
   });
+});
+
+app.all('*', (req, res) => {
+  res.redirect('http://satisfactory.fi');
 });
 
 //Start server
